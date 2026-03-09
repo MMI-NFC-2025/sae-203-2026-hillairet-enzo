@@ -1,28 +1,25 @@
 ---
-// Données de Billetterie
+// 1. DONNÉES DU COMPOSANT
 const tickets = [
     { title: "Pass 3 jours", img: "/assets/images/cards/pass-3.avif" },
     { title: "Pass 2 jours", img: "/assets/images/cards/pass-2.avif" },
     { title: "Pass 1 jour", img: "/assets/images/cards/pass-1.avif" }
 ];
 
-// Données des Onglets
 const tabs = [
     { title: "Programme", text: "En Savoir Plus...", img: "/assets/images/cards/programme.avif" },
     { title: "Invités", text: "En Savoir Plus...", img: "/assets/images/cards/invite.avif" },
     { title: "Infos Pratiques", text: "En Savoir Plus...", img: "/assets/images/cards/infos.avif" }
 ];
 
-// Logos du carrousel automatique
 const logos = [
     "/assets/icons/culture-logo.svg",
     "/assets/icons/logo-montbeliard-white.svg",
     "/assets/icons/logo-univ.svg",
 ];
 
-// Liens pour le Menu Hamburger
 const navLinks = [
-    { name: "Le Festival", href: "#" },
+    { name: "Le Festival", href: "/festival" },
     { name: "Programme", href: "#" },
     { name: "Artistes", href: "#" },
     { name: "Scènes", href: "#" },
@@ -41,7 +38,9 @@ const navLinks = [
 
         <div class="relative z-10 h-full flex flex-col p-6 md:p-10">
             <div class="flex justify-between items-center w-full">
-                <img src="/assets/icons/logo.avif" alt="Logo" class="h-14 md:h-20 w-auto" />
+                <a href="/">
+                    <img src="/assets/icons/logo.avif" alt="Logo" class="h-14 md:h-20 w-auto" />
+                </a>
                 <button id="menu-close" class="text-white p-2 hover:scale-110 transition-transform cursor-pointer">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 md:h-12 md:w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -49,12 +48,12 @@ const navLinks = [
                 </button>
             </div>
 
-            <nav class="flex-1 flex flex-col justify-center items-end pr-4 md:pr-20">
-                <ul class="space-y-6 md:space-y-10 text-right">
+            <nav class="flex-1 flex flex-col justify-start pt-32 md:pt-40 items-end pr-4 md:pr-20">
+                <ul class="space-y-4 md:space-y-6 text-right">
                     {navLinks.map((link) => (
                         <li>
-                            <a href={link.href} class="block text-4xl md:text-6xl lg:text-7xl font-poppins font-bold text-white uppercase tracking-tighter hover:text-[#FED506] transition-colors">
-                                {link.name} <span class="text-[#FED506] ml-2 md:ml-4">•</span>
+                            <a href={link.href} class="block text-2xl md:text-4xl lg:text-5xl font-poppins font-bold text-white uppercase tracking-tight hover:text-[#FED506] transition-colors">
+                                {link.name} <span class="text-white ml-2 md:ml-4">•</span>
                             </a>
                         </li>
                     ))}
@@ -65,16 +64,16 @@ const navLinks = [
 
     <section class="relative min-h-screen w-full flex flex-col items-center justify-center overflow-hidden bg-[#FFF4C6] py-20">
         
-    <header class="absolute top-0 left-0 w-full flex justify-between items-center p-6 md:p-10 z-50">
-    <a href="/" class="transition-transform hover:scale-110">
-        <img src="/assets/icons/logo.avif" alt="Logo" class="h-14 md:h-20 w-auto" />
-    </a>
-    
-    <button id="menu-open" class="group flex flex-col gap-2.5 p-2 focus:outline-none cursor-pointer items-end">
-        <div class="w-10 md:w-12 h-1 bg-black rounded-full transition-all group-hover:w-8"></div>
-        <div class="w-7 md:w-9 h-1 bg-black rounded-full transition-all group-hover:w-12"></div>
-    </button>
-</header>
+        <header class="absolute top-0 left-0 w-full flex justify-between items-center p-6 md:p-10 z-50">
+            <a href="/" class="transition-transform hover:scale-110">
+                <img src="/assets/icons/logo.avif" alt="Logo" class="h-14 md:h-20 w-auto" />
+            </a>
+            
+            <button id="menu-open" class="group flex flex-col gap-2 p-2 focus:outline-none cursor-pointer items-end">
+                <div class="w-10 md:w-12 h-1 bg-black rounded-full transition-all"></div>
+                <div class="w-10 md:w-12 h-1 bg-black rounded-full transition-all"></div>
+            </button>
+        </header>
 
         <div class="relative z-20 w-full text-center px-4 flex flex-col items-center">
             <h1 class="font-display text-6xl md:text-9xl lg:text-[13rem] tracking-wider leading-none" 
@@ -94,8 +93,8 @@ const navLinks = [
             </div>
         </div>
 
-        <div class="relative z-10 mt-12 lg:mt-0">
-            <img src="/assets/images/mascotte.avif" alt="Mascotte" class="w-[90%] md:w-[60%] lg:w-[45%] mx-auto h-auto object-contain drop-shadow-2xl" />
+        <div class="relative z-10 mt-12 lg:mt-0 md:hidden">
+            <img src="/assets/images/mascotte.avif" alt="Mascotte" class="w-[90%] mx-auto h-auto object-contain drop-shadow-2xl" />
         </div>
 
         <div class="absolute bottom-16 left-0 w-full overflow-hidden leading-[0] z-40">
@@ -177,7 +176,7 @@ const navLinks = [
 
         <nav class="mb-12 px-4">
             <ul class="flex flex-wrap justify-center items-center gap-x-6 gap-y-4 font-poppins font-bold text-sm md:text-xl uppercase">
-                <li><a href="#" class="hover:text-[#FED506] transition-all hover:tracking-widest">Le Festival</a></li>
+                <li><a href="/festival" class="hover:text-[#FED506] transition-all hover:tracking-widest">Le Festival</a></li>
                 <li class="hidden md:block opacity-30">•</li>
                 <li><a href="#" class="hover:text-[#FED506] transition-all hover:tracking-widest">Programme</a></li>
                 <li class="hidden md:block opacity-30">•</li>
@@ -209,22 +208,20 @@ const navLinks = [
     if (menuOpen && menuClose && overlay) {
         menuOpen.addEventListener('click', () => {
             overlay.classList.remove('translate-x-full');
-            document.body.style.overflow = 'hidden'; // Bloque le scroll arrière
+            document.body.style.overflow = 'hidden';
         });
 
         menuClose.addEventListener('click', () => {
             overlay.classList.add('translate-x-full');
-            document.body.style.overflow = ''; // Libère le scroll
+            document.body.style.overflow = '';
         });
     }
 </script>
 
 <style>
-    /* Animation carrousel logos */
     .marquee-content { animation: scroll 7s linear infinite; width: fit-content; }
     @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-33.33%); } }
 
-    /* Animation lignes Hero */
     .animate-lines-scroll { animation: scrollLines 15s linear infinite; }
     @keyframes scrollLines { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 

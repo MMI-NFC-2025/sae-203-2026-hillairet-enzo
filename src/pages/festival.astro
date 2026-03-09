@@ -1,0 +1,298 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+// 1. Données de l'histoire
+const historySteps = [
+    { title: "La naissance d’une équipe", text: "Ce projet à démarrer dans le cadre d'un travail étudiants en MMI. Ce projet à finis par ce concrétiser et est devenu le festival que vous connaissez." },
+    { title: "Notre premier festival", text: "En 2026 nous organiserons notre premier festival de reggae. Ce festival vise tout public et à pour but de rendre le reggae accessible." },
+    { title: "Nos projets à venir", text: "Nous visons à égaler les meilleurs festivals et à donner une nouvelles images plus propre aux festivals de musique." }
+];
+
+// 2. Données de l'équipe
+const teamCategories = [
+    {
+        name: "Logistique",
+        members: [
+            { name: "Hugo Martin", role: "Coordinateur Flux", img: "/assets/images/team/team1.avif", bio: "Hugo gère toute la circulation et l'installation technique du site pour garantir un accès fluide." },
+            { name: "Léa Morel", role: "Responsable Accueil", img: "/assets/images/team/team2.avif", bio: "Léa supervise les équipes d'accueil pour que chaque festivalier se sente comme chez lui." },
+            { name: "Thomas Petit", role: "Gestionnaire Stocks", img: "/assets/images/team/team3.avif", bio: "Thomas veille à ce que rien ne manque, de la boisson aux fournitures techniques." }
+        ]
+    },
+    {
+        name: "Son",
+        members: [
+            { name: "Marc Durand", role: "Ingénieur Son", img: "/assets/images/team/team4.avif", bio: "Expert des basses, Marc s'assure que le son reggae soit profond et cristallin." },
+            { name: "Constance Dubois", role: "Technicienne lumière", img: "/assets/images/team/team5.avif", bio: "Constance est responsable de la conception et de la mise en œuvre des effets lumineux, créant une ambiance visuelle immersive." },
+            { name: "Sophie Leroy", role: "Mixage Live", img: "/assets/images/team/team6.avif", bio: "Sophie gère les balances en direct pour offrir une expérience auditive parfaite." }
+        ]
+    },
+    {
+        name: "Support",
+        members: [
+            { name: "Nina Chen", role: "Community Manager", img: "/assets/images/team/team7.avif", bio: "Nina fait vibrer nos réseaux sociaux et répond à toutes vos questions en ligne." },
+            { name: "Yassine Bakri", role: "Partenariats", img: "/assets/images/team/team8.avif", bio: "Yassine tisse les liens avec nos partenaires locaux pour soutenir l'économie de la région." },
+            { name: "Emma Bernard", role: "Relations Presse", img: "/assets/images/team/team9.avif", bio: "Emma diffuse l'esprit du festival auprès des médias nationaux et internationaux." }
+        ]
+    }
+];
+
+// 3. Données Édition 2026
+const themes = [
+    { label: "Festival de la ", bold: "culture reggae" },
+    { label: "Festival de la ", bold: "création artistique" },
+    { label: "Festival de l'", bold: "innovation locale" },
+    { label: "Festival de l'", bold: "engagement citoyen" }
+];
+
+const values = [
+    { name: "Convivialité", img: "/assets/icons/valeurs/conv.avif" },
+    { name: "Écologie", img: "/assets/icons/valeurs/eco.avif" },
+    { name: "Créativité", img: "/assets/icons/valeurs/crea.avif" }
+];
+
+const navLinks = [
+    { name: "Le Festival", href: "/festival" },
+    { name: "Programme", href: "#" },
+    { name: "Artistes", href: "#" },
+    { name: "Scènes", href: "#" },
+    { name: "Infos pratiques", href: "#" },
+    { name: "Contact", href: "#" }
+];
+
+const logos = [
+    "/assets/icons/culture-logo.svg",
+    "/assets/icons/logo-montbeliard-white.svg",
+    "/assets/icons/logo-univ.svg",
+];
+---
+
+<Layout title="Festival | Echos Sonore">
+    <div class="w-full flex flex-col overflow-x-hidden">
+        
+        <div id="menu-overlay" class="fixed inset-0 z-[100] translate-x-full transition-transform duration-500 ease-in-out">
+            <div class="absolute inset-0 bg-black">
+                <img src="/assets/images/licorn-bg.avif" alt="Menu BG" class="w-full h-full object-cover opacity-50" />
+                <div class="absolute inset-0 bg-gradient-to-l from-black/80 to-transparent"></div>
+            </div>
+            <div class="relative z-10 h-full flex flex-col p-6 md:p-10">
+                <div class="flex justify-between items-center w-full">
+                    <a href="/"><img src="/assets/icons/logo.avif" alt="Logo" class="h-14 md:h-20 w-auto" /></a>
+                    <button id="menu-close" class="text-white p-2 cursor-pointer transition-transform hover:rotate-90">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 md:h-12 md:w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                    </button>
+                </div>
+                <nav class="flex-1 flex flex-col justify-start pt-32 md:pt-40 items-end pr-4 md:pr-20">
+                    <ul class="space-y-4 md:space-y-6 text-right">
+                        {navLinks.map((link) => (
+                            <li><a href={link.href} class="block text-2xl md:text-4xl lg:text-5xl font-poppins font-bold text-white uppercase tracking-tight hover:text-[#FED506] transition-colors">{link.name} <span class="text-white ml-2 md:ml-4">•</span></a></li>
+                        ))}
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
+        <header class="w-full flex justify-between items-center p-6 md:p-10 z-50 bg-[#FFF4C6]">
+            <a href="/" class="transition-transform hover:scale-110">
+                <img src="/assets/icons/logo.avif" alt="Logo" class="h-14 md:h-20 w-auto" />
+            </a>
+            <button id="menu-open" class="group flex flex-col gap-2 p-2 focus:outline-none cursor-pointer items-end">
+                <div class="w-10 md:w-12 h-1 bg-black rounded-full transition-all"></div>
+                <div class="w-10 md:w-12 h-1 bg-black rounded-full transition-all"></div>
+            </button>
+        </header>
+
+        <section class="relative w-full min-h-screen flex flex-col items-center py-20 px-6">
+            <div class="absolute inset-0 w-full h-full z-0">
+                <img src="/assets/images/section-background.avif" alt="Fond" class="w-full h-full object-cover" />
+                <div class="absolute inset-0 bg-black/60"></div> 
+            </div>
+            <div class="relative z-10 mb-16 text-center">
+                <h2 class="font-display text-5xl md:text-8xl text-white tracking-widest uppercase italic" style="-webkit-text-stroke: 1px rgba(255,255,255,0.3);">
+                    Notre histoire
+                </h2>
+            </div>
+            <div class="relative z-10 w-full max-w-3xl flex flex-col items-center">
+                {historySteps.map((step, index) => (
+                    <div class="w-full flex flex-col items-center">
+                        <div class="w-full p-8 md:p-12 min-h-[250px] md:min-h-[300px] flex flex-col justify-center rounded-[30px] bg-white/40 backdrop-blur-md border border-white/20 shadow-2xl transition-all hover:bg-white/50">
+                            <h3 class="font-poppins font-bold text-2xl md:text-3xl text-black mb-4 uppercase tracking-tight">{step.title}</h3>
+                            <p class="font-poppins text-black leading-relaxed text-base md:text-lg">{step.text}</p>
+                        </div>
+                        {index < historySteps.length - 1 && (
+                            <div class="w-full py-8">
+                                <img src="/assets/images/lignes_rouge_jaune_vert.svg" alt="séparateur" class="w-full h-auto" />
+                            </div>
+                        )}
+                    </div>
+                ))}
+            </div>
+        </section>
+
+        <section class="w-full bg-[#FEFAF5] py-24 flex flex-col items-center overflow-hidden">
+            <h2 class="font-display text-4xl md:text-6xl text-black mb-16 uppercase tracking-widest text-center px-4">
+                Notre équipe
+            </h2>
+
+            <div class="w-full max-w-4xl px-4 space-y-20">
+                {teamCategories.map((cat) => (
+                    <div class="flex flex-col items-center text-center">
+                        <h3 class="font-poppins font-bold text-xl md:text-2xl mb-10 uppercase tracking-widest">{cat.name}</h3>
+                        <div class="flex items-center justify-center gap-1 md:gap-8">
+                            {cat.members.map((member, index) => (
+                                <div class="flex items-center gap-1 md:gap-8">
+                                    <button 
+                                        class="team-trigger group relative outline-none cursor-pointer"
+                                        data-name={member.name}
+                                        data-role={member.role}
+                                        data-bio={member.bio}
+                                        data-img={member.img}
+                                    >
+                                        <div class={`rounded-full overflow-hidden border-4 border-transparent group-hover:border-black transition-all duration-300 shadow-xl ${index === 1 ? 'w-36 h-36 sm:w-40 sm:h-40 md:w-48 md:h-48' : 'w-25 h-25 sm:w-24 sm:h-24 md:w-48 md:h-48'}`}>
+                                            <img src={member.img} alt={member.name} class="w-full h-full object-cover transition-all duration-500" />
+                                        </div>
+                                    </button>
+                                    
+                                    {index < cat.members.length - 1 && (
+                                        <span class="text-black text-3xl md:text-7xl font-bold">•</span>
+                                    )}
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                ))}
+            </div>
+        </section>
+
+        <section class="relative w-full py-24 md:py-32 px-6 flex flex-col items-center overflow-hidden">
+            <div class="absolute inset-0 w-full h-full z-0">
+                <img src="/assets/images/licorn-bg.avif" alt="Fond Licorne" class="w-full h-full object-cover" />
+                <div class="absolute inset-0 bg-black/75 backdrop-blur-[2px]"></div>
+            </div>
+
+            <div class="relative z-10 w-full max-w-4xl">
+                <h2 class="font-display text-4xl md:text-7xl text-white text-center mb-16 md:mb-24 uppercase tracking-widest">
+                    Édition 2026
+                </h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-24">
+                    <div class="flex flex-col">
+                        <h3 class="font-poppins font-bold text-2xl md:text-3xl text-white mb-8 uppercase tracking-widest">
+                            Thématiques
+                        </h3>
+                        <ul class="space-y-4 md:space-y-6">
+                            {themes.map((theme) => (
+                                <li class="flex items-center gap-4 text-white font-poppins text-lg md:text-xl">
+                                    <span class="w-2 h-2 bg-white rounded-full shrink-0"></span>
+                                    <p>{theme.label}<span class="font-bold">{theme.bold}</span></p>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+
+                    <div class="flex flex-col">
+                        <h3 class="font-poppins font-bold text-2xl md:text-3xl text-white mb-8 uppercase tracking-widest">
+                            Valeurs
+                        </h3>
+                        <div class="grid grid-cols-3 gap-4">
+                            {values.map((value) => (
+                                <div class="flex flex-col items-center text-center gap-4 group">
+                                    <div class="w-16 h-16 md:w-20 md:h-20 transition-transform group-hover:scale-110">
+                                        <img src={value.img} alt={value.name} class="w-full h-full object-contain" />
+                                    </div>
+                                    <p class="font-poppins font-bold text-white text-[10px] md:text-xs uppercase tracking-widest">
+                                        {value.name}
+                                    </p>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div id="team-modal" class="fixed inset-0 z-[150] flex items-center justify-center hidden px-4">
+            <div id="modal-overlay" class="absolute inset-0 bg-black/40 backdrop-blur-md"></div>
+            <div class="relative z-10 w-full max-w-md bg-black/40 backdrop-blur-2xl border border-white/10 p-10 rounded-[40px] shadow-2xl flex flex-col items-center text-center text-white">
+                <div class="w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden mb-6 border-4 border-white/20 shadow-lg">
+                    <img id="modal-img" src="" alt="" class="w-full h-full object-cover" />
+                </div>
+                <h3 id="modal-name" class="font-poppins font-bold text-2xl md:text-3xl mb-1 italic"></h3>
+                <p id="modal-role" class="font-poppins text-[#FED506] font-medium mb-6 uppercase tracking-widest text-sm"></p>
+                <p id="modal-bio" class="font-poppins text-white/80 leading-relaxed text-base"></p>
+                <button id="modal-close-btn" class="mt-8 px-6 py-2 border border-white/20 rounded-full text-xs font-bold uppercase tracking-widest hover:bg-white hover:text-black transition-all">Fermer</button>
+            </div>
+        </div>
+
+        <footer class="w-full bg-black text-white pt-24 pb-12 flex flex-col items-center overflow-hidden z-30">
+            <div class="w-full relative py-12 overflow-hidden mb-12 border-y border-white/5">
+                <div class="flex marquee-content whitespace-nowrap items-center">
+                    {[...logos, ...logos, ...logos].map((logo) => (
+                        <div class="flex-shrink-0 mx-8 md:mx-16 w-32 md:w-56 flex justify-center items-center"> 
+                            <img src={logo} alt="Partner" class="h-16 md:h-24 w-auto brightness-0 invert opacity-50" />
+                        </div>
+                    ))}
+                </div>
+            </div>
+            <p class="font-poppins text-[10px] opacity-40 uppercase tracking-widest">© 2026 Echos Sonore — MMI Montbéliard</p>
+        </footer>
+    </div>
+</Layout>
+
+<script>
+    // --- GESTION DU MENU OVERLAY ---
+    const menuOpen = document.getElementById('menu-open');
+    const menuClose = document.getElementById('menu-close');
+    const overlay = document.getElementById('menu-overlay');
+
+    if (menuOpen && menuClose && overlay) {
+        menuOpen.addEventListener('click', () => {
+            overlay.classList.remove('translate-x-full');
+            document.body.style.overflow = 'hidden';
+        });
+        menuClose.addEventListener('click', () => {
+            overlay.classList.add('translate-x-full');
+            document.body.style.overflow = '';
+        });
+    }
+
+    // --- GESTION DE LA MODALE ÉQUIPE ---
+    const teamTriggers = document.querySelectorAll('.team-trigger');
+    const teamModal = document.getElementById('team-modal');
+    const modalCloseBtn = document.getElementById('modal-close-btn');
+    const modalOverlay = document.getElementById('modal-overlay');
+
+    const mImg = document.getElementById('modal-img') as HTMLImageElement;
+    const mName = document.getElementById('modal-name');
+    const mRole = document.getElementById('modal-role');
+    const mBio = document.getElementById('modal-bio');
+
+    teamTriggers.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const name = btn.getAttribute('data-name');
+            const role = btn.getAttribute('data-role');
+            const bio = btn.getAttribute('data-bio');
+            const img = btn.getAttribute('data-img');
+
+            if (mImg) mImg.src = img || '';
+            if (mName) mName.innerText = name || '';
+            if (mRole) mRole.innerText = role || '';
+            if (mBio) mBio.innerText = bio || '';
+
+            teamModal?.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        });
+    });
+
+    const closeTeamModal = () => {
+        teamModal?.classList.add('hidden');
+        document.body.style.overflow = '';
+    };
+
+    modalCloseBtn?.addEventListener('click', closeTeamModal);
+    modalOverlay?.addEventListener('click', closeTeamModal);
+</script>
+
+<style>
+    .marquee-content { animation: scroll 7s linear infinite; width: fit-content; }
+    @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-33.33%); } }
+</style>

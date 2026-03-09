@@ -1,6 +1,7 @@
 ---
+// index.astro
 import Layout from '../layouts/Layout.astro';
-import Header from '../components/Header.astro';
+// On n'a plus besoin d'importer Header ici car il est DANS le Hero
 import Hero from '../components/Hero.astro';
 
 // Logique PocketBase
@@ -16,10 +17,7 @@ try {
 ---
 
 <Layout title="Echos Sonore | Festival Reggae à Belfort">
-	<Header />
-	<main>
-		<Hero />
-		
-		
-	</main>
+    <main>
+        <Hero />
+    </header>
 </Layout>

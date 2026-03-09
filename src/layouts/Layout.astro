@@ -1,18 +1,14 @@
 ---
-import '../styles/global.css'; // <-- Indispensable !
-
-interface Props {
-	title: string;
-}
-const { title } = Astro.props;
+import '../styles/global.css';
 ---
 <!doctype html>
 <html lang="fr">
 	<head>
 		<meta charset="UTF-8" />
-		<title>{title}</title>
+		<meta name="viewport" content="width=device-width" />
+		<title>Echos Sonore</title>
 	</head>
-	<body class="bg-[#fff4c6]">
+	<body class="bg-[#FFF4C6] text-black font-poppins antialiased">
 		<slot />
 	</body>
 </html>

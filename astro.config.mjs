@@ -1,9 +1,13 @@
 import { defineConfig } from 'astro/config';
-import tailwind from '@astrojs/tailwind';
+import tailwindcss from '@tailwindcss/vite';
 import netlify from '@astrojs/netlify';
 
 export default defineConfig({
-  // On utilise l'intégration standard d'Astro pour Tailwind
-  integrations: [tailwind()],
-  adapter: netlify(),
+  output: 'server',
+  vite: {
+    plugins: [tailwindcss()]
+  },
+  adapter: netlify({
+    imageCDN: false,
+  }),
 });

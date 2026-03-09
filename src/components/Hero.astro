@@ -1,0 +1,232 @@
+---
+// Données de Billetterie
+const tickets = [
+    { title: "Pass 3 jours", img: "/assets/images/cards/pass-3.avif" },
+    { title: "Pass 2 jours", img: "/assets/images/cards/pass-2.avif" },
+    { title: "Pass 1 jour", img: "/assets/images/cards/pass-1.avif" }
+];
+
+// Données des Onglets
+const tabs = [
+    { title: "Programme", text: "En Savoir Plus...", img: "/assets/images/cards/programme.avif" },
+    { title: "Invités", text: "En Savoir Plus...", img: "/assets/images/cards/invite.avif" },
+    { title: "Infos Pratiques", text: "En Savoir Plus...", img: "/assets/images/cards/infos.avif" }
+];
+
+// Logos du carrousel automatique
+const logos = [
+    "/assets/icons/culture-logo.svg",
+    "/assets/icons/logo-montbeliard-white.svg",
+    "/assets/icons/logo-univ.svg",
+];
+
+// Liens pour le Menu Hamburger
+const navLinks = [
+    { name: "Le Festival", href: "#" },
+    { name: "Programme", href: "#" },
+    { name: "Artistes", href: "#" },
+    { name: "Scènes", href: "#" },
+    { name: "Infos pratiques", href: "#" },
+    { name: "Contact", href: "#" }
+];
+---
+
+<div class="w-full flex flex-col overflow-x-hidden">
+    
+    <div id="menu-overlay" class="fixed inset-0 z-[100] translate-x-full transition-transform duration-500 ease-in-out">
+        <div class="absolute inset-0 bg-black">
+            <img src="/assets/images/licorn-bg.avif" alt="Menu BG" class="w-full h-full object-cover opacity-50" />
+            <div class="absolute inset-0 bg-gradient-to-l from-black/80 to-transparent"></div>
+        </div>
+
+        <div class="relative z-10 h-full flex flex-col p-6 md:p-10">
+            <div class="flex justify-between items-center w-full">
+                <img src="/assets/icons/logo.avif" alt="Logo" class="h-14 md:h-20 w-auto" />
+                <button id="menu-close" class="text-white p-2 hover:scale-110 transition-transform cursor-pointer">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 md:h-12 md:w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+
+            <nav class="flex-1 flex flex-col justify-center items-end pr-4 md:pr-20">
+                <ul class="space-y-6 md:space-y-10 text-right">
+                    {navLinks.map((link) => (
+                        <li>
+                            <a href={link.href} class="block text-4xl md:text-6xl lg:text-7xl font-poppins font-bold text-white uppercase tracking-tighter hover:text-[#FED506] transition-colors">
+                                {link.name} <span class="text-[#FED506] ml-2 md:ml-4">•</span>
+                            </a>
+                        </li>
+                    ))}
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <section class="relative min-h-screen w-full flex flex-col items-center justify-center overflow-hidden bg-[#FFF4C6] py-20">
+        
+    <header class="absolute top-0 left-0 w-full flex justify-between items-center p-6 md:p-10 z-50">
+    <a href="/" class="transition-transform hover:scale-110">
+        <img src="/assets/icons/logo.avif" alt="Logo" class="h-14 md:h-20 w-auto" />
+    </a>
+    
+    <button id="menu-open" class="group flex flex-col gap-2.5 p-2 focus:outline-none cursor-pointer items-end">
+        <div class="w-10 md:w-12 h-1 bg-black rounded-full transition-all group-hover:w-8"></div>
+        <div class="w-7 md:w-9 h-1 bg-black rounded-full transition-all group-hover:w-12"></div>
+    </button>
+</header>
+
+        <div class="relative z-20 w-full text-center px-4 flex flex-col items-center">
+            <h1 class="font-display text-6xl md:text-9xl lg:text-[13rem] tracking-wider leading-none" 
+                style="color:#0B1E15; -webkit-text-stroke: 2px #ED3F24; -webkit-text-fill-color: #FED506;">
+                Echos Sonore
+            </h1>
+            <p class="mt-8 text-black font-righteous text-2xl md:text-4xl lg:text-5xl uppercase leading-tight">
+                Vibrez <br class="md:hidden" /> au rythme de la nature
+            </p>
+            <div class="mt-10 font-poppins font-bold uppercase tracking-widest text-black space-y-2">
+                <p class="text-xl md:text-2xl">Festival de Reggae</p>
+                <div class="flex flex-col md:flex-row md:gap-8 justify-center opacity-80 text-sm md:text-lg">
+                    <p>du 29 au 31 octobre</p>
+                    <p class="hidden md:block">•</p>
+                    <p>Audincourt, 25400</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="relative z-10 mt-12 lg:mt-0">
+            <img src="/assets/images/mascotte.avif" alt="Mascotte" class="w-[90%] md:w-[60%] lg:w-[45%] mx-auto h-auto object-contain drop-shadow-2xl" />
+        </div>
+
+        <div class="absolute bottom-16 left-0 w-full overflow-hidden leading-[0] z-40">
+            <div class="flex w-[200%] animate-lines-scroll">
+                <img src="/assets/images/lignes_rouge_jaune_vert.svg" alt="Bandes" class="w-1/2 h-auto object-cover" />
+                <img src="/assets/images/lignes_rouge_jaune_vert.svg" alt="Bandes" class="w-1/2 h-auto object-cover" aria-hidden="true" />
+            </div>
+        </div>
+    </section>
+
+    <div class="relative w-full flex flex-col items-center -mt-16 z-10">
+        <div class="absolute inset-0 w-full h-full z-0">
+            <img src="/assets/images/section-background.avif" alt="Ambiance" class="w-full h-full object-cover" />
+            <div class="absolute inset-0 bg-black/60"></div>
+        </div>
+
+        <div class="relative z-10 w-full max-w-7xl px-6 py-32 grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
+            {tickets.map((ticket, index) => (
+                <div class="flex flex-col gap-6 items-center">
+                    <a href="#" class="group relative w-full aspect-[16/9] md:aspect-[4/5] lg:aspect-square rounded-[10px] overflow-hidden shadow-2xl transition-transform duration-500 hover:scale-105">
+                        <img src={ticket.img} alt={ticket.title} class="absolute inset-0 w-full h-full object-cover grayscale-[20%] group-hover:grayscale-0 transition-all duration-700" />
+                        <div class="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-all"></div>
+                        <div class="absolute bottom-6 left-6 text-white font-poppins">
+                            <h3 class="text-xl md:text-2xl font-bold uppercase tracking-wide">{ticket.title}</h3>
+                            <p class="text-sm opacity-90">Je réserve !</p>
+                        </div>
+                    </a>
+                    {index < tickets.length - 1 && (
+                        <div class="w-full md:hidden">
+                             <img src="/assets/images/lignes_rouge_jaune_vert.svg" alt="séparateur" class="w-full h-auto" />
+                        </div>
+                    )}
+                </div>
+            ))}
+        </div>
+    </div>
+
+    <div class="w-full bg-[#FEFAF5] flex flex-col items-center py-32 z-20">
+        <div class="w-full max-w-7xl px-6 grid grid-cols-1 md:grid-cols-3 gap-8">
+            {tabs.map((tab, index) => (
+                <div class="flex flex-col gap-6 items-center">
+                    <a href="#" class="group relative w-full aspect-[16/9] md:aspect-square rounded-[10px] overflow-hidden shadow-lg transition-transform duration-500 hover:scale-105">
+                        <img src={tab.img} alt={tab.title} class="absolute inset-0 w-full h-full object-cover" />
+                        <div class="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-all"></div>
+                        <div class="absolute bottom-6 left-6 text-white font-poppins">
+                            <h3 class="text-xl md:text-2xl font-bold uppercase tracking-wide">{tab.title}</h3>
+                            <p class="text-sm opacity-90">{tab.text}</p>
+                        </div>
+                    </a>
+                    {index < tabs.length - 1 && (
+                        <div class="w-full md:hidden">
+                             <img src="/assets/images/lignes_rouge_jaune_vert.svg" alt="séparateur" class="w-full h-auto" />
+                        </div>
+                    )}
+                </div>
+            ))}
+        </div>
+    </div>
+
+    <footer class="w-full bg-black text-white pt-32 pb-16 flex flex-col items-center overflow-hidden -mt-16 z-30">
+        <h2 class="font-poppins font-bold text-2xl md:text-3xl uppercase tracking-widest mb-12 border-b border-white/10 pb-4">
+            Partenaires :
+        </h2>
+
+        <div class="w-full relative py-12 overflow-hidden">
+            <div class="flex marquee-content whitespace-nowrap items-center">
+                {[...logos, ...logos, ...logos].map((logo) => (
+                    <div class="flex-shrink-0 mx-8 md:mx-16 w-32 md:w-56 flex justify-center items-center"> 
+                        <img src={logo} alt="Logo" class="h-16 md:h-28 w-auto max-w-full object-contain brightness-0 invert opacity-90" />
+                    </div>
+                ))}
+            </div>
+        </div>
+
+        <div class="font-poppins text-xs md:text-base opacity-60 space-y-1 mt-24 mb-12 text-center">
+            <p>MMI 1ère année — SAE 105 — Montbéliard</p>
+            <p>Par Maël BRUNGARD @BooMooN.cloud</p>
+        </div>
+
+        <nav class="mb-12 px-4">
+            <ul class="flex flex-wrap justify-center items-center gap-x-6 gap-y-4 font-poppins font-bold text-sm md:text-xl uppercase">
+                <li><a href="#" class="hover:text-[#FED506] transition-all hover:tracking-widest">Le Festival</a></li>
+                <li class="hidden md:block opacity-30">•</li>
+                <li><a href="#" class="hover:text-[#FED506] transition-all hover:tracking-widest">Programme</a></li>
+                <li class="hidden md:block opacity-30">•</li>
+                <li><a href="#" class="hover:text-[#FED506] transition-all hover:tracking-widest">Artistes</a></li>
+                <li class="hidden md:block opacity-30">•</li>
+                <li><a href="#" class="hover:text-[#FED506] transition-all hover:tracking-widest">Scènes</a></li>
+                <li class="hidden md:block opacity-30">•</li>
+                <li><a href="#" class="hover:text-[#FED506] transition-all hover:tracking-widest">Infos pratiques</a></li>
+                <li class="hidden md:block opacity-30">•</li>
+                <li><a href="#" class="hover:text-[#FED506] transition-all hover:tracking-widest">Contact</a></li>
+            </ul>
+        </nav>
+
+        <nav>
+            <ul class="flex justify-center gap-10 font-poppins text-xs md:text-sm uppercase underline opacity-70">
+                <li><a href="#" class="hover:text-white transition-colors">CGU</a></li>
+                <li><a href="#" class="hover:text-white transition-colors">CGV</a></li>
+                <li><a href="#" class="hover:text-white transition-colors">Mentions Légales</a></li>
+            </ul>
+        </nav>
+    </footer>
+</div>
+
+<script>
+    const menuOpen = document.getElementById('menu-open');
+    const menuClose = document.getElementById('menu-close');
+    const overlay = document.getElementById('menu-overlay');
+
+    if (menuOpen && menuClose && overlay) {
+        menuOpen.addEventListener('click', () => {
+            overlay.classList.remove('translate-x-full');
+            document.body.style.overflow = 'hidden'; // Bloque le scroll arrière
+        });
+
+        menuClose.addEventListener('click', () => {
+            overlay.classList.add('translate-x-full');
+            document.body.style.overflow = ''; // Libère le scroll
+        });
+    }
+</script>
+
+<style>
+    /* Animation carrousel logos */
+    .marquee-content { animation: scroll 7s linear infinite; width: fit-content; }
+    @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-33.33%); } }
+
+    /* Animation lignes Hero */
+    .animate-lines-scroll { animation: scrollLines 15s linear infinite; }
+    @keyframes scrollLines { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+    .marquee-content:hover { animation-play-state: paused; }
+</style>

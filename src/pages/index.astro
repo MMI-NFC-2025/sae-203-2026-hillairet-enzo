@@ -1,10 +1,139 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { getArtistesByDate } from '../../backend/backend.mjs';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const artistes = await getArtistesByDate();
 ---
 
-<Layout>
-	<h1>Welcome to Astro!</h1>
+<Layout title="Echos Sonores - Accueil">
+    <div class="menu menu--close">
+        <header class="menu__headbar">
+            <a href="/"><img src="/assets/favicon/favicon-96x96.png" alt="ES-logo"></a>
+            <button class="nav-btn" aria-expanded="false" aria-label="menu" aria-controls="menu__content">
+                <span class="nav-btn__bar"></span>
+                <span class="nav-btn__bar"></span>
+            </button>
+        </header>
+        <nav class="menu__content" id="menu__content" aria-hidden="true">
+            <ul class="menu__list">
+                <li><a href="/festival">Le Festival ⋅</a></li>
+                <li><a href="/programme">Programme ⋅</a></li>
+                <li><a href="/artistes">Artistes ⋅</a></li>
+                <li><a href="/scenes">Scènes ⋅</a></li>
+                <li><a href="/infos">Infos Pratiques ⋅</a></li>
+                <li><a href="/contact">Contact ⋅</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    {/* SECTION ACCUEIL */}
+    <div class="section section--home">
+        <h1 class="section__title">Echos Sonore</h1>
+        <div class="section__content">
+            <h2>Vibrez<br>au rythme de la nature</h2>
+            <div class="section__info">
+                <span class="section__info-text">Festival de Reggae</span>
+                <span class="section__info-text">du 29 au 31 octobre</span>
+                <span class="section__info-text">Audincourt, 25400</span>
+            </div>
+            <img class="section__mascotte" src="/assets/images/mascotte.avif" alt="ES-mascotte">
+        </div>
+        <a href="#billetterie-section"><img class="section__scroll-icon" src="/assets/icons/scroll-down.svg" alt="scroll-down-indicator"></a>
+        <div class="lines lines--animated">
+            <div class="lines__item lines__item--red"></div>
+            <div class="lines__item lines__item--yellow"></div>
+            <div class="lines__item lines__item--green"></div>
+        </div>
+    </div>
+
+    {/* SECTION BILLETTERIE (Restrictions prof : Bouton appel action) */}
+    <div class="section section--reggae" id="billetterie-section">
+        <div class="card card--home">
+            <a href="#" class="card__link">
+                <img src="/assets/images/cards/pass-3.avif" alt="pass-card-3-days" class="card__image">
+                <div class="card__text">
+                    <span><strong>Pass 3 jours</strong></span>
+                    <span>Je réserve !</span>
+                </div>
+            </a>
+        </div>
+        <div class="lines">
+            <div class="lines__item lines__item--red"></div>
+            <div class="lines__item lines__item--yellow"></div>
+            <div class="lines__item lines__item--green"></div>
+        </div>
+        <div class="card card--home">
+            <a href="#" class="card__link">
+                <img src="/assets/images/cards/pass-2.avif" alt="pass-card-2-days" class="card__image">
+                <div class="card__text">
+                    <span><strong>Pass 2 jours</strong></span>
+                    <span>Je réserve !</span>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    {/* SECTION APERÇU SECTIONS PRINCIPALES */}
+    <div class="section section--white">
+        <div class="card card--home">
+            <a href="/programme" class="card__link">
+                <img src="/assets/images/cards/programme.avif" alt="programme-card" class="card__image">
+                <div class="card__text">
+                    <span><strong>Programme</strong></span>
+                    <span>En Savoir Plus...</span> 
+                </div>
+            </a>
+        </div>
+        <div class="lines">
+            <div class="lines__item lines__item--red"></div>
+            <div class="lines__item lines__item--yellow"></div>
+            <div class="lines__item lines__item--green"></div>
+        </div>
+        <div class="card card--home">
+            <a href="/artistes" class="card__link">
+                <img src="/assets/images/cards/invite.avif" alt="invite-card" class="card__image">
+                <div class="card__text">
+                    <span><strong>Invités</strong></span>
+                    <span>En Savoir Plus...</span>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    {/* SECTION PARTENAIRES (Carrousel) */}
+    <div class="section section--grey">
+        <h2 class="section__title">Partenaires :</h2>
+        <div class="carousel">
+            <div class="carousel__list">
+                <div class="carousel__item">
+                    <img src="/assets/icons/culture-logo.svg" alt="partenaire-logo" class="carousel__image">
+                </div>
+                <div class="carousel__item">
+                    <img src="/assets/icons/logo-montbeliard-white.svg" alt="partenaire-logo" class="carousel__image">
+                </div>
+                <div class="carousel__item">
+                    <img src="/assets/icons/logo-univ.svg" alt="partenaire-logo" class="carousel__image">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {/* FOOTER */}
+    <footer class="footer">
+        <div class="footer__mentions-part">
+            <p>MMI 1ère année - SAE 105 - Montbéilard</p>
+            <p>Par Enzo HILLAIRET & Maël BRUNGARD</p>
+        </div>
+        <div class="footer__nav">
+            <a href="/festival">Le Festival</a>
+            <div class="separator"></div>
+            <a href="/programme">Programme</a>
+            <div class="separator"></div>
+            <a href="/artistes">Artistes</a>
+        </div>
+    </footer>
+
+    {/* Scripts de Maël pour le menu et le carrousel */}
+    <script is:inline src="/js/menu.js"></script>
+    <script is:inline src="/js/carousel.js"></script>
 </Layout>

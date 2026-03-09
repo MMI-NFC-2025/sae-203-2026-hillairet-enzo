@@ -1,139 +1,57 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { getArtistesByDate } from '../../backend/backend.mjs';
-
-const artistes = await getArtistesByDate();
 ---
 
 <Layout title="Echos Sonores - Accueil">
-    <div class="menu menu--close">
-        <header class="menu__headbar">
-            <a href="/"><img src="/assets/favicon/favicon-96x96.png" alt="ES-logo"></a>
-            <button class="nav-btn" aria-expanded="false" aria-label="menu" aria-controls="menu__content">
-                <span class="nav-btn__bar"></span>
-                <span class="nav-btn__bar"></span>
-            </button>
-        </header>
-        <nav class="menu__content" id="menu__content" aria-hidden="true">
-            <ul class="menu__list">
-                <li><a href="/festival">Le Festival ⋅</a></li>
-                <li><a href="/programme">Programme ⋅</a></li>
-                <li><a href="/artistes">Artistes ⋅</a></li>
-                <li><a href="/scenes">Scènes ⋅</a></li>
-                <li><a href="/infos">Infos Pratiques ⋅</a></li>
-                <li><a href="/contact">Contact ⋅</a></li>
-            </ul>
-        </nav>
+	<button class="bg-red-600 text-white p-10 text-3xl font-bold rounded-full shadow-2xl">
+  SI TU VOIS CE BOUTON ROUGE, TAILWIND MARCHE !
+</button>
+  
+  <section class="relative min-h-screen flex flex-col justify-between items-center bg-[#fff4c6] overflow-hidden pt-20">
+    
+    <header class="absolute top-0 w-full p-6 flex justify-between items-center z-50">
+      <img src="/assets/favicon/favicon-96x96.png" alt="Logo" class="w-12 h-12" />
+      <button class="flex flex-col gap-2 group">
+        <span class="w-8 h-1 bg-[#130e0a] rounded-full"></span>
+        <span class="w-8 h-1 bg-[#130e0a] rounded-full"></span>
+      </button>
+    </header>
+
+    <div class="flex flex-col items-center text-center px-4 flex-grow justify-center gap-8">
+      
+      <h1 class="text-6xl md:text-9xl font-['Righteous'] text-[#130e0a] uppercase tracking-tighter leading-none">
+        Echos Sonore
+      </h1>
+
+      <div class="flex flex-col items-center gap-6">
+        <h2 class="text-3xl md:text-5xl font-bold leading-tight text-[#130e0a]">
+          Vibrez<br />au rythme de la nature
+        </h2>
+        
+        <div class="flex flex-col items-center gap-1 uppercase tracking-[0.2em] font-black text-[#6d9a02] text-sm md:text-base">
+          <span>Festival de Reggae</span>
+          <span>du 29 au 31 octobre</span>
+          <span>Audincourt, 25400</span>
+        </div>
+
+        <img 
+          src="/assets/images/mascotte.avif" 
+          alt="Mascotte Echos Sonores" 
+          class="h-64 md:h-80 object-contain mt-4"
+        />
+      </div>
     </div>
 
-    {/* SECTION ACCUEIL */}
-    <div class="section section--home">
-        <h1 class="section__title">Echos Sonore</h1>
-        <div class="section__content">
-            <h2>Vibrez<br>au rythme de la nature</h2>
-            <div class="section__info">
-                <span class="section__info-text">Festival de Reggae</span>
-                <span class="section__info-text">du 29 au 31 octobre</span>
-                <span class="section__info-text">Audincourt, 25400</span>
-            </div>
-            <img class="section__mascotte" src="/assets/images/mascotte.avif" alt="ES-mascotte">
-        </div>
-        <a href="#billetterie-section"><img class="section__scroll-icon" src="/assets/icons/scroll-down.svg" alt="scroll-down-indicator"></a>
-        <div class="lines lines--animated">
-            <div class="lines__item lines__item--red"></div>
-            <div class="lines__item lines__item--yellow"></div>
-            <div class="lines__item lines__item--green"></div>
-        </div>
+    <a href="#billetterie" class="mb-12 animate-bounce">
+      <img src="/assets/icons/scroll-down.svg" alt="Scroll" class="w-10 h-10" />
+    </a>
+
+    <div class="w-full flex h-3">
+      <div class="flex-1 bg-[#ed3f24]"></div>
+      <div class="flex-1 bg-[#fed506]"></div>
+      <div class="flex-1 bg-[#6d9a02]"></div>
     </div>
 
-    {/* SECTION BILLETTERIE (Restrictions prof : Bouton appel action) */}
-    <div class="section section--reggae" id="billetterie-section">
-        <div class="card card--home">
-            <a href="#" class="card__link">
-                <img src="/assets/images/cards/pass-3.avif" alt="pass-card-3-days" class="card__image">
-                <div class="card__text">
-                    <span><strong>Pass 3 jours</strong></span>
-                    <span>Je réserve !</span>
-                </div>
-            </a>
-        </div>
-        <div class="lines">
-            <div class="lines__item lines__item--red"></div>
-            <div class="lines__item lines__item--yellow"></div>
-            <div class="lines__item lines__item--green"></div>
-        </div>
-        <div class="card card--home">
-            <a href="#" class="card__link">
-                <img src="/assets/images/cards/pass-2.avif" alt="pass-card-2-days" class="card__image">
-                <div class="card__text">
-                    <span><strong>Pass 2 jours</strong></span>
-                    <span>Je réserve !</span>
-                </div>
-            </a>
-        </div>
-    </div>
+  </section>
 
-    {/* SECTION APERÇU SECTIONS PRINCIPALES */}
-    <div class="section section--white">
-        <div class="card card--home">
-            <a href="/programme" class="card__link">
-                <img src="/assets/images/cards/programme.avif" alt="programme-card" class="card__image">
-                <div class="card__text">
-                    <span><strong>Programme</strong></span>
-                    <span>En Savoir Plus...</span> 
-                </div>
-            </a>
-        </div>
-        <div class="lines">
-            <div class="lines__item lines__item--red"></div>
-            <div class="lines__item lines__item--yellow"></div>
-            <div class="lines__item lines__item--green"></div>
-        </div>
-        <div class="card card--home">
-            <a href="/artistes" class="card__link">
-                <img src="/assets/images/cards/invite.avif" alt="invite-card" class="card__image">
-                <div class="card__text">
-                    <span><strong>Invités</strong></span>
-                    <span>En Savoir Plus...</span>
-                </div>
-            </a>
-        </div>
-    </div>
-
-    {/* SECTION PARTENAIRES (Carrousel) */}
-    <div class="section section--grey">
-        <h2 class="section__title">Partenaires :</h2>
-        <div class="carousel">
-            <div class="carousel__list">
-                <div class="carousel__item">
-                    <img src="/assets/icons/culture-logo.svg" alt="partenaire-logo" class="carousel__image">
-                </div>
-                <div class="carousel__item">
-                    <img src="/assets/icons/logo-montbeliard-white.svg" alt="partenaire-logo" class="carousel__image">
-                </div>
-                <div class="carousel__item">
-                    <img src="/assets/icons/logo-univ.svg" alt="partenaire-logo" class="carousel__image">
-                </div>
-            </div>
-        </div>
-    </div>
-
-    {/* FOOTER */}
-    <footer class="footer">
-        <div class="footer__mentions-part">
-            <p>MMI 1ère année - SAE 105 - Montbéilard</p>
-            <p>Par Enzo HILLAIRET & Maël BRUNGARD</p>
-        </div>
-        <div class="footer__nav">
-            <a href="/festival">Le Festival</a>
-            <div class="separator"></div>
-            <a href="/programme">Programme</a>
-            <div class="separator"></div>
-            <a href="/artistes">Artistes</a>
-        </div>
-    </footer>
-
-    {/* Scripts de Maël pour le menu et le carrousel */}
-    <script is:inline src="/js/menu.js"></script>
-    <script is:inline src="/js/carousel.js"></script>
 </Layout>

@@ -1,0 +1,288 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PocketBase from 'pocketbase';
+
+// ==========================================
+// 1. GÉNÉRATION DES CHEMINS (Static Paths)
+// ==========================================
+export async function getStaticPaths() {
+    const pb = new PocketBase('http://127.0.0.1:8090');
+    
+    try {
+        const records = await pb.collection('artistes').getFullList();
+        return records.map((record) => ({
+            params: { id: record.id },
+            props: { artiste: record }
+        }));
+    } catch (err) {
+        console.error("Erreur PB : Génération de chemins de secours");
+        return [
+            { params: { id: '1' } }, { params: { id: '2' } }, { params: { id: '3' } },
+            { params: { id: '4' } }, { params: { id: '5' } }, { params: { id: '6' } },
+            { params: { id: '7' } }, { params: { id: '8' } }, { params: { id: '9' } },
+        ];
+    }
+}
+
+// ==========================================
+// 2. RÉCUPÉRATION SÉCURISÉE DES DONNÉES
+// ==========================================
+const { id } = Astro.params;
+let artiste = Astro.props.artiste;
+const pb = new PocketBase('http://127.0.0.1:8090');
+
+if (!artiste) {
+    try {
+        artiste = await pb.collection('artistes').getOne(id);
+    } catch (error) {
+        console.warn(`Artiste avec l'ID ${id} introuvable, utilisation des données par défaut.`);
+        artiste = {
+            nom: "Artiste introuvable",
+            description: "Les informations de cet artiste ne sont pas disponibles actuellement.",
+            date_representation: null,
+            type_de_scene: "À définir",
+            image_principale: null,
+            galerie: []
+        };
+    }
+}
+
+let formattedDate = "Date à venir";
+if (artiste?.date_representation) {
+    const d = new Date(artiste.date_representation);
+    formattedDate = d.toLocaleDateString('fr-FR', { 
+        day: '2-digit', 
+        month: '2-digit', 
+        year: 'numeric' 
+    });
+}
+
+const mainImage = artiste?.image_principale ? pb.files.getUrl(artiste, artiste.image_principale) : '/assets/images/section-background.avif';
+const galleryImages = artiste?.galerie && Array.isArray(artiste.galerie) 
+    ? artiste.galerie.map(img => pb.files.getUrl(artiste, img)) 
+    : [];
+
+const navLinks = [
+    { name: "Le Festival", href: "/festival" },
+    { name: "Programme", href: "/programme" },
+    { name: "Artistes", href: "/artistes" },
+    { name: "Scènes", href: "/scenes" },
+    { name: "Infos pratiques", href: "/infos-pratiques" },
+    { name: "Contact", href: "/contact" }
+];
+---
+
+<Layout title={`${artiste.nom} | Echos Sonore`}>
+    <div class="w-full flex flex-col overflow-x-hidden bg-[#FFF4C6] min-h-screen">
+        
+        <div id="menu-overlay" class="fixed inset-0 z-[100] translate-x-full transition-transform duration-500 ease-in-out">
+            <div class="absolute inset-0 bg-black">
+                <img src="/assets/images/licorn-bg.avif" alt="Menu BG" class="w-full h-full object-cover opacity-50" />
+                <div class="absolute inset-0 bg-gradient-to-l from-black/80 to-transparent"></div>
+            </div>
+            <div class="relative z-10 h-full flex flex-col p-6 md:p-10">
+                <div class="flex justify-between items-center w-full">
+                    <a href="/"><img src="/assets/icons/logo.avif" alt="Logo" class="h-14 md:h-20 w-auto" /></a>
+                    <button id="menu-close" class="text-white p-2 cursor-pointer hover:rotate-90 transition-transform">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 md:h-12 md:w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                    </button>
+                </div>
+                <nav class="flex-1 flex flex-col justify-start pt-32 items-end pr-4 md:pr-20">
+                    <ul class="space-y-6 text-right">
+                        {navLinks.map((link) => (
+                            <li>
+                                <a href={link.href} class="block text-2xl md:text-5xl font-poppins font-bold text-white uppercase hover:text-[#FED506] transition-colors">
+                                    {link.name} <span class="text-white ml-2 md:ml-4">•</span>
+                                </a>
+                            </li>
+                        ))}
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
+        <header class="w-full flex justify-between items-center p-6 md:p-10 z-50 bg-[#FFF4C6]">
+            <a href="/" class="hover:scale-110 transition-transform">
+                <img src="/assets/icons/logo.avif" alt="Logo" class="h-14 md:h-20 w-auto" />
+            </a>
+            <button id="menu-open" class="flex flex-col gap-2 p-2 cursor-pointer items-end group">
+                <div class="w-10 md:w-12 h-1 bg-black rounded-full group-hover:w-8 transition-all"></div>
+                <div class="w-10 md:w-12 h-1 bg-black rounded-full transition-all"></div>
+            </button>
+        </header>
+
+        <section class="relative w-full h-64 sm:h-96 md:h-[500px] overflow-hidden bg-black">
+            <img src={mainImage} alt={artiste.nom} class="absolute inset-0 w-full h-full object-cover opacity-90" />
+            <div class="absolute inset-0 flex items-center justify-center p-4">
+                <h1 class="font-poppins font-bold text-5xl md:text-8xl lg:text-9xl text-white tracking-wide text-center drop-shadow-xl">
+                    {artiste.nom}
+                </h1>
+            </div>
+        </section>
+
+        <section class="w-full max-w-4xl mx-auto px-6 py-16 md:py-24 flex flex-col items-center gap-10">
+            
+            <div class="w-full bg-[#FEFAF5] rounded-[2rem] p-8 md:p-12 shadow-sm">
+                <h2 class="font-poppins font-bold text-2xl md:text-3xl text-black mb-6">Description</h2>
+                <div 
+                    class="font-poppins text-base md:text-xl text-black/90 leading-relaxed" 
+                    set:html={artiste.description || "Aucune description disponible pour cet artiste."}
+                ></div>
+            </div>
+
+            <div class="w-full">
+                <img src="/assets/images/lignes_rouge_jaune_vert.svg" alt="separateur" class="w-full h-auto opacity-90 drop-shadow-sm" />
+            </div>
+
+            <div class="w-full bg-[#FEFAF5] rounded-[2rem] p-8 md:p-12 shadow-sm">
+                <h2 class="font-poppins font-bold text-2xl md:text-3xl text-black mb-6">Performance</h2>
+                <div class="font-poppins text-base md:text-xl text-black/90 space-y-2">
+                    <p>Date : {formattedDate}</p>
+                    <p>Scène : {artiste.type_de_scene}</p>
+                </div>
+            </div>
+
+        </section>
+
+        {galleryImages.length > 0 && (
+            <section class="relative w-full py-20 md:py-32 overflow-hidden">
+                <div class="absolute inset-0 z-0">
+                    <img src={mainImage} alt="" class="w-full h-full object-cover blur-xl scale-110" />
+                    <div class="absolute inset-0 bg-black/60"></div>
+                </div>
+
+                <div class="relative z-10 w-full max-w-6xl mx-auto flex flex-col items-center">
+                    <h2 class="font-poppins font-bold text-4xl md:text-6xl text-white mb-16 tracking-widest text-center px-6">
+                        Galerie Photos
+                    </h2>
+                    
+                    <div class="relative w-full group px-12 md:px-20">
+                        <div class="overflow-hidden w-full">
+                            <div id="carousel-track" class="flex transition-transform duration-500 ease-in-out">
+                                {galleryImages.map((img) => (
+                                    <div class="carousel-item w-full sm:w-1/2 md:w-1/3 flex-shrink-0 px-2 sm:px-4">
+                                        <div class="w-full h-64 md:h-80 rounded-3xl overflow-hidden shadow-2xl">
+                                            <img src={img} alt={`Galerie ${artiste.nom}`} class="w-full h-full object-cover transition-transform duration-500 hover:scale-110" />
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+
+                        <button id="btn-prev" class="absolute top-1/2 left-2 md:left-6 -translate-y-1/2 bg-black/50 hover:bg-[#FED506] hover:text-black text-white p-3 md:p-4 rounded-full backdrop-blur-md transition-all shadow-xl z-20 hidden">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 md:h-8 md:w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+                        </button>
+
+                        <button id="btn-next" class="absolute top-1/2 right-2 md:right-6 -translate-y-1/2 bg-black/50 hover:bg-[#FED506] hover:text-black text-white p-3 md:p-4 rounded-full backdrop-blur-md transition-all shadow-xl z-20">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 md:h-8 md:w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+                        </button>
+                    </div>
+                </div>
+            </section>
+        )}
+
+        <footer class="w-full bg-black text-white pt-24 pb-12 flex flex-col items-center overflow-hidden z-30 mt-auto">
+            <div class="font-poppins text-[10px] sm:text-xs md:text-base opacity-40 mb-12 text-center text-balance px-4 leading-relaxed">
+                <p>MMI 1ère année — SAE 105 — Montbéliard</p>
+                <p>Par Maël BRUNGARD @BooMooN.cloud</p>
+            </div>
+            <nav class="mb-12 px-4 text-center">
+                <ul class="flex flex-wrap justify-center items-center gap-x-6 sm:gap-x-12 gap-y-6 font-poppins font-bold text-xs sm:text-sm md:text-xl uppercase">
+                    {navLinks.map((link, i) => (
+                        <li class="flex items-center gap-6 sm:gap-12">
+                            <a href={link.href} class="hover:text-[#FED506] transition-all hover:tracking-widest">{link.name}</a>
+                            {i < navLinks.length - 1 && <span class="opacity-20 hidden md:block select-none">•</span>}
+                        </li>
+                    ))}
+                </ul>
+            </nav>
+            <nav class="flex flex-wrap justify-center gap-6 sm:gap-10 font-poppins text-[9px] sm:text-[10px] md:text-xs uppercase underline opacity-40 text-center px-4">
+                <a href="#">CGU</a><a href="#">CGV</a><a href="#">Mentions Légales</a>
+            </nav>
+        </footer>
+    </div>
+</Layout>
+
+<script>
+    // MENU LOGIC
+    const menuOpen = document.getElementById('menu-open');
+    const menuClose = document.getElementById('menu-close');
+    const overlay = document.getElementById('menu-overlay');
+    
+    if (menuOpen && menuClose && overlay) {
+        menuOpen.addEventListener('click', () => { 
+            overlay.classList.remove('translate-x-full'); 
+            document.body.style.overflow = 'hidden'; 
+        });
+        menuClose.addEventListener('click', () => { 
+            overlay.classList.add('translate-x-full'); 
+            document.body.style.overflow = ''; 
+        });
+    }
+
+    // CAROUSEL LOGIC
+    const track = document.getElementById('carousel-track');
+    const btnPrev = document.getElementById('btn-prev');
+    const btnNext = document.getElementById('btn-next');
+
+    if (track && btnPrev && btnNext) {
+        let currentIndex = 0;
+        const items = track.querySelectorAll('.carousel-item');
+        const totalItems = items.length;
+
+        const updateCarousel = () => {
+            if (totalItems === 0) return;
+
+            const itemWidth = items[0].getBoundingClientRect().width;
+            track.style.transform = `translateX(-${currentIndex * itemWidth}px)`;
+
+            const trackContainerWidth = track.parentElement.getBoundingClientRect().width;
+            const visibleItems = Math.round(trackContainerWidth / itemWidth);
+
+            if (currentIndex === 0) {
+                btnPrev.classList.add('hidden');
+            } else {
+                btnPrev.classList.remove('hidden');
+            }
+
+            if (currentIndex >= totalItems - visibleItems) {
+                btnNext.classList.add('hidden');
+            } else {
+                btnNext.classList.remove('hidden');
+            }
+        };
+
+        btnNext.addEventListener('click', () => {
+            const itemWidth = items[0].getBoundingClientRect().width;
+            const trackContainerWidth = track.parentElement.getBoundingClientRect().width;
+            const visibleItems = Math.round(trackContainerWidth / itemWidth);
+
+            if (currentIndex < totalItems - visibleItems) {
+                currentIndex++;
+                updateCarousel();
+            }
+        });
+
+        btnPrev.addEventListener('click', () => {
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateCarousel();
+            }
+        });
+
+        window.addEventListener('resize', () => {
+            currentIndex = 0; 
+            updateCarousel();
+        });
+
+        updateCarousel();
+    }
+</script>
+
+<style>
+    html { scroll-behavior: smooth; }
+    
+    /* Retire les marges par défaut que l'éditeur riche de Pocketbase pourrait ajouter en haut/bas */
+    div[set\:html] p:first-child { margin-top: 0; }
+    div[set\:html] p:last-child { margin-bottom: 0; }
+</style>

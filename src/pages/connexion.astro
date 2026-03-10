@@ -1,0 +1,204 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const navLinks = [
+    { name: "Le Festival", href: "/festival" },
+    { name: "Programme", href: "/programme" },
+    { name: "Artistes", href: "/artistes" },
+    { name: "Scènes", href: "/scenes" },
+    { name: "Infos pratiques", href: "/infos-pratiques" },
+    { name: "Contact", href: "/contact" }
+];
+---
+
+<Layout title="Connexion | Echos Sonores">
+    <div class="w-full flex flex-col overflow-x-hidden bg-[#FFF4C6] min-h-screen">
+        
+        <div id="menu-overlay" class="fixed inset-0 z-[100] translate-x-full transition-transform duration-500 ease-in-out">
+            <div class="absolute inset-0 bg-black">
+                <img src="/assets/images/licorn-bg.avif" alt="Menu BG" class="w-full h-full object-cover opacity-50" onerror="this.style.display='none'" />
+                <div class="absolute inset-0 bg-gradient-to-l from-black/80 to-transparent"></div>
+            </div>
+            <div class="relative z-10 h-full flex flex-col p-6 md:p-10">
+                <div class="flex justify-between items-center w-full">
+                    <a href="/festival"><img src="/assets/icons/logo.avif" alt="Logo" class="h-14 md:h-20 w-auto rounded-2xl" /></a>
+                    <button id="menu-close" class="text-white p-2 cursor-pointer hover:rotate-90 transition-transform">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 md:h-12 md:w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                    </button>
+                </div>
+                <nav class="flex-1 flex flex-col justify-start pt-32 items-end pr-4 md:pr-20">
+                    <ul class="space-y-6 text-right">
+                        {navLinks.map((link) => (
+                            <li>
+                                <a href={link.href} class="block text-2xl md:text-5xl font-poppins font-bold text-white uppercase hover:text-[#FED506] transition-colors">
+                                    {link.name} <span class="text-white ml-2 md:ml-4">•</span>
+                                </a>
+                            </li>
+                        ))}
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
+        <header class="w-full flex justify-between items-center p-6 md:p-10 z-50 bg-[#FFF4C6]">
+            <a href="/festival" class="hover:scale-110 transition-transform">
+                <img src="/assets/icons/logo.avif" alt="Logo" class="h-14 md:h-20 w-auto rounded-2xl" />
+            </a>
+            <div class="flex items-center gap-4">
+                <span id="user-status" class="hidden font-poppins text-[10px] md:text-xs uppercase font-bold bg-[#6d9a02] text-white px-4 py-1.5 rounded-full shadow-lg animate-pulse">Connecté</span>
+                <button id="menu-open" class="flex flex-col gap-2 p-2 cursor-pointer items-end group">
+                    <div class="w-10 md:w-12 h-1 bg-black rounded-full group-hover:w-8 transition-all"></div>
+                    <div class="w-10 md:w-12 h-1 bg-black rounded-full transition-all"></div>
+                </button>
+            </div>
+        </header>
+
+        <section class="w-full pt-4 pb-12 flex justify-center text-center px-4">
+            <h1 class="font-display text-5xl sm:text-7xl md:text-[8rem] text-[#130e0a] uppercase italic leading-none drop-shadow-[0_4px_0_rgba(185,28,28,1)] md:drop-shadow-[0_8px_0_rgba(185,28,28,1)]">
+                Espace Membre
+            </h1>
+        </section>
+
+        <section class="w-full pb-24 px-6 md:px-10 flex flex-col items-center flex-1">
+            
+            <div class="relative w-full max-w-md min-h-[550px] rounded-[3rem] overflow-hidden shadow-2xl border border-black/10 transition-transform duration-500 hover:scale-[1.01]">
+                
+                <img src="/assets/images/licorn-bg.avif" alt="Fond" class="absolute inset-0 w-full h-full object-cover scale-110 blur-md rounded-[3rem]" />
+                <div class="absolute inset-0 bg-black/60 backdrop-blur-sm rounded-[3rem]"></div>
+
+                <div class="relative z-10 p-8 md:p-14 flex flex-col h-full text-white">
+                    
+                    <div id="login-zone">
+                        <h2 class="font-poppins font-bold text-3xl md:text-4xl mb-2 drop-shadow-md">Heureux de vous revoir !</h2>
+                        <p class="font-poppins text-white/60 mb-10 text-sm">Connectez-vous pour accéder à vos avantages.</p>
+
+                        <form id="login-form" class="flex flex-col gap-6">
+                            <div class="flex flex-col gap-2">
+                                <label for="email" class="font-poppins font-bold text-xs uppercase tracking-widest text-white/80 ml-1">Email</label>
+                                <input 
+                                    type="email" 
+                                    id="email" 
+                                    required
+                                    placeholder="votre@email.com" 
+                                    class="w-full bg-white/10 border border-white/20 rounded-2xl py-4 px-6 text-white placeholder:text-white/30 focus:outline-none focus:border-[#FED506] focus:ring-1 focus:ring-[#FED506] transition-all backdrop-blur-xl"
+                                />
+                            </div>
+
+                            <div class="flex flex-col gap-2">
+                                <label for="password" class="font-poppins font-bold text-xs uppercase tracking-widest text-white/80 ml-1">Mot de passe</label>
+                                <input 
+                                    type="password" 
+                                    id="password" 
+                                    required
+                                    placeholder="••••••••" 
+                                    class="w-full bg-white/10 border border-white/20 rounded-2xl py-4 px-6 text-white placeholder:text-white/30 focus:outline-none focus:border-[#FED506] focus:ring-1 focus:ring-[#FED506] transition-all backdrop-blur-xl"
+                                />
+                            </div>
+
+                            <p id="error-message" class="text-[#ed3f24] font-poppins text-sm hidden bg-red-500/10 p-3 rounded-xl border border-red-500/20 animate-bounce text-center">
+                                ⚠️ Identifiants incorrects.
+                            </p>
+
+                            <button 
+                                type="submit" 
+                                class="w-full mt-4 bg-[#FED506] hover:bg-yellow-400 text-black font-poppins font-bold text-xl py-5 rounded-3xl transition-all shadow-xl active:scale-95 border border-yellow-200/50"
+                            >
+                                Se connecter
+                            </button>
+                        </form>
+                    </div>
+
+                    <div id="logout-zone" class="hidden flex flex-col items-center justify-center flex-1 text-center py-10">
+                        <div class="w-24 h-24 bg-[#6d9a02]/20 rounded-full flex items-center justify-center mb-8 border border-[#6d9a02]/30">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-[#6d9a02]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                        </div>
+                        <h2 class="font-poppins font-bold text-3xl mb-4">Accès autorisé</h2>
+                        <p class="font-poppins text-white/70 mb-12">Vous êtes actuellement authentifié sur Echos Sonores.</p>
+                        
+                        <button id="logout-btn" class="w-full bg-[#ed3f24] hover:bg-red-600 text-white font-poppins font-bold text-xl py-5 rounded-3xl transition-all shadow-xl active:scale-95 border border-white/10">
+                            Se déconnecter
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <footer class="w-full bg-black text-white py-12 flex flex-col items-center">
+             <p class="font-poppins text-[10px] opacity-40">© 2026 Echos Sonores Festival | ID Étudiant : o4g3yq8bkgg4bxz</p>
+        </footer>
+    </div>
+</Layout>
+
+<script>
+    // --- 1. LOGIQUE DU MENU ---
+    const menuOpen = document.getElementById('menu-open');
+    const menuClose = document.getElementById('menu-close');
+    const overlay = document.getElementById('menu-overlay');
+
+    if (menuOpen && menuClose && overlay) {
+        menuOpen.addEventListener('click', () => { 
+            overlay.classList.remove('translate-x-full'); 
+            document.body.style.overflow = 'hidden'; 
+        });
+        menuClose.addEventListener('click', () => { 
+            overlay.classList.add('translate-x-full'); 
+            document.body.style.overflow = ''; 
+        });
+    }
+
+    // --- 2. LOGIQUE CONNEXION POCKETBASE ---
+    import { loginUser, logoutUser, pb } from '../../backend/backend.mjs';
+
+    const loginForm = document.getElementById('login-form') as HTMLFormElement;
+    const loginZone = document.getElementById('login-zone');
+    const logoutZone = document.getElementById('logout-zone');
+    const logoutBtn = document.getElementById('logout-btn');
+    const errorMessage = document.getElementById('error-message');
+    const userStatus = document.getElementById('user-status');
+
+    function updateUI() {
+        const isConnected = pb.authStore.isValid;
+        
+        if (isConnected) {
+            loginZone?.classList.add('hidden');
+            logoutZone?.classList.remove('hidden');
+            logoutZone?.classList.add('flex');
+            userStatus?.classList.remove('hidden');
+        } else {
+            loginZone?.classList.remove('hidden');
+            logoutZone?.classList.add('hidden');
+            logoutZone?.classList.remove('flex');
+            userStatus?.classList.add('hidden');
+        }
+    }
+
+    // Init au chargement
+    updateUI();
+
+    loginForm?.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const email = (document.getElementById('email') as HTMLInputElement).value;
+        const password = (document.getElementById('password') as HTMLInputElement).value;
+        
+        const success = await loginUser(email, password);
+        
+        if (success) {
+            errorMessage?.classList.add('hidden');
+            updateUI();
+        } else {
+            errorMessage?.classList.remove('hidden');
+        }
+    });
+
+    logoutBtn?.addEventListener('click', () => {
+        logoutUser();
+        updateUI();
+    });
+</script>
+
+<style>
+    html { scroll-behavior: smooth; }
+</style>

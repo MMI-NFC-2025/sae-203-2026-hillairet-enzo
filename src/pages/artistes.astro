@@ -1,0 +1,204 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PocketBase from 'pocketbase';
+
+// ==========================================
+// 1. CONNEXION POCKETBASE
+// ==========================================
+const pb = new PocketBase('http://127.0.0.1:8090'); // Ton URL PocketBase
+
+let artistes = [];
+
+try {
+    // On récupère tous les artistes
+    const records = await pb.collection('artistes').getFullList();
+
+    artistes = records.map((record) => {
+        // Formatage de la date (ex: 2026-12-29 -> 29/12/26)
+        let formattedDate = "Date à venir";
+        if (record.date_representation) {
+            const dateObj = new Date(record.date_representation);
+            formattedDate = dateObj.toLocaleDateString('fr-FR', { 
+                day: '2-digit', 
+                month: '2-digit', 
+                year: '2-digit' 
+            });
+        }
+
+        return {
+            id: record.id,
+            nom: record.nom,
+            scene: record.type_de_scene || "À définir",
+            date: formattedDate,
+            image: record.image_principale ? pb.files.getUrl(record, record.image_principale) : null
+        };
+    });
+
+} catch (err) {
+    console.error("Erreur de connexion à PocketBase :", err);
+    // Données de secours pour l'affichage de test (avec des faux ID ajoutés)
+    artistes = [
+        { id: "1", nom: "Danakil", scene: "Scène principale", date: "10/07/26", image: "/assets/images/artistes/danakil.avif" },
+        { id: "2", nom: "Tiken Jah Fakoly", scene: "Scène principale", date: "10/07/26", image: "/assets/images/artistes/tiken.avif" },
+        { id: "3", nom: "Biga*Ranx", scene: "Scène alternative", date: "10/07/26", image: "/assets/images/artistes/bigaranx.avif" },
+        { id: "4", nom: "Jahneration", scene: "Scène principale", date: "11/07/26", image: "/assets/images/artistes/jahneration.avif" },
+        { id: "5", nom: "Yaniss Odua", scene: "Scène alternative", date: "11/07/26", image: "/assets/images/artistes/yaniss.avif" },
+        { id: "6", nom: "Alborosie", scene: "Scène principale", date: "11/07/26", image: "/assets/images/artistes/alborosie.avif" },
+        { id: "7", nom: "Dub Inc", scene: "Scène principale", date: "12/07/26", image: "/assets/images/artistes/dubinc.avif" },
+        { id: "8", nom: "Lila Iké", scene: "Scène acoustique", date: "12/07/26", image: "/assets/images/artistes/lila-ike.avif" }
+    ];
+}
+
+// ==========================================
+// 2. TRI PERSONNALISÉ DES ARTISTES
+// ==========================================
+const ordreVoulu = [
+    "Danakil",
+    "Tiken Jah Fakoly",
+    "Biga*Ranx",
+    "Jahneration",
+    "Yaniss Odua",
+    "Alborosie",
+    "Dub Inc",
+    "Lila Iké"
+];
+
+artistes.sort((a, b) => {
+    let indexA = ordreVoulu.indexOf(a.nom);
+    let indexB = ordreVoulu.indexOf(b.nom);
+    
+    if (indexA === -1) indexA = 999;
+    if (indexB === -1) indexB = 999;
+    
+    return indexA - indexB;
+});
+
+// 3. Configuration des liens du menu
+const navLinks = [
+    { name: "Le Festival", href: "/festival" },
+    { name: "Programme", href: "/programme" },
+    { name: "Artistes", href: "/artistes" },
+    { name: "Scènes", href: "/scenes" },
+    { name: "Infos pratiques", href: "/infos-pratiques" },
+    { name: "Contact", href: "/contact" }
+];
+---
+
+<Layout title="Nos Artistes | Echos Sonore">
+    <div class="w-full flex flex-col overflow-x-hidden bg-[#FFF4C6] min-h-screen">
+        
+        <div id="menu-overlay" class="fixed inset-0 z-[100] translate-x-full transition-transform duration-500 ease-in-out">
+            <div class="absolute inset-0 bg-black">
+                <img src="/assets/images/licorn-bg.avif" alt="Menu BG" class="w-full h-full object-cover opacity-50" />
+                <div class="absolute inset-0 bg-gradient-to-l from-black/80 to-transparent"></div>
+            </div>
+            <div class="relative z-10 h-full flex flex-col p-6 md:p-10">
+                <div class="flex justify-between items-center w-full">
+                    <a href="/"><img src="/assets/icons/logo.avif" alt="Logo" class="h-14 md:h-20 w-auto" /></a>
+                    <button id="menu-close" class="text-white p-2 cursor-pointer hover:rotate-90 transition-transform">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 md:h-12 md:w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                    </button>
+                </div>
+                <nav class="flex-1 flex flex-col justify-start pt-32 items-end pr-4 md:pr-20">
+                    <ul class="space-y-6 text-right">
+                        {navLinks.map((link) => (
+                            <li>
+                                <a href={link.href} class="block text-2xl md:text-5xl font-poppins font-bold text-white uppercase hover:text-[#FED506] transition-colors">
+                                    {link.name} <span class="text-white ml-2 md:ml-4">•</span>
+                                </a>
+                            </li>
+                        ))}
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
+        <header class="w-full flex justify-between items-center p-6 md:p-10 z-50 bg-[#FFF4C6]">
+            <a href="/" class="hover:scale-110 transition-transform">
+                <img src="/assets/icons/logo.avif" alt="Logo" class="h-14 md:h-20 w-auto" />
+            </a>
+            <button id="menu-open" class="flex flex-col gap-2 p-2 cursor-pointer items-end group">
+                <div class="w-10 md:w-12 h-1 bg-black rounded-full group-hover:w-8 transition-all"></div>
+                <div class="w-10 md:w-12 h-1 bg-black rounded-full transition-all"></div>
+            </button>
+        </header>
+
+        <section class="relative w-full h-64 md:h-[500px] overflow-hidden bg-black">
+            <img src="/assets/images/hero.avif" alt="Platine Vinyle" class="w-full h-full object-cover opacity-80" />
+            <div class="absolute inset-0 flex flex-col items-center justify-center p-6 text-center bg-black/20">
+                <h1 class="font-display text-5xl sm:text-7xl md:text-[10rem] text-[#FED506] uppercase italic leading-none drop-shadow-[0_4px_0_rgba(185,28,28,1)] md:drop-shadow-[0_8px_0_rgba(185,28,28,1)]">
+                    Nos Artistes
+                </h1>
+            </div>
+        </section>
+
+        <section class="w-full py-16 md:py-28 px-6 md:px-10 flex flex-col items-center flex-1">
+            <div class="w-full max-w-7xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
+                {artistes.map((artiste) => (
+                    // ICI : La div est remplacée par une balise <a> avec l'attribut href vers la page de l'artiste
+                    <a href={`/artistes/${artiste.id}`} class="group relative block w-full h-64 md:h-[350px] rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 cursor-pointer border border-black/5">
+                        <img src={artiste.image || "/assets/images/section-background.avif"} alt={artiste.nom} class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                        
+                        <div class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-all duration-500"></div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
+                        
+                        <div class="absolute bottom-6 left-6 md:bottom-8 md:left-8 flex flex-col gap-1 md:gap-2">
+                            <h3 class="font-poppins font-bold text-3xl md:text-4xl text-white tracking-wide">{artiste.nom}</h3>
+                            <div class="mt-2 flex flex-col gap-1 text-white/90 font-poppins text-sm md:text-base">
+                                <p>Date : {artiste.date}</p>
+                                <p>Scène : {artiste.scene}</p>
+                            </div>
+                        </div>
+                    </a>
+                ))}
+            </div>
+            
+            {artistes.length === 0 && (
+                <div class="py-20 text-center text-black font-poppins text-2xl">
+                    Aucun artiste disponible pour le moment.
+                </div>
+            )}
+        </section>
+
+        <footer class="w-full bg-black text-white pt-24 pb-12 flex flex-col items-center overflow-hidden z-30 mt-auto">
+            <div class="font-poppins text-[10px] sm:text-xs md:text-base opacity-40 mb-12 text-center text-balance px-4 leading-relaxed">
+                <p>MMI 1ère année — SAE 105 — Montbéliard</p>
+                <p>Par Maël BRUNGARD @BooMooN.cloud</p>
+            </div>
+            <nav class="mb-12 px-4 text-center">
+                <ul class="flex flex-wrap justify-center items-center gap-x-6 sm:gap-x-12 gap-y-6 font-poppins font-bold text-xs sm:text-sm md:text-xl uppercase">
+                    {navLinks.map((link, i) => (
+                        <li class="flex items-center gap-6 sm:gap-12">
+                            <a href={link.href} class="hover:text-[#FED506] transition-all hover:tracking-widest">{link.name}</a>
+                            {i < navLinks.length - 1 && <span class="opacity-20 hidden md:block select-none">•</span>}
+                        </li>
+                    ))}
+                </ul>
+            </nav>
+            <nav class="flex flex-wrap justify-center gap-6 sm:gap-10 font-poppins text-[9px] sm:text-[10px] md:text-xs uppercase underline opacity-40 text-center px-4">
+                <a href="#">CGU</a><a href="#">CGV</a><a href="#">Mentions Légales</a>
+            </nav>
+        </footer>
+    </div>
+</Layout>
+
+<script>
+    const menuOpen = document.getElementById('menu-open');
+    const menuClose = document.getElementById('menu-close');
+    const overlay = document.getElementById('menu-overlay');
+    
+    if (menuOpen && menuClose && overlay) {
+        menuOpen.addEventListener('click', () => { 
+            overlay.classList.remove('translate-x-full'); 
+            document.body.style.overflow = 'hidden'; 
+        });
+        menuClose.addEventListener('click', () => { 
+            overlay.classList.add('translate-x-full'); 
+            document.body.style.overflow = ''; 
+        });
+    }
+</script>
+
+<style>
+    html { scroll-behavior: smooth; }
+</style>

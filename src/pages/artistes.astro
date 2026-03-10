@@ -5,16 +5,14 @@ import PocketBase from 'pocketbase';
 // ==========================================
 // 1. CONNEXION POCKETBASE
 // ==========================================
-const pb = new PocketBase('http://127.0.0.1:8090'); // Ton URL PocketBase
+const pb = new PocketBase('http://127.0.0.1:8090'); 
 
 let artistes = [];
 
 try {
-    // On récupère tous les artistes
     const records = await pb.collection('artistes').getFullList();
 
     artistes = records.map((record) => {
-        // Formatage de la date (ex: 2026-12-29 -> 29/12/26)
         let formattedDate = "Date à venir";
         if (record.date_representation) {
             const dateObj = new Date(record.date_representation);
@@ -36,21 +34,20 @@ try {
 
 } catch (err) {
     console.error("Erreur de connexion à PocketBase :", err);
-    // Données de secours pour l'affichage de test (avec des faux ID ajoutés)
     artistes = [
-        { id: "1", nom: "Danakil", scene: "Scène principale", date: "10/07/26", image: "/assets/images/artistes/danakil.avif" },
-        { id: "2", nom: "Tiken Jah Fakoly", scene: "Scène principale", date: "10/07/26", image: "/assets/images/artistes/tiken.avif" },
-        { id: "3", nom: "Biga*Ranx", scene: "Scène alternative", date: "10/07/26", image: "/assets/images/artistes/bigaranx.avif" },
-        { id: "4", nom: "Jahneration", scene: "Scène principale", date: "11/07/26", image: "/assets/images/artistes/jahneration.avif" },
-        { id: "5", nom: "Yaniss Odua", scene: "Scène alternative", date: "11/07/26", image: "/assets/images/artistes/yaniss.avif" },
-        { id: "6", nom: "Alborosie", scene: "Scène principale", date: "11/07/26", image: "/assets/images/artistes/alborosie.avif" },
-        { id: "7", nom: "Dub Inc", scene: "Scène principale", date: "12/07/26", image: "/assets/images/artistes/dubinc.avif" },
-        { id: "8", nom: "Lila Iké", scene: "Scène acoustique", date: "12/07/26", image: "/assets/images/artistes/lila-ike.avif" }
+        { id: "1", nom: "Danakil", scene: "Scène principale", date: "29/10/26", image: "/assets/images/artistes/danakil.avif" },
+        { id: "2", nom: "Tiken Jah Fakoly", scene: "Scène principale", date: "29/10/26", image: "/assets/images/artistes/tiken.avif" },
+        { id: "3", nom: "Biga*Ranx", scene: "Scène alternative", date: "29/10/26", image: "/assets/images/artistes/bigaranx.avif" },
+        { id: "4", nom: "Jahneration", scene: "Scène principale", date: "30/10/26", image: "/assets/images/artistes/jahneration.avif" },
+        { id: "5", nom: "Yaniss Odua", scene: "Scène alternative", date: "30/10/26", image: "/assets/images/artistes/yaniss.avif" },
+        { id: "6", nom: "Alborosie", scene: "Scène principale", date: "30/10/26", image: "/assets/images/artistes/alborosie.avif" },
+        { id: "7", nom: "Dub Inc", scene: "Scène principale", date: "31/10/26", image: "/assets/images/artistes/dubinc.avif" },
+        { id: "8", nom: "Lila Iké", scene: "Scène acoustique", date: "31/10/26", image: "/assets/images/artistes/lila-ike.avif" }
     ];
 }
 
 // ==========================================
-// 2. TRI PERSONNALISÉ DES ARTISTES
+// 2. TRI PERSONNALISÉ
 // ==========================================
 const ordreVoulu = [
     "Danakil",
@@ -66,14 +63,11 @@ const ordreVoulu = [
 artistes.sort((a, b) => {
     let indexA = ordreVoulu.indexOf(a.nom);
     let indexB = ordreVoulu.indexOf(b.nom);
-    
     if (indexA === -1) indexA = 999;
     if (indexB === -1) indexB = 999;
-    
     return indexA - indexB;
 });
 
-// 3. Configuration des liens du menu
 const navLinks = [
     { name: "Le Festival", href: "/festival" },
     { name: "Programme", href: "/programme" },
@@ -89,12 +83,12 @@ const navLinks = [
         
         <div id="menu-overlay" class="fixed inset-0 z-[100] translate-x-full transition-transform duration-500 ease-in-out">
             <div class="absolute inset-0 bg-black">
-                <img src="/assets/images/licorn-bg.avif" alt="Menu BG" class="w-full h-full object-cover opacity-50" />
+                <img src="/assets/images/licorn-bg.avif" alt="Menu BG" class="w-full h-full object-cover opacity-50" onerror="this.style.display='none'" />
                 <div class="absolute inset-0 bg-gradient-to-l from-black/80 to-transparent"></div>
             </div>
             <div class="relative z-10 h-full flex flex-col p-6 md:p-10">
                 <div class="flex justify-between items-center w-full">
-                    <a href="/"><img src="/assets/icons/logo.avif" alt="Logo" class="h-14 md:h-20 w-auto" /></a>
+                    <a href="/connexion"><img src="/assets/icons/logo.avif" alt="Logo" class="h-14 md:h-20 w-auto rounded-2xl" /></a>
                     <button id="menu-close" class="text-white p-2 cursor-pointer hover:rotate-90 transition-transform">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 md:h-12 md:w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
                     </button>
@@ -114,13 +108,16 @@ const navLinks = [
         </div>
 
         <header class="w-full flex justify-between items-center p-6 md:p-10 z-50 bg-[#FFF4C6]">
-            <a href="/" class="hover:scale-110 transition-transform">
-                <img src="/assets/icons/logo.avif" alt="Logo" class="h-14 md:h-20 w-auto" />
+            <a href="/connexion" class="hover:scale-110 transition-transform">
+                <img src="/assets/icons/logo.avif" alt="Logo" class="h-14 md:h-20 w-auto rounded-2xl" />
             </a>
-            <button id="menu-open" class="flex flex-col gap-2 p-2 cursor-pointer items-end group">
-                <div class="w-10 md:w-12 h-1 bg-black rounded-full group-hover:w-8 transition-all"></div>
-                <div class="w-10 md:w-12 h-1 bg-black rounded-full transition-all"></div>
-            </button>
+            <div class="flex items-center gap-4">
+                <span id="user-status" class="hidden font-poppins text-[10px] md:text-xs uppercase font-bold bg-[#6d9a02] text-white px-4 py-1.5 rounded-full shadow-lg animate-pulse">Connecté</span>
+                <button id="menu-open" class="flex flex-col gap-2 p-2 cursor-pointer items-end group">
+                    <div class="w-10 md:w-12 h-1 bg-black rounded-full group-hover:w-8 transition-all"></div>
+                    <div class="w-10 md:w-12 h-1 bg-black rounded-full transition-all"></div>
+                </button>
+            </div>
         </header>
 
         <section class="relative w-full h-64 md:h-[500px] overflow-hidden bg-black">
@@ -135,7 +132,6 @@ const navLinks = [
         <section class="w-full py-16 md:py-28 px-6 md:px-10 flex flex-col items-center flex-1">
             <div class="w-full max-w-7xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
                 {artistes.map((artiste) => (
-                    // ICI : La div est remplacée par une balise <a> avec l'attribut href vers la page de l'artiste
                     <a href={`/artistes/${artiste.id}`} class="group relative block w-full h-64 md:h-[350px] rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 cursor-pointer border border-black/5">
                         <img src={artiste.image || "/assets/images/section-background.avif"} alt={artiste.nom} class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                         
@@ -183,6 +179,7 @@ const navLinks = [
 </Layout>
 
 <script>
+    // --- MENU ---
     const menuOpen = document.getElementById('menu-open');
     const menuClose = document.getElementById('menu-close');
     const overlay = document.getElementById('menu-overlay');
@@ -196,6 +193,13 @@ const navLinks = [
             overlay.classList.add('translate-x-full'); 
             document.body.style.overflow = ''; 
         });
+    }
+
+    // --- STATUT CONNEXION ---
+    import { pb } from '../../backend/backend.mjs';
+    const userStatus = document.getElementById('user-status');
+    if (pb.authStore.isValid && userStatus) {
+        userStatus.classList.remove('hidden');
     }
 </script>
 

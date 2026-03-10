@@ -5,78 +5,62 @@ import PocketBase from 'pocketbase';
 // ==========================================
 // 1. CONNEXION POCKETBASE
 // ==========================================
-const pb = new PocketBase('http://127.0.0.1:8090'); // Ton URL PocketBase
+const pb = new PocketBase('http://127.0.0.1:8090'); 
 
 let concerts = [];
 try {
-    // Remplacer 'artistes' par le nom exact de ta collection si besoin
     const records = await pb.collection('artistes').getFullList({
-        sort: '+date_representation', // Trie chronologiquement par date
+        sort: '+date_representation', 
     });
 
-    // On extrait toutes les dates uniques (ex: ["2026-12-29", "2026-12-30"]) pour créer Jour 1, Jour 2...
     const uniqueDates = [...new Set(records.map(r => r.date_representation.substring(0, 10)))].sort();
 
-    // On formate les données avec TES vrais noms de colonnes
     concerts = records.map((record) => {
-        // Détermine si c'est le Jour 1, 2 ou 3 selon la date
         const dateStr = record.date_representation.substring(0, 10);
         const dayNum = uniqueDates.indexOf(dateStr) + 1;
 
         return {
             id: record.id,
             nom: record.nom,
-            genre: record.genre_musical,     // Correspond à ta BDD
-            scene: record.type_de_scene,     // Correspond à ta BDD
-            horaire: record.moment_journee,  // Correspond à ta BDD
-            jour: `Jour ${dayNum}`,          // Généré automatiquement !
-            image: record.image_principale ? pb.files.getUrl(record, record.image_principale) : null // Correspond à ta BDD
+            genre: record.genre_musical,    
+            scene: record.type_de_scene,    
+            horaire: record.moment_journee,  
+            jour: `Jour ${dayNum}`,          
+            image: record.image_principale ? pb.files.getUrl(record, record.image_principale) : null 
         };
     });
 
 } catch (err) {
     console.error("Erreur de connexion à PocketBase :", err);
-    // Données de secours
     concerts = [
         { id: "1", nom: "Danakil", genre: "Reggae", scene: "Scène principale", horaire: "Soirée", jour: "Jour 1", image: "/assets/images/artistes/danakil.avif" },
         { id: "2", nom: "Tiken Jah Fakoly", genre: "Reggae", scene: "Scène principale", horaire: "Nuit", jour: "Jour 1", image: "/assets/images/artistes/tiken.avif" },
-        { id: "3", nom: "Biga*Ranx", genre: "Dub", scene: "Scène alternative", horaire: "Nuit", jour: "Jour 1", image: "/assets/images/artistes/bigaranx.avif" },
         { id: "4", nom: "Jahneration", genre: "Reggae", scene: "Scène principale", horaire: "Soirée", jour: "Jour 2", image: "/assets/images/artistes/jahneration.avif" },
-        { id: "5", nom: "Yaniss Odua", genre: "Reggae", scene: "Scène alternative", horaire: "Soirée", jour: "Jour 2", image: "/assets/images/artistes/yaniss.avif" },
-        { id: "6", nom: "Alborosie", genre: "Roots", scene: "Scène principale", horaire: "Nuit", jour: "Jour 2", image: "/assets/images/artistes/alborosie.avif" },
         { id: "7", nom: "Dub Inc", genre: "Reggae", scene: "Scène principale", horaire: "Soirée", jour: "Jour 3", image: "/assets/images/artistes/dubinc.avif" },
-        { id: "8", nom: "Lila Iké", genre: "Pop", scene: "Scène acoustique", horaire: "Après-midi", jour: "Jour 3", image: "/assets/images/artistes/lila-ike.avif" },
-        { id: "9", nom: "Protoje", genre: "Roots", scene: "Scène alternative", horaire: "Nuit", jour: "Jour 3", image: "/assets/images/artistes/protoje.avif" },
     ];
 }
 
-// 2. LOGIQUE AUTOMATIQUE DES JOURS ET FILTRES
+// 2. LOGIQUE DES FILTRES
 const groupedConcerts = {};
-// On initialise le Set de genres avec "Rock" pour forcer son apparition
-const genresSet = new Set(["Rock"]); 
+const genresSet = new Set(); 
 const horairesSet = new Set();
 const scenesSet = new Set();
 
 concerts.forEach(c => {
-    // Groupement par jour
     if(!groupedConcerts[c.jour]) groupedConcerts[c.jour] = [];
     groupedConcerts[c.jour].push(c);
-    
-    // Récupération des filtres uniques depuis ta BDD
     if(c.genre) genresSet.add(c.genre);
     if(c.horaire) horairesSet.add(c.horaire);
     if(c.scene) scenesSet.add(c.scene);
 });
 
 const days = Object.keys(groupedConcerts).sort();
-
 const filtres = {
     genre: Array.from(genresSet).sort(),
     horaire: Array.from(horairesSet).sort(),
     scene: Array.from(scenesSet).sort()
 };
 
-// 3. Navigation
 const navLinks = [
     { name: "Le Festival", href: "/festival" },
     { name: "Programme", href: "/programme" },
@@ -87,9 +71,9 @@ const navLinks = [
 ];
 
 const programDays = [
-    { title: "Jour 1", img: "/assets/images/artistes/danakil.avif", date: "Vendredi 10 Juillet" },
-    { title: "Jour 2", img: "/assets/images/artistes/jahneration.avif", date: "Samedi 11 Juillet" },
-    { title: "Jour 3", img: "/assets/images/artistes/dub-inc.avif", date: "Dimanche 12 Juillet" }
+    { title: "Jour 1", img: "/assets/images/artistes/danakil.avif", date: "Vendredi 29 Octobre" },
+    { title: "Jour 2", img: "/assets/images/artistes/jahneration.avif", date: "Samedi 30 Octobre" },
+    { title: "Jour 3", img: "/assets/images/artistes/dub-inc.avif", date: "Dimanche 31 Octobre" }
 ];
 ---
 
@@ -103,7 +87,7 @@ const programDays = [
             </div>
             <div class="relative z-10 h-full flex flex-col p-6 md:p-10">
                 <div class="flex justify-between items-center w-full">
-                    <a href="/"><img src="/assets/icons/logo.avif" alt="Logo" class="h-14 md:h-20 w-auto" /></a>
+                    <a href="/connexion"><img src="/assets/icons/logo.avif" alt="Logo" class="h-14 md:h-20 w-auto rounded-2xl" /></a>
                     <button id="menu-close" class="text-white p-2 cursor-pointer hover:rotate-90 transition-transform">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 md:h-12 md:w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
                     </button>
@@ -123,13 +107,16 @@ const programDays = [
         </div>
 
         <header class="w-full flex justify-between items-center p-6 md:p-10 z-50 bg-[#FFF4C6]">
-            <a href="/" class="hover:scale-110 transition-transform">
-                <img src="/assets/icons/logo.avif" alt="Logo" class="h-14 md:h-20 w-auto" />
+            <a href="/connexion" class="hover:scale-110 transition-transform">
+                <img src="/assets/icons/logo.avif" alt="Logo" class="h-14 md:h-20 w-auto rounded-2xl" />
             </a>
-            <button id="menu-open" class="flex flex-col gap-2 p-2 cursor-pointer items-end group">
-                <div class="w-10 md:w-12 h-1 bg-black rounded-full group-hover:w-8 transition-all"></div>
-                <div class="w-10 md:w-12 h-1 bg-black rounded-full transition-all"></div>
-            </button>
+            <div class="flex items-center gap-4">
+                <span id="user-status" class="hidden font-poppins text-[10px] md:text-xs uppercase font-bold bg-[#6d9a02] text-white px-4 py-1.5 rounded-full shadow-lg animate-pulse">Connecté</span>
+                <button id="menu-open" class="flex flex-col gap-2 p-2 cursor-pointer items-end group">
+                    <div class="w-10 md:w-12 h-1 bg-black rounded-full group-hover:w-8 transition-all"></div>
+                    <div class="w-10 md:w-12 h-1 bg-black rounded-full transition-all"></div>
+                </button>
+            </div>
         </header>
 
         <section class="relative w-full overflow-hidden bg-black">
@@ -203,7 +190,6 @@ const programDays = [
                         <button class="filter-btn px-6 py-2 border border-white/40 rounded-xl bg-[#333333] text-white font-poppins text-sm md:text-base hover:bg-white hover:text-black transition-all" data-type="scene" data-value={s}>{s}</button>
                     ))}
                 </div>
-                
                 <button id="reset-filters" class="hidden mt-8 px-8 py-2 border border-[#FED506] text-[#FED506] rounded-xl font-poppins text-sm md:text-base hover:bg-[#FED506] hover:text-black transition-all">
                     Tout afficher
                 </button>
@@ -213,20 +199,16 @@ const programDays = [
         <div id="concerts-grid" class="w-full flex flex-col">
             {days.length === 0 ? (
                  <div class="w-full py-20 text-center text-black font-poppins text-2xl">
-                     Aucun concert trouvé dans la base de données.
+                     Aucun concert trouvé.
                  </div>
             ) : (
                 days.map((day, index) => {
                     const isLight = index % 2 !== 0; 
-                    
-                    let bgImage = null;
-                    if (day === 'Jour 1') bgImage = '/assets/images/section-background.avif';
-                    else if (day === 'Jour 3') bgImage = '/assets/images/licorn-bg.avif';
-                    else if (!isLight) bgImage = '/assets/images/section-background.avif'; 
+                    let bgImage = index % 2 === 0 ? '/assets/images/section-background.avif' : null;
+                    if (day === 'Jour 3') bgImage = '/assets/images/licorn-bg.avif';
                     
                     return (
                         <section class={`day-section relative w-full py-20 flex flex-col items-center overflow-hidden min-h-[500px] ${isLight ? 'bg-[#FEFAF5]' : ''}`} data-day-section={day}>
-                            
                             {!isLight && bgImage && (
                                 <div class="absolute inset-0 z-0">
                                     <img src={bgImage} alt="Ambiance" class="w-full h-full object-cover absolute" />
@@ -238,31 +220,24 @@ const programDays = [
                                 <h2 class={`font-poppins font-bold text-4xl md:text-6xl mb-16 text-center tracking-widest uppercase ${isLight ? 'text-black' : 'text-white'}`}>
                                     {day}
                                 </h2>
-                                
                                 <div class="w-full flex flex-col items-center">
-                                    {groupedConcerts[day].map((concert, idx) => (
+                                    {groupedConcerts[day].map((concert) => (
                                         <div class="concert-wrapper w-full flex flex-col items-center" 
                                              data-scene={concert.scene} 
                                              data-genre={concert.genre} 
                                              data-horaire={concert.horaire}
                                              data-jour={concert.jour}>
-                                            
                                             <a href={`/artistes/${concert.id}`} class="relative w-full h-[220px] md:h-[400px] rounded-3xl overflow-hidden shadow-2xl group border border-white/10 block cursor-pointer">
                                                 <img src={concert.image || "/assets/images/section-background.avif"} alt={concert.nom} class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
-                                                
                                                 <div class="absolute inset-0 bg-gradient-to-br from-black/80 via-transparent to-transparent opacity-90"></div>
-                                                <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-70"></div>
-                                                
                                                 <div class="absolute top-5 left-6 md:top-8 md:left-10">
                                                     <h3 class="font-poppins font-bold text-2xl md:text-5xl text-white tracking-wide">{concert.nom}</h3>
                                                 </div>
-
                                                 <div class="absolute bottom-5 right-6 md:bottom-8 md:right-10 flex flex-col items-end gap-2 md:opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                                     <span class="inline-block px-3 py-1 bg-[#FED506] text-black font-bold text-xs md:text-sm rounded-full uppercase tracking-widest shadow-lg">{concert.horaire}</span>
                                                     <span class="inline-block px-3 py-1 bg-black/60 text-white font-poppins text-xs md:text-sm rounded-full uppercase tracking-widest border border-white/20 backdrop-blur-md">{concert.scene}</span>
                                                 </div>
                                             </a>
-                                            
                                             <div class="separator w-full py-8 md:py-12">
                                                 <img src="/assets/images/lignes_rouge_jaune_vert.svg" alt="separateur" class="w-full h-auto opacity-90 drop-shadow-xl" />
                                             </div>
@@ -274,18 +249,10 @@ const programDays = [
                     );
                 })
             )}
-
             <div id="no-results" class="hidden text-white font-poppins text-xl md:text-2xl my-16 text-center bg-[#1e1e1e] border border-[#FED506] px-8 py-4 rounded-2xl shadow-xl mx-auto max-w-max">
                 Aucun artiste ne correspond à ces filtres.
             </div>
         </div>
-
-        <a href="/assets/programme.pdf" download class="fixed bottom-6 right-6 md:bottom-8 md:right-8 z-[90] bg-white text-black px-4 py-3 md:px-6 md:py-4 rounded-2xl shadow-2xl flex items-center gap-3 md:gap-4 hover:scale-110 transition-transform active:scale-95 group border border-black/5">
-            <span class="font-poppins font-bold uppercase tracking-widest text-xs md:text-base">PDF</span>
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 md:h-8 md:w-8 group-hover:translate-y-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-            </svg>
-        </a>
 
         <footer class="w-full bg-black text-white pt-24 pb-12 flex flex-col items-center overflow-hidden z-30 mt-auto">
             <div class="font-poppins text-[10px] sm:text-xs md:text-base opacity-40 mb-12 text-center text-balance px-4 leading-relaxed">
@@ -310,10 +277,10 @@ const programDays = [
 </Layout>
 
 <script>
+    // --- MENU ---
     const menuOpen = document.getElementById('menu-open');
     const menuClose = document.getElementById('menu-close');
     const overlay = document.getElementById('menu-overlay');
-    
     if (menuOpen && menuClose && overlay) {
         menuOpen.addEventListener('click', () => { 
             overlay.classList.remove('translate-x-full'); 
@@ -325,15 +292,13 @@ const programDays = [
         });
     }
 
+    // --- LOGIQUE FILTRES ---
     let activeGroup = null;
-
     window.toggleSubFilters = function(group) {
         document.querySelectorAll('.filter-group').forEach(el => el.classList.add('hidden'));
         document.querySelectorAll('span[id^="arrow-"]').forEach(el => el.innerText = '▼');
-
-        if (activeGroup === group) {
-            activeGroup = null;
-        } else {
+        if (activeGroup === group) { activeGroup = null; } 
+        else {
             document.getElementById(`options-${group}`).classList.remove('hidden');
             document.getElementById(`arrow-${group}`).innerText = '▲';
             activeGroup = group;
@@ -358,16 +323,11 @@ const programDays = [
 
     filterBtns.forEach(btn => {
         btn.addEventListener('click', (e) => {
-            const type = e.target.getAttribute('data-type');
-            const val = e.target.getAttribute('data-value');
-            
-            filterBtns.forEach(b => {
-                b.classList.remove('bg-white', 'text-black', 'border-transparent');
-                b.classList.add('bg-[#333333]', 'text-white', 'border-white/40');
-            });
-            e.target.classList.remove('bg-[#333333]', 'text-white', 'border-white/40');
-            e.target.classList.add('bg-white', 'text-black', 'border-transparent');
-
+            const target = e.currentTarget as HTMLButtonElement;
+            const type = target.getAttribute('data-type');
+            const val = target.getAttribute('data-value');
+            filterBtns.forEach(b => b.classList.replace('bg-white', 'bg-[#333333]'));
+            target.classList.replace('bg-[#333333]', 'bg-white');
             currentFilterType = type;
             currentFilterValue = val;
             resetBtn.classList.remove('hidden');
@@ -375,74 +335,35 @@ const programDays = [
         });
     });
 
-    resetBtn.addEventListener('click', () => {
-        currentFilterType = null;
-        currentFilterValue = null;
-        currentDayFilter = null;
-        
-        filterBtns.forEach(b => {
-            b.classList.remove('bg-white', 'text-black', 'border-transparent');
-            b.classList.add('bg-[#333333]', 'text-white', 'border-white/40');
-        });
-        
-        document.querySelectorAll('.filter-group').forEach(el => el.classList.add('hidden'));
-        document.querySelectorAll('span[id^="arrow-"]').forEach(el => el.innerText = '▼');
-        activeGroup = null;
-
+    resetBtn?.addEventListener('click', () => {
+        currentFilterType = currentFilterValue = currentDayFilter = null;
         resetBtn.classList.add('hidden');
         applyFilters();
     });
 
     function applyFilters() {
         let totalVisible = 0;
-
         daySections.forEach(section => {
             let sectionVisibleCount = 0;
             const wrappers = section.querySelectorAll('.concert-wrapper');
-            let lastVisibleWrapper = null;
-
             wrappers.forEach(wrapper => {
-                let showCard = true;
-
-                if (currentFilterType && currentFilterValue) {
-                    if (wrapper.getAttribute(`data-${currentFilterType}`) !== currentFilterValue) {
-                        showCard = false;
-                    }
-                }
-
-                if (currentDayFilter) {
-                    if (wrapper.getAttribute('data-jour') !== currentDayFilter) {
-                        showCard = false;
-                    }
-                }
-
-                if (showCard) {
-                    wrapper.style.display = 'flex';
-                    wrapper.querySelector('.separator').style.display = 'block';
-                    sectionVisibleCount++;
-                    totalVisible++;
-                    lastVisibleWrapper = wrapper;
-                } else {
-                    wrapper.style.display = 'none';
-                }
+                let show = true;
+                if (currentFilterType && wrapper.getAttribute(`data-${currentFilterType}`) !== currentFilterValue) show = false;
+                if (currentDayFilter && wrapper.getAttribute('data-jour') !== currentDayFilter) show = false;
+                wrapper.style.display = show ? 'flex' : 'none';
+                if (show) sectionVisibleCount++;
             });
-
-            if (lastVisibleWrapper) {
-                lastVisibleWrapper.querySelector('.separator').style.display = 'none';
-            }
-
-            if (sectionVisibleCount === 0) {
-                section.style.display = 'none';
-            } else {
-                section.style.display = 'flex';
-            }
+            section.style.display = sectionVisibleCount > 0 ? 'flex' : 'none';
+            totalVisible += sectionVisibleCount;
         });
+        noResultsMsg.style.display = totalVisible === 0 ? 'block' : 'none';
+    }
 
-        if (totalVisible === 0) {
-            noResultsMsg.classList.remove('hidden');
-        } else {
-            noResultsMsg.classList.add('hidden');
-        }
+    // --- STATUT CONNEXION ---
+    import { pb } from '../../backend/backend.mjs';
+    const userStatus = document.getElementById('user-status');
+    if (pb.authStore.isValid && userStatus) {
+        userStatus.classList.remove('hidden');
     }
 </script>
 

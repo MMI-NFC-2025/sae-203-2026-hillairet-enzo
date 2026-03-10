@@ -78,7 +78,7 @@ const navLinks = [
             </div>
             <div class="relative z-10 h-full flex flex-col p-6 md:p-10">
                 <div class="flex justify-between items-center w-full">
-                    <a href="/"><img src="/assets/icons/logo.avif" alt="Logo" class="h-14 md:h-20 w-auto" /></a>
+                    <a href="/connexion"><img src="/assets/icons/logo.avif" alt="Logo" class="h-14 md:h-20 w-auto rounded-2xl" /></a>
                     <button id="menu-close" class="text-white p-2 cursor-pointer hover:rotate-90 transition-transform">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 md:h-12 md:w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
                     </button>
@@ -94,13 +94,16 @@ const navLinks = [
         </div>
 
         <header class="w-full flex justify-between items-center p-6 md:p-10 z-50 bg-[#FFF4C6]">
-            <a href="/" class="hover:scale-110 transition-transform">
-                <img src="/assets/icons/logo.avif" alt="Logo" class="h-14 md:h-20 w-auto" />
+            <a href="/connexion" class="hover:scale-110 transition-transform">
+                <img src="/assets/icons/logo.avif" alt="Logo" class="h-14 md:h-20 w-auto rounded-2xl" />
             </a>
-            <button id="menu-open" class="flex flex-col gap-2 p-2 cursor-pointer items-end group">
-                <div class="w-10 md:w-12 h-1 bg-black rounded-full group-hover:w-8 transition-all"></div>
-                <div class="w-10 md:w-12 h-1 bg-black rounded-full transition-all"></div>
-            </button>
+            <div class="flex items-center gap-4">
+                <span id="user-status" class="hidden font-poppins text-[10px] md:text-xs uppercase font-bold bg-[#6d9a02] text-white px-4 py-1.5 rounded-full shadow-lg animate-pulse">Connecté</span>
+                <button id="menu-open" class="flex flex-col gap-2 p-2 cursor-pointer items-end group">
+                    <div class="w-10 md:w-12 h-1 bg-black rounded-full group-hover:w-8 transition-all"></div>
+                    <div class="w-10 md:w-12 h-1 bg-black rounded-full transition-all"></div>
+                </button>
+            </div>
         </header>
 
         <section class="relative w-full overflow-hidden bg-black">
@@ -261,6 +264,7 @@ const navLinks = [
 </Layout>
 
 <script>
+    // --- MENU ---
     const menuOpen = document.getElementById('menu-open');
     const menuClose = document.getElementById('menu-close');
     const overlay = document.getElementById('menu-overlay');
@@ -269,6 +273,7 @@ const navLinks = [
         menuClose.addEventListener('click', () => { overlay.classList.add('translate-x-full'); document.body.style.overflow = ''; });
     }
 
+    // --- MODAL EQUIPE ---
     const teamTriggers = document.querySelectorAll('.team-trigger');
     const teamModal = document.getElementById('team-modal');
     const modalContent = document.getElementById('modal-content');
@@ -301,6 +306,13 @@ const navLinks = [
     };
     modalCloseBtn?.addEventListener('click', closeTeamModal);
     modalOverlay?.addEventListener('click', closeTeamModal);
+
+    // --- STATUT CONNEXION (Optionnel) ---
+    import { pb } from '../../backend/backend.mjs';
+    const userStatus = document.getElementById('user-status');
+    if (pb.authStore.isValid && userStatus) {
+        userStatus.classList.remove('hidden');
+    }
 </script>
 
 <style>

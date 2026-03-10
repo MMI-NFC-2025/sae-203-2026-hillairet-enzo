@@ -2,6 +2,8 @@
 import Layout from '../layouts/Layout.astro';
 import PocketBase from 'pocketbase';
 
+export const prerender = true;
+
 // ==========================================
 // 1. CONNEXION POCKETBASE (Serveur-side)
 // ==========================================
@@ -112,8 +114,9 @@ const programDays = [
             </a>
             
             <div class="flex items-center gap-4">
-                <button id="user-status-connected" class="hidden font-poppins text-[10px] md:text-xs uppercase font-bold bg-[#6d9a02] text-white px-3 py-1.5 rounded-full shadow-lg animate-pulse hover:bg-red-600 transition-colors">
-                    Connecté
+                <button id="user-status-connected" class="hidden font-poppins text-[10px] md:text-xs uppercase font-bold bg-[#6d9a02] text-white px-3 py-1.5 rounded-full shadow-lg animate-pulse hover:bg-red-600 transition-colors group">
+                    <span class="group-hover:hidden">Connecté</span>
+                    <span class="hidden group-hover:inline">Déconnexion</span>
                 </button>
 
                 <a href="/connexion" id="user-status-disconnected" class="font-poppins text-[10px] md:text-xs uppercase font-bold bg-[#ED3F24] text-white px-3 py-1.5 rounded-full shadow-lg hover:scale-105 transition-transform">
@@ -121,8 +124,8 @@ const programDays = [
                 </a>
 
                 <button id="menu-open" class="flex flex-col gap-2 p-2 cursor-pointer items-end group">
-                    <div class="w-10 md:w-12 h-1 bg-black rounded-full"></div>
-                    <div class="w-10 md:w-12 h-1 bg-black rounded-full"></div>
+                    <div class="w-10 md:w-12 h-1 bg-black rounded-full group-hover:w-8 transition-all"></div>
+                    <div class="w-10 md:w-12 h-1 bg-black rounded-full transition-all"></div>
                 </button>
             </div>
         </header>
@@ -207,7 +210,7 @@ const programDays = [
         <div id="concerts-grid" class="w-full flex flex-col">
             {days.length === 0 ? (
                  <div class="w-full py-20 text-center text-black font-poppins text-2xl">
-                     Aucun concert trouvé.
+                    Aucun concert trouvé.
                  </div>
             ) : (
                 days.map((day, index) => {
@@ -262,15 +265,15 @@ const programDays = [
             </div>
         </div>
 
-        <footer class="w-full bg-black text-white pt-24 pb-12 flex flex-col items-center overflow-hidden z-30 mt-auto">
+        <footer class="w-full bg-black text-white pt-24 pb-12 flex flex-col items-center overflow-hidden z-30 mt-auto border-t border-white/10">
             <div class="font-poppins text-[10px] sm:text-xs md:text-base opacity-40 mb-12 text-center text-balance px-4 leading-relaxed">
                 <p>MMI 1ère année — SAE 105 — Montbéliard</p>
                 <p>Par Maël BRUNGARD @BooMooN.cloud | ID : o4g3yq8bkgg4bxz</p>
             </div>
             <nav class="mb-12 px-4 text-center">
-                <ul class="flex flex-wrap justify-center items-center gap-x-6 sm:gap-x-12 gap-y-6 font-poppins font-bold text-xs sm:text-sm md:text-xl uppercase">
+                <ul class="flex flex-wrap justify-center items-center gap-x-12 gap-y-6 font-poppins font-bold text-sm md:text-xl uppercase">
                     {navLinks.map((link, i) => (
-                        <li class="flex items-center gap-6 sm:gap-12">
+                        <li class="flex items-center gap-12">
                             <a href={link.href} class="hover:text-[#FED506] transition-all hover:tracking-widest">{link.name}</a>
                             {i < navLinks.length - 1 && <span class="opacity-20 hidden md:block select-none">•</span>}
                         </li>
@@ -308,7 +311,7 @@ const programDays = [
     const btnDisconnected = document.getElementById('user-status-disconnected');
 
     function updateHeader() {
-        if (pb && pb.authStore.isValid) {
+        if (pb && pb.authStore && pb.authStore.isValid) {
             btnConnected?.classList.remove('hidden');
             btnDisconnected?.classList.add('hidden');
         } else {
@@ -317,9 +320,9 @@ const programDays = [
         }
     }
 
-    // Action de déconnexion au clic sur le bouton vert
     btnConnected?.addEventListener('click', () => {
-        logoutUser();
+        if(typeof logoutUser === 'function') logoutUser();
+        else pb.authStore.clear();
         window.location.reload();
     });
 
@@ -360,10 +363,24 @@ const programDays = [
             const target = e.currentTarget as HTMLButtonElement;
             const type = target.getAttribute('data-type');
             const val = target.getAttribute('data-value');
-            filterBtns.forEach(b => b.classList.replace('bg-white', 'bg-[#333333]'));
-            target.classList.replace('bg-[#333333]', 'bg-white');
-            currentFilterType = type;
-            currentFilterValue = val;
+            
+            // Toggle filter: si on clique sur le même filtre déjà actif, on l'enlève
+            if (currentFilterType === type && currentFilterValue === val) {
+                currentFilterType = null;
+                currentFilterValue = null;
+                target.classList.replace('bg-white', 'bg-[#333333]');
+                target.classList.replace('text-black', 'text-white');
+            } else {
+                filterBtns.forEach(b => {
+                    b.classList.replace('bg-white', 'bg-[#333333]');
+                    b.classList.replace('text-black', 'text-white');
+                });
+                target.classList.replace('bg-[#333333]', 'bg-white');
+                target.classList.replace('text-white', 'text-black');
+                currentFilterType = type;
+                currentFilterValue = val;
+            }
+            
             resetBtn?.classList.remove('hidden');
             applyFilters();
         });
@@ -371,6 +388,10 @@ const programDays = [
 
     resetBtn?.addEventListener('click', () => {
         currentFilterType = currentFilterValue = currentDayFilter = null;
+        filterBtns.forEach(b => {
+            b.classList.replace('bg-white', 'bg-[#333333]');
+            b.classList.replace('text-black', 'text-white');
+        });
         resetBtn.classList.add('hidden');
         applyFilters();
     });
@@ -380,6 +401,7 @@ const programDays = [
         daySections.forEach(section => {
             let sectionVisibleCount = 0;
             const wrappers = section.querySelectorAll('.concert-wrapper');
+            // CORRECTION ICI : "wrappers" au lieu de "wrapper"
             wrappers.forEach(wrapper => {
                 let show = true;
                 if (currentFilterType && wrapper.getAttribute(`data-${currentFilterType}`) !== currentFilterValue) show = false;

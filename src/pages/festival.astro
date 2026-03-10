@@ -10,9 +10,9 @@ const quickLinks = [
 
 // 2. Histoire
 const historySteps = [
-    { title: "La naissance d’une équipe", text: "Ce projet a démarré dans le cadre d'un travail étudiant en MMI. Ce projet a fini par se concrétiser et est devenu le festival que vous connaissez." },
-    { title: "Notre premier festival", text: "En 2026, nous organiserons notre premier festival de reggae. Ce festival vise tout public et a pour but de rendre le reggae accessible." },
-    { title: "Nos projets à venir", text: "Nous visons à égaler les meilleurs festivals et à donner une nouvelle image plus propre aux festivals de musique." }
+    { title: "La naissance d’une équipe", text: "Ce projet à démarrer dans le cadre d'un travail étudiants en MMI. Ce projet à finis par ce concrétiser et est devenu le festival que vous connaissez." },
+    { title: "Notre premier festival", text: "En 2026 nous organiserons notre premier festival de reggae. Ce festival vise tout public et à pour but de rendre le reggae accessible." },
+    { title: "Nos projets à venir", text: "Nous visons à égaler les meilleurs festivals et à donner une nouvelles images plus propre aux festivals de musique." }
 ];
 
 // 3. Équipe
@@ -32,9 +32,19 @@ const teamCategories = [
             { name: "Constance Dubois", role: "Lumière", img: "/assets/images/team/team5.avif", bio: "Constance est responsable de la conception des effets lumineux." },
             { name: "Roxanne Lefèvre", role: "Sécurité", img: "/assets/images/team/team6.avif", bio: "Roxanne coordonne les mesures de sécurité." }
         ]
+    },
+    {
+    name: "Support",
+        members: [
+            { name: "Evan Moreau", role: "Coordinateur support", img: "/assets/images/team/team7.avif", bio: "Evan assure le support opérationnel pendant le festival." },
+            { name: "Nina Rousseau", role: "Assistante logistique", img: "/assets/images/team/team8.avif", bio: "Nina assiste Pedro dans la gestion logistique." },
+            { name: "Camille Fontaine", role: "Presse", img: "/assets/images/team/team9.avif", bio: "Camille travaille aux côtés d'Evan pour fournir un support technique." }
+        ]
     }
 ];
 
+
+// 4. Édition 2026
 const themes = [
     { label: "Festival de la ", bold: "culture reggae" },
     { label: "Festival de la ", bold: "création artistique" },
@@ -76,7 +86,7 @@ const navLinks = [
                 <nav class="flex-1 flex flex-col justify-start pt-32 items-end pr-4 md:pr-20">
                     <ul class="space-y-6 text-right">
                         {navLinks.map((link) => (
-                            <li><a href={link.href} class="block text-3xl md:text-5xl font-poppins font-bold text-white uppercase hover:text-[#FED506] transition-colors">{link.name} •</a></li>
+                            <li><a href={link.href} class="block text-3xl md:text-5xl font-poppins font-bold text-white uppercase hover:text-[#FED506] transition-colors">{link.name} <span class="text-white ml-2 md:ml-4">•</span></a></li>
                         ))}
                     </ul>
                 </nav>
@@ -89,8 +99,9 @@ const navLinks = [
             </a>
             
             <div class="flex items-center gap-4">
-                <button id="user-status-connected" class="hidden font-poppins text-[10px] md:text-xs uppercase font-bold bg-[#6d9a02] text-white px-3 py-1.5 rounded-full shadow-lg animate-pulse hover:bg-red-600 transition-colors">
-                    Connecté
+                <button id="user-status-connected" class="hidden font-poppins text-[10px] md:text-xs uppercase font-bold bg-[#6d9a02] text-white px-3 py-1.5 rounded-full shadow-lg animate-pulse hover:bg-red-600 transition-colors group">
+                    <span class="group-hover:hidden">Connecté</span>
+                    <span class="hidden group-hover:inline">Déconnexion</span>
                 </button>
 
                 <a href="/connexion" id="user-status-disconnected" class="font-poppins text-[10px] md:text-xs uppercase font-bold bg-[#ED3F24] text-white px-3 py-1.5 rounded-full shadow-lg hover:scale-105 transition-transform">
@@ -98,8 +109,8 @@ const navLinks = [
                 </a>
 
                 <button id="menu-open" class="flex flex-col gap-2 p-2 cursor-pointer items-end group">
-                    <div class="w-10 md:w-12 h-1 bg-black rounded-full"></div>
-                    <div class="w-10 md:w-12 h-1 bg-black rounded-full"></div>
+                    <div class="w-10 md:w-12 h-1 bg-black rounded-full group-hover:w-8 transition-all"></div>
+                    <div class="w-10 md:w-12 h-1 bg-black rounded-full transition-all"></div>
                 </button>
             </div>
         </header>
@@ -107,7 +118,7 @@ const navLinks = [
         <section class="relative w-full overflow-hidden bg-black">
             <img src="/assets/images/hero.avif" alt="Hero Festival" class="w-full h-auto block" />
             <div class="absolute inset-0 bg-black/40 flex items-center justify-center p-6">
-                <h1 class="font-display text-5xl md:text-8xl lg:text-[11rem] text-white uppercase italic text-center leading-none">
+                <h1 class="font-display text-5xl md:text-8xl lg:text-[11rem] text-white uppercase italic tracking-tighter text-center leading-none">
                     Le Festival
                 </h1>
             </div>
@@ -115,14 +126,21 @@ const navLinks = [
 
         <section class="w-full bg-[#FFF4C6] py-16 md:py-24 px-6 flex flex-col items-center">
             <div class="w-full max-w-7xl flex flex-col md:flex-row items-stretch justify-center gap-6 md:gap-8">
-                {quickLinks.map((link) => (
-                    <a href={link.href} class="group relative w-full md:flex-1 h-48 md:h-64 rounded-2xl overflow-hidden shadow-xl transition-all duration-500 hover:scale-[1.03]">
-                        <img src={link.img} alt={link.title} class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-                        <div class="absolute inset-0 bg-black/50 group-hover:bg-black/30 transition-all duration-500"></div>
-                        <div class="absolute bottom-6 left-8">
-                            <h3 class="font-poppins font-bold text-2xl md:text-3xl text-white uppercase tracking-widest">{link.title}</h3>
-                        </div>
-                    </a>
+                {quickLinks.map((link, index) => (
+                    <>
+                        <a href={link.href} class="group relative w-full md:flex-1 h-48 md:h-64 rounded-2xl overflow-hidden shadow-xl transition-all duration-500 hover:scale-[1.03]">
+                            <img src={link.img} alt={link.title} class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                            <div class="absolute inset-0 bg-black/50 group-hover:bg-black/30 transition-all duration-500"></div>
+                            <div class="absolute bottom-6 left-8">
+                                <h3 class="font-poppins font-bold text-2xl md:text-3xl text-white uppercase tracking-widest leading-tight">{link.title}</h3>
+                            </div>
+                        </a>
+                        {index < quickLinks.length - 1 && (
+                            <div class="w-full block md:hidden py-4">
+                                <img src="/assets/images/lignes_rouge_jaune_vert.svg" alt="separateur" class="w-full h-auto opacity-60" />
+                            </div>
+                        )}
+                    </>
                 ))}
             </div>
         </section>
@@ -132,60 +150,184 @@ const navLinks = [
                 <img src="/assets/images/section-background.avif" alt="" class="w-full h-full object-cover" />
                 <div class="absolute inset-0 bg-black/75"></div> 
             </div>
-            <h2 class="relative z-10 font-display text-5xl md:text-[10rem] text-white mb-24 text-center uppercase italic opacity-95">Notre histoire</h2>
-            <div class="relative z-10 w-full max-w-7xl flex flex-col md:flex-row gap-8 px-6">
-                {historySteps.map((step) => (
-                    <div class="w-full md:flex-1 p-8 md:p-10 rounded-[30px] bg-white/60 backdrop-blur-xl border border-white/10 shadow-2xl">
-                        <h3 class="font-poppins font-bold text-xl md:text-2xl text-black mb-4 uppercase">{step.title}</h3>
-                        <p class="font-poppins text-black text-base md:text-lg leading-relaxed opacity-90">{step.text}</p>
+
+            <h2 class="relative z-10 font-display text-5xl md:text-[10rem] text-white mb-24 text-center uppercase italic opacity-95 leading-none">Notre histoire</h2>
+            
+            <div class="relative z-10 w-full max-w-7xl flex flex-col md:flex-row items-stretch justify-center gap-8 px-6">
+                {historySteps.map((step, index) => (
+                    <>
+                        <div class="w-full md:flex-1 flex flex-col">
+                            <div class="w-full h-full p-8 md:p-10 rounded-[30px] bg-white/60 backdrop-blur-xl border border-white/10 shadow-2xl hover:bg-white/30 transition-all flex flex-col justify-center text-center md:text-left">
+                                <h3 class="font-poppins font-bold text-xl md:text-2xl text-black mb-4 uppercase tracking-tight">{step.title}</h3>
+                                <p class="font-poppins text-black text-base md:text-lg leading-relaxed opacity-90">{step.text}</p>
+                            </div>
+                        </div>
+                        {index < historySteps.length - 1 && (
+                            <div class="w-full block md:hidden py-8">
+                                <img src="/assets/images/lignes_rouge_jaune_vert.svg" class="w-full h-auto opacity-40" />
+                            </div>
+                        )}
+                    </>
+                ))}
+            </div>
+        </section>
+
+        <section id="equipe" class="w-full bg-[#FEFAF5] py-24 md:py-40 flex flex-col items-center scroll-mt-20">
+            <h2 class="font-display text-4xl md:text-8xl text-black mb-24 uppercase tracking-widest text-center px-4">Notre équipe</h2>
+            
+
+[Image of organizational hierarchy chart]
+
+            <div class="w-full max-w-6xl px-6 space-y-32">
+                {teamCategories.map((cat) => (
+                    <div class="flex flex-col items-center">
+                        <h3 class="font-poppins font-bold text-xl md:text-3xl mb-12 uppercase tracking-[0.3em] opacity-30 italic">{cat.name}</h3>
+                        <div class="flex flex-wrap items-center justify-center gap-4 md:gap-12">
+                            {cat.members.map((member, index) => (
+                                <div class="flex items-center gap-2 md:gap-12">
+                                    <button class="team-trigger group outline-none cursor-pointer" data-name={member.name} data-role={member.role} data-bio={member.bio} data-img={member.img}>
+                                        <div class={`rounded-full overflow-hidden border-4 border-transparent group-hover:border-black transition-all duration-300 shadow-xl group-hover:scale-105 
+                                            ${index === 1 
+                                                ? 'w-32 h-32 md:w-52 md:h-52' 
+                                                : 'w-20 h-20 md:w-40 md:h-40'
+                                            }`}>
+                                            <img src={member.img} alt={member.name} class="w-full h-full object-cover transition-all duration-500" />
+                                        </div>
+                                    </button>
+                                    {index < cat.members.length - 1 && (
+                                        <span class="text-black text-2xl md:text-7xl font-black opacity-80 select-none">•</span>
+                                    )}
+                                </div>
+                            ))}
+                        </div>
                     </div>
                 ))}
             </div>
         </section>
 
-        <footer class="w-full bg-black text-white pt-24 pb-12 flex flex-col items-center">
-            <div class="font-poppins text-xs md:text-base opacity-40 mb-12 text-center">
+        <section id="edition" class="relative w-full py-24 md:py-40 px-6 flex flex-col items-center scroll-mt-20 overflow-hidden">
+            <div class="absolute inset-0 w-full h-full z-0">
+                <img src="/assets/images/licorn-bg.avif" alt="Fond" class="w-full h-full object-cover" />
+                <div class="absolute inset-0 bg-black/80 backdrop-blur-sm"></div>
+            </div>
+            <div class="relative z-10 w-full max-w-5xl">
+                <h2 class="font-display text-4xl md:text-9xl text-white text-center mb-24 uppercase">Édition 2026</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-20 md:gap-40">
+                    <div class="space-y-12 text-center md:text-left">
+                        <h3 class="font-poppins font-bold text-2xl md:text-4xl text-white uppercase tracking-widest">Thématiques</h3>
+                        <ul class="space-y-6">
+                            {themes.map((theme) => (
+                                <li class="flex items-center gap-6 text-white font-poppins text-lg md:text-2xl text-left">
+                                    <span class="w-3 h-3 bg-white rounded-full shrink-0"></span>
+                                    <p>{theme.label}<span class="font-bold">{theme.bold}</span></p>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                    <div class="space-y-12">
+                        <h3 class="font-poppins font-bold text-2xl md:text-4xl text-white uppercase tracking-widest text-center">Valeurs</h3>
+                        <div class="grid grid-cols-3 gap-6">
+                            {values.map((value) => (
+                                <div class="flex flex-col items-center gap-4 group">
+                                    <div class="w-16 h-16 md:w-24 md:h-24 transition-transform duration-500 group-hover:scale-110">
+                                        <img src={value.img} alt={value.name} class="w-full h-full object-contain brightness-0 invert opacity-90" />
+                                    </div>
+                                    <p class="font-poppins font-bold text-white text-[10px] md:text-xs uppercase text-center tracking-widest">{value.name}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div id="team-modal" class="fixed inset-0 z-[150] flex items-center justify-center hidden px-4">
+            <div id="modal-overlay" class="absolute inset-0 bg-black/60 backdrop-blur-md"></div>
+            <div class="relative z-10 w-full max-w-md bg-black/25 backdrop-blur-3xl border border-white/10 p-10 rounded-[40px] shadow-2xl flex flex-col items-center text-center text-white scale-95 transition-all duration-300" id="modal-content">
+                <div class="w-32 h-32 md:w-48 md:h-48 rounded-full overflow-hidden mb-6 border-4 border-white/20"><img id="modal-img" src="" class="w-full h-full object-cover" /></div>
+                <h3 id="modal-name" class="font-poppins font-bold text-3xl mb-1 italic"></h3>
+                <p id="modal-role" class="font-poppins text-[#FED506] font-medium mb-6 uppercase tracking-widest text-sm"></p>
+                <p id="modal-bio" class="font-poppins text-white/80 leading-relaxed text-base"></p>
+                <button id="modal-close-btn" class="mt-8 px-8 py-2 border border-white/20 rounded-full text-xs font-bold uppercase hover:bg-white hover:text-black transition-all cursor-pointer">Fermer</button>
+            </div>
+        </div>
+
+        <footer class="w-full bg-black text-white pt-32 pb-16 flex flex-col items-center overflow-hidden -mt-16 z-30">
+            <div class="font-poppins text-xs md:text-base opacity-40 mb-12 text-center text-balance px-4 leading-relaxed">
                 <p>MMI 1ère année — SAE 105 — Montbéliard</p>
                 <p>Par Maël BRUNGARD @BooMooN.cloud | ID : o4g3yq8bkgg4bxz</p>
             </div>
+            <nav class="mb-12 px-4 text-center">
+                <ul class="flex flex-wrap justify-center items-center gap-x-12 gap-y-6 font-poppins font-bold text-sm md:text-xl uppercase text-center">
+                    {navLinks.map((link, i) => (
+                        <li class="flex items-center gap-12">
+                            <a href={link.href} class="hover:text-[#FED506] transition-all hover:tracking-widest">{link.name}</a>
+                            {i < navLinks.length - 1 && <span class="opacity-20 hidden md:block select-none">•</span>}
+                        </li>
+                    ))}
+                </ul>
+            </nav>
+            <nav class="flex justify-center gap-10 font-poppins text-[10px] md:text-xs uppercase underline opacity-40 text-center px-4 leading-relaxed">
+                <a href="#">CGU</a>
+                <a href="#">CGV</a>
+                <a href="#">Mentions Légales</a>
+            </nav>
         </footer>
-    </div>
-
-    <div id="team-modal" class="fixed inset-0 z-[150] flex items-center justify-center hidden px-4">
-        <div id="modal-overlay" class="absolute inset-0 bg-black/60 backdrop-blur-md"></div>
-        <div class="relative z-10 w-full max-w-md bg-black/80 backdrop-blur-3xl border border-white/10 p-10 rounded-[40px] shadow-2xl text-white text-center">
-            <h3 id="modal-name" class="font-poppins font-bold text-3xl mb-1"></h3>
-            <p id="modal-role" class="text-[#FED506] uppercase mb-4"></p>
-            <p id="modal-bio" class="opacity-80"></p>
-            <button id="modal-close-btn" class="mt-8 px-8 py-2 border border-white/20 rounded-full cursor-pointer hover:bg-white hover:text-black">Fermer</button>
-        </div>
     </div>
 </Layout>
 
 <script>
-    // --- IMPORT BACKEND ---
     import { pb, logoutUser } from '../../backend/backend.mjs';
 
-    // --- LOGIQUE MENU ---
+    // --- MENU ---
     const menuOpen = document.getElementById('menu-open');
     const menuClose = document.getElementById('menu-close');
     const overlay = document.getElementById('menu-overlay');
+    if (menuOpen && menuClose && overlay) {
+        menuOpen.addEventListener('click', () => { overlay.classList.remove('translate-x-full'); document.body.style.overflow = 'hidden'; });
+        menuClose.addEventListener('click', () => { overlay.classList.add('translate-x-full'); document.body.style.overflow = ''; });
+    }
 
-    menuOpen?.addEventListener('click', () => {
-        overlay?.classList.remove('translate-x-full');
-        document.body.style.overflow = 'hidden';
+    // --- MODAL EQUIPE ---
+    const teamTriggers = document.querySelectorAll('.team-trigger');
+    const teamModal = document.getElementById('team-modal');
+    const modalContent = document.getElementById('modal-content');
+    const modalCloseBtn = document.getElementById('modal-close-btn');
+    const modalOverlay = document.getElementById('modal-overlay');
+    const mImg = document.getElementById('modal-img') as HTMLImageElement;
+    const mName = document.getElementById('modal-name');
+    const mRole = document.getElementById('modal-role');
+    const mBio = document.getElementById('modal-bio');
+
+    teamTriggers.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const name = btn.getAttribute('data-name');
+            const role = btn.getAttribute('data-role');
+            const bio = btn.getAttribute('data-bio');
+            const img = btn.getAttribute('data-img');
+            if(mImg) mImg.src = img || '';
+            if(mName) mName.innerText = name || '';
+            if(mRole) mRole.innerText = role || '';
+            if(mBio) mBio.innerText = bio || '';
+            teamModal?.classList.remove('hidden');
+            setTimeout(() => modalContent?.classList.remove('scale-95'), 10);
+            document.body.style.overflow = 'hidden';
+        });
     });
-    menuClose?.addEventListener('click', () => {
-        overlay?.classList.add('translate-x-full');
-        document.body.style.overflow = '';
-    });
+
+    const closeTeamModal = () => { 
+        modalContent?.classList.add('scale-95');
+        setTimeout(() => { teamModal?.classList.add('hidden'); document.body.style.overflow = ''; }, 200);
+    };
+    modalCloseBtn?.addEventListener('click', closeTeamModal);
+    modalOverlay?.addEventListener('click', closeTeamModal);
 
     // --- LOGIQUE BOUTONS STATUT ---
     const btnConnected = document.getElementById('user-status-connected');
     const btnDisconnected = document.getElementById('user-status-disconnected');
 
     function updateHeader() {
-        if (pb && pb.authStore.isValid) {
+        if (pb && pb.authStore && pb.authStore.isValid) {
             btnConnected?.classList.remove('hidden');
             btnDisconnected?.classList.add('hidden');
         } else {
@@ -194,9 +336,9 @@ const navLinks = [
         }
     }
 
-    // Action de déconnexion au clic sur le bouton vert
     btnConnected?.addEventListener('click', () => {
-        logoutUser();
+        if(typeof logoutUser === 'function') logoutUser();
+        else pb.authStore.clear();
         window.location.reload();
     });
 

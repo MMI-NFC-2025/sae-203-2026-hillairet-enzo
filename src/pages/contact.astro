@@ -119,6 +119,23 @@ const navLinks = [
                     </form>
                 </div>
             </div>
+
+            <div class="mt-12 flex flex-col items-center gap-6">
+                <div class="flex gap-6">
+                    <a href="https://facebook.com" target="_blank" class="w-14 h-14 bg-black text-white rounded-full flex items-center justify-center hover:bg-[#FED506] hover:text-black transition-all shadow-lg hover:-translate-y-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+                    </a>
+                    <a href="https://instagram.com" target="_blank" class="w-14 h-14 bg-black text-white rounded-full flex items-center justify-center hover:bg-[#FED506] hover:text-black transition-all shadow-lg hover:-translate-y-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                    </a>
+                    <a href="https://tiktok.com" target="_blank" class="w-14 h-14 bg-black text-white rounded-full flex items-center justify-center hover:bg-[#FED506] hover:text-black transition-all shadow-lg hover:-translate-y-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path></svg>
+                    </a>
+                    <a href="https://twitter.com" target="_blank" class="w-14 h-14 bg-black text-white rounded-full flex items-center justify-center hover:bg-[#FED506] hover:text-black transition-all shadow-lg hover:-translate-y-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></svg>
+                    </a>
+                </div>
+            </div>
         </section>
 
         <footer class="w-full bg-black text-white pt-24 pb-12 flex flex-col items-center overflow-hidden z-30 mt-auto">
@@ -144,26 +161,18 @@ const navLinks = [
 </Layout>
 
 <script>
-    // --- IMPORT BACKEND (1 Niveau car on est dans src/pages/) ---
     import { pb, logoutUser } from '../../backend/backend.mjs';
 
-    // --- LOGIQUE DU MENU ---
+    // MENU
     const menuOpen = document.getElementById('menu-open');
     const menuClose = document.getElementById('menu-close');
     const overlay = document.getElementById('menu-overlay');
-    
     if (menuOpen && menuClose && overlay) {
-        menuOpen.addEventListener('click', () => { 
-            overlay.classList.remove('translate-x-full'); 
-            document.body.style.overflow = 'hidden'; 
-        });
-        menuClose.addEventListener('click', () => { 
-            overlay.classList.add('translate-x-full'); 
-            document.body.style.overflow = ''; 
-        });
+        menuOpen.addEventListener('click', () => { overlay.classList.remove('translate-x-full'); document.body.style.overflow = 'hidden'; });
+        menuClose.addEventListener('click', () => { overlay.classList.add('translate-x-full'); document.body.style.overflow = ''; });
     }
 
-    // --- LOGIQUE BOUTONS STATUT ---
+    // AUTH STATUS
     const btnConnected = document.getElementById('user-status-connected');
     const btnDisconnected = document.getElementById('user-status-disconnected');
 
@@ -177,13 +186,9 @@ const navLinks = [
         }
     }
 
-    // Action de déconnexion au clic sur le bouton vert
     btnConnected?.addEventListener('click', () => {
-        if(typeof logoutUser === 'function') {
-            logoutUser();
-        } else {
-            pb.authStore.clear(); 
-        }
+        if(typeof logoutUser === 'function') logoutUser();
+        else pb.authStore.clear(); 
         window.location.reload();
     });
 

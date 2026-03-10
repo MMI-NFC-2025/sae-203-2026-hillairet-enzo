@@ -2,43 +2,21 @@
 import Layout from '../layouts/Layout.astro';
 
 // ==========================================
-// 1. CONFIGURATION DES CARTES D'INFOS
+// 1. CONFIGURATION DES DONNÉES
 // ==========================================
 const infosList = [
-    { 
-        title: "Nos tarifs", 
-        img: "/assets/images/cards/price.avif", 
-        link: "#tarifs" 
-    },
-    { 
-        title: "Hébergement", 
-        img: "/assets/images/hebergement/autres/camping.avif", 
-        link: "#hebergement" 
-    },
-    { 
-        title: "Transports", 
-        img: "/assets/images/cards/transport.avif", 
-        link: "#transports" 
-    },
-    { 
-        title: "FAQ",
-        img: "/assets/images/cards/faq.avif", 
-        link: "#faq" 
-    }
+    { title: "Nos tarifs", img: "/assets/images/cards/price.avif", link: "#tarifs" },
+    { title: "Hébergement", img: "/assets/images/hebergement/autres/camping.avif", link: "#hebergement" },
+    { title: "Transports", img: "/assets/images/cards/transport.avif", link: "#transports" },
+    { title: "FAQ", img: "/assets/images/cards/faq.avif", link: "#faq" }
 ];
 
-// ==========================================
-// 2. CONFIGURATION DES TARIFS
-// ==========================================
 const tarifsList = [
-    { title: "PASS 3 JOURS" },
-    { title: "PASS 2 JOURS" },
-    { title: "PASS 1 JOURS" }
+    { title: "PASS 3 JOURS", prix: "75€" },
+    { title: "PASS 2 JOURS", prix: "55€" },
+    { title: "PASS 1 JOURS", prix: "35€" }
 ];
 
-// ==========================================
-// 3. CONFIGURATION DES HÉBERGEMENTS (Bulles)
-// ==========================================
 const hebergementCategories = [
     {
         name: "Hotel",
@@ -58,9 +36,6 @@ const hebergementCategories = [
     }
 ];
 
-// ==========================================
-// 4. CONFIGURATION DES TRANSPORTS (Style Édition 2026)
-// ==========================================
 const transportApps = [
     { name: "Train", img: "/assets/images/transports/sncf.svg", url: "https://www.sncf-connect.com" },
     { name: "Covoiturage", img: "/assets/images/transports/blablacar.svg", url: "https://www.blablacar.fr" },
@@ -87,7 +62,7 @@ const navLinks = [
             </div>
             <div class="relative z-10 h-full flex flex-col p-6 md:p-10">
                 <div class="flex justify-between items-center w-full">
-                    <a href="/"><img src="/assets/icons/logo.avif" alt="Logo" class="h-14 md:h-20 w-auto" /></a>
+                    <a href="/"><img src="/assets/icons/logo.avif" alt="Logo" class="h-14 md:h-20 w-auto rounded-2xl" /></a>
                     <button id="menu-close" class="text-white p-2 cursor-pointer hover:rotate-90 transition-transform">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 md:h-12 md:w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
                     </button>
@@ -95,7 +70,7 @@ const navLinks = [
                 <nav class="flex-1 flex flex-col justify-start pt-32 items-end pr-4 md:pr-20">
                     <ul class="space-y-6 text-right">
                         {navLinks.map((link) => (
-                            <li><a href={link.href} class="block text-2xl md:text-5xl font-poppins font-bold text-white uppercase hover:text-[#FED506] transition-colors">{link.name} <span class="text-white ml-2 md:ml-4">•</span></a></li>
+                            <li><a href={link.href} class="block text-2xl md:text-5xl font-poppins font-bold text-white uppercase hover:text-[#FED506] transition-colors">{link.name} •</a></li>
                         ))}
                     </ul>
                 </nav>
@@ -104,16 +79,27 @@ const navLinks = [
 
         <header class="w-full flex justify-between items-center p-6 md:p-10 z-50 bg-[#FFF4C6]">
             <a href="/" class="hover:scale-110 transition-transform">
-                <img src="/assets/icons/logo.avif" alt="Logo" class="h-14 md:h-20 w-auto" />
+                <img src="/assets/icons/logo.avif" alt="Logo" class="h-14 md:h-20 w-auto rounded-2xl" />
             </a>
-            <button id="menu-open" class="flex flex-col gap-2 p-2 cursor-pointer items-end group">
-                <div class="w-10 md:w-12 h-1 bg-black rounded-full group-hover:w-8 transition-all"></div>
-                <div class="w-10 md:w-12 h-1 bg-black rounded-full transition-all"></div>
-            </button>
+            
+            <div class="flex items-center gap-4">
+                <button id="user-status-connected" class="hidden font-poppins text-[10px] md:text-xs uppercase font-bold bg-[#6d9a02] text-white px-3 py-1.5 rounded-full shadow-lg animate-pulse hover:bg-red-600 transition-colors">
+                    Connecté
+                </button>
+
+                <a href="/connexion" id="user-status-disconnected" class="font-poppins text-[10px] md:text-xs uppercase font-bold bg-[#ED3F24] text-white px-3 py-1.5 rounded-full shadow-lg hover:scale-105 transition-transform">
+                    Se connecter
+                </a>
+
+                <button id="menu-open" class="flex flex-col gap-2 p-2 cursor-pointer items-end group">
+                    <div class="w-10 md:w-12 h-1 bg-black rounded-full"></div>
+                    <div class="w-10 md:w-12 h-1 bg-black rounded-full"></div>
+                </button>
+            </div>
         </header>
 
         <section class="w-full pt-8 pb-12 flex justify-center text-center px-4">
-            <h1 class="font-display text-5xl sm:text-7xl md:text-[8rem] text-[#FED506] uppercase italic leading-none drop-shadow-[0_4px_0_rgba(185,28,28,1)] md:drop-shadow-[0_6px_0_rgba(185,28,28,1)]">
+            <h1 class="font-display text-5xl sm:text-7xl md:text-[8rem] text-[#FED506] uppercase italic leading-none drop-shadow-[0_4px_0_rgba(185,28,28,1)]">
                 Infos Pratiques
             </h1>
         </section>
@@ -122,43 +108,39 @@ const navLinks = [
             <div class="w-full max-w-4xl flex flex-col gap-8">
                 {infosList.map((info, index) => (
                     <div class="flex flex-col gap-6 w-full">
-                        <a href={info.link} class="group relative w-full h-48 sm:h-64 md:h-80 bg-gray-900 rounded-[2rem] overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-1 border border-black/10 cursor-pointer block">
-                            <img src={info.img} alt={info.title} class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" onerror="this.style.display='none'" />
-                            <div class="absolute inset-0 bg-black/50 group-hover:bg-black/30 transition-all duration-500"></div>
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-90"></div>
+                        <a href={info.link} class="group relative w-full h-48 sm:h-64 md:h-80 bg-gray-900 rounded-[2rem] overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-black/10 block cursor-pointer">
+                            <img src={info.img} alt={info.title} class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                            <div class="absolute inset-0 bg-black/40 group-hover:bg-black/20"></div>
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
                             <div class="absolute bottom-6 left-6 md:bottom-10 md:left-10">
-                                <h2 class="font-poppins font-bold text-3xl md:text-5xl text-white tracking-wide">{info.title}</h2>
+                                <h2 class="font-poppins font-bold text-3xl md:text-5xl text-white tracking-wide uppercase italic">{info.title}</h2>
                             </div>
                         </a>
                         {index < infosList.length - 1 && (
-                            <div class="w-full">
-                                <img src="/assets/images/lignes_rouge_jaune_vert.svg" alt="separateur" class="w-full h-auto opacity-90 drop-shadow-sm" />
-                            </div>
+                            <img src="/assets/images/lignes_rouge_jaune_vert.svg" alt="separateur" class="w-full h-auto opacity-90" />
                         )}
                     </div>
                 ))}
             </div>
         </section>
 
-        <section id="tarifs" class="relative w-full py-24 px-6 md:px-10 flex flex-col items-center scroll-mt-20 bg-black">
-            <div class="absolute inset-0 z-0 overflow-hidden">
-                <img src="/assets/images/section-background.avif" alt="Fond Tarifs" class="w-full h-full object-cover opacity-70" />
-                <div class="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-black/90"></div>
+        <section id="tarifs" class="relative w-full py-24 px-6 md:px-10 flex flex-col items-center scroll-mt-20 bg-black overflow-hidden">
+            <div class="absolute inset-0 z-0">
+                <img src="/assets/images/section-background.avif" alt="Fond" class="w-full h-full object-cover opacity-60" />
+                <div class="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-black/95"></div>
             </div>
             <div class="relative z-10 w-full max-w-4xl flex flex-col items-center text-white">
-                <h2 class="font-poppins font-bold text-4xl md:text-5xl mb-16 uppercase tracking-widest drop-shadow-lg">Nos Tarifs</h2>
+                <h2 class="font-display text-4xl md:text-8xl mb-16 uppercase tracking-widest italic text-[#FED506]">Nos Tarifs</h2>
                 <div class="w-full flex flex-col gap-10">
                     {tarifsList.map((pass) => (
                         <div class="flex flex-col gap-8 w-full">
-                            <div class="w-full bg-white/80 backdrop-blur-md rounded-3xl p-8 md:p-12 shadow-2xl border border-white/20">
-                                <h3 class="font-poppins font-black text-3xl md:text-5xl text-black mb-8 uppercase tracking-wider">{pass.title}</h3>
-                                <div class="font-poppins text-lg md:text-2xl text-black/90 space-y-4 font-bold">
-                                    <p>Prix étudiants : <span class="font-normal">00.00€</span></p>
-                                    <p>Prix - de 22 ans : <span class="font-normal">00.00€</span></p>
-                                    <p>Prix + de 22 ans : <span class="font-normal">00.00€</span></p>
+                            <div class="w-full bg-white/10 backdrop-blur-xl rounded-[3rem] p-8 md:p-14 shadow-2xl border border-white/10 group hover:bg-white/20 transition-all">
+                                <h3 class="font-poppins font-black text-3xl md:text-5xl text-[#FED506] mb-8 uppercase tracking-wider italic">{pass.title}</h3>
+                                <div class="font-poppins text-lg md:text-2xl text-white/90 space-y-4 font-bold">
+                                    <p>Prix unique : <span class="font-normal">{pass.prix}</span></p>
                                 </div>
                             </div>
-                            <div class="w-full mx-auto"><img src="/assets/images/lignes_rouge_jaune_vert.svg" class="w-full h-auto" /></div>
+                            <img src="/assets/images/lignes_rouge_jaune_vert.svg" class="w-full h-auto opacity-50" />
                         </div>
                     ))}
                 </div>
@@ -166,7 +148,7 @@ const navLinks = [
         </section>
 
         <section id="hebergement" class="w-full bg-[#FEFAF5] py-24 md:py-40 flex flex-col items-center scroll-mt-20">
-            <h2 class="font-display text-4xl md:text-8xl text-black mb-24 uppercase tracking-widest text-center px-4">Hébergement</h2>
+            <h2 class="font-display text-4xl md:text-[8rem] text-black mb-24 uppercase tracking-widest text-center italic">Hébergement</h2>
             <div class="w-full max-w-6xl px-6 space-y-32">
                 {hebergementCategories.map((cat) => (
                     <div class="flex flex-col items-center">
@@ -175,12 +157,12 @@ const navLinks = [
                             {cat.members.map((member, index) => (
                                 <div class="flex items-center gap-2 md:gap-12">
                                     <a href={member.url} target="_blank" class="group outline-none cursor-pointer">
-                                        <div class={`rounded-full overflow-hidden border-4 border-transparent group-hover:border-black transition-all duration-300 shadow-xl group-hover:scale-105 
+                                        <div class={`rounded-full overflow-hidden border-4 border-transparent group-hover:border-[#FED506] transition-all duration-300 shadow-xl group-hover:scale-105 
                                             ${index === 1 ? 'w-32 h-32 md:w-52 md:h-52' : 'w-20 h-20 md:w-40 md:h-40'}`}>
-                                            <img src={member.img} alt={member.name} class="w-full h-full object-cover transition-all duration-500" />
+                                            <img src={member.img} alt={member.name} class="w-full h-full object-cover" />
                                         </div>
                                     </a>
-                                    {index < cat.members.length - 1 && (<span class="text-black text-2xl md:text-7xl font-black opacity-80 select-none">•</span>)}
+                                    {index < cat.members.length - 1 && (<span class="text-black text-2xl md:text-7xl font-black opacity-10 select-none">•</span>)}
                                 </div>
                             ))}
                         </div>
@@ -189,32 +171,29 @@ const navLinks = [
             </div>
         </section>
 
-        <section id="transports" class="relative w-full py-24 md:py-40 px-6 flex flex-col items-center scroll-mt-20 overflow-hidden">
-            <div class="absolute inset-0 w-full h-full z-0">
-                <img src="/assets/images/section-background.avif" alt="Fond" class="w-full h-full object-cover" />
-                <div class="absolute inset-0 bg-black/80 backdrop-blur-sm"></div>
+        <section id="transports" class="relative w-full py-24 md:py-40 px-6 flex flex-col items-center scroll-mt-20 overflow-hidden bg-black">
+            <div class="absolute inset-0 z-0">
+                <img src="/assets/images/licorn-bg.avif" alt="Fond" class="w-full h-full object-cover blur-sm opacity-50" />
+                <div class="absolute inset-0 bg-black/60"></div>
             </div>
-
             <div class="relative z-10 w-full max-w-5xl">
-                <h2 class="font-display text-4xl md:text-9xl text-white text-center mb-24 uppercase italic">Transports</h2>
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-20 md:gap-40">
-                    <div class="space-y-12 text-center md:text-left">
-                        <h3 class="font-poppins font-bold text-2xl md:text-4xl text-white uppercase tracking-widest">Bus Evolity</h3>
-                        <div class="rounded-2xl overflow-hidden shadow-2xl border border-white/10 group transition-transform hover:scale-[1.02]">
-                            <img src="/assets/images/transports/plan-bus.avif" alt="Plan Bus Evolity" class="w-full h-auto object-cover" />
+                <h2 class="font-display text-5xl md:text-[9rem] text-white text-center mb-24 uppercase italic drop-shadow-2xl">Transports</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-32">
+                    <div class="space-y-12">
+                        <h3 class="font-poppins font-bold text-2xl md:text-4xl text-[#FED506] uppercase tracking-widest italic text-center md:text-left">Bus Evolity</h3>
+                        <div class="rounded-[2rem] overflow-hidden shadow-2xl border border-white/10">
+                            <img src="/assets/images/transports/plan-bus.avif" alt="Plan Bus" class="w-full h-auto" />
                         </div>
                     </div>
-
                     <div class="space-y-12 flex flex-col items-center">
-                        <h3 class="font-poppins font-bold text-2xl md:text-4xl text-white uppercase tracking-widest text-center">Autres</h3>
+                        <h3 class="font-poppins font-bold text-2xl md:text-4xl text-[#FED506] uppercase tracking-widest italic text-center">Mobilité</h3>
                         <div class="grid grid-cols-3 gap-6 md:gap-10">
                             {transportApps.map((app) => (
                                 <a href={app.url} target="_blank" class="flex flex-col items-center gap-4 group">
-                                    <div class="w-16 h-16 md:w-24 md:h-24 transition-transform duration-500 group-hover:scale-110 rounded-2xl overflow-hidden shadow-xl">
-                                        <img src={app.img} alt={app.name} class="w-full h-full object-cover" />
+                                    <div class="w-16 h-16 md:w-28 md:h-28 transition-all group-hover:scale-110 rounded-3xl overflow-hidden shadow-xl border border-white/10 p-4 backdrop-blur-md bg-white/5">
+                                        <img src={app.img} alt={app.name} class="w-full h-full object-contain brightness-0 invert" />
                                     </div>
-                                    <p class="font-poppins font-bold text-white text-[10px] md:text-xs uppercase text-center tracking-widest opacity-80 group-hover:opacity-100">{app.name}</p>
+                                    <p class="font-poppins font-bold text-white text-[10px] md:text-xs uppercase opacity-60">{app.name}</p>
                                 </a>
                             ))}
                         </div>
@@ -224,14 +203,32 @@ const navLinks = [
         </section>
 
         <footer class="w-full bg-black text-white pt-24 pb-12 flex flex-col items-center mt-auto">
-            <div class="font-poppins text-xs md:text-base opacity-40 mb-12 text-center px-4 leading-relaxed"><p>MMI 1ère année — SAE 105 — Montbéliard</p><p>Par Maël BRUNGARD @BooMooN.cloud</p></div>
-            <nav class="mb-12 px-4"><ul class="flex flex-wrap justify-center items-center gap-x-12 gap-y-6 font-poppins font-bold text-sm md:text-xl uppercase">{navLinks.map((link, i) => (<li class="flex items-center gap-12"><a href={link.href} class="hover:text-[#FED506] transition-all hover:tracking-widest">{link.name}</a>{i < navLinks.length - 1 && <span class="opacity-20 hidden md:block select-none">•</span>}</li>))}</ul></nav>
-            <nav class="flex justify-center gap-10 font-poppins text-[10px] md:text-xs uppercase underline opacity-40 px-4 leading-relaxed"><a href="#">CGU</a><a href="#">CGV</a><a href="#">Mentions Légales</a></nav>
+            <div class="font-poppins text-xs md:text-base opacity-40 mb-12 text-center px-4 leading-relaxed">
+                <p>MMI 1ère année — SAE 105 — Montbéliard</p>
+                <p>Par Maël BRUNGARD @BooMooN.cloud | ID Étudiant : o4g3yq8bkgg4bxz</p>
+            </div>
+            <nav class="mb-12 px-4">
+                <ul class="flex flex-wrap justify-center items-center gap-x-12 gap-y-6 font-poppins font-bold text-sm md:text-xl uppercase">
+                    {navLinks.map((link, i) => (
+                        <li class="flex items-center gap-12">
+                            <a href={link.href} class="hover:text-[#FED506] transition-all">{link.name}</a>
+                            {i < navLinks.length - 1 && <span class="opacity-20 hidden md:block">•</span>}
+                        </li>
+                    ))}
+                </ul>
+            </nav>
+            <nav class="flex justify-center gap-10 font-poppins text-[10px] md:text-xs uppercase underline opacity-40 px-4 leading-relaxed">
+                <a href="#">CGU</a><a href="#">CGV</a><a href="#">Mentions Légales</a>
+            </nav>
         </footer>
     </div>
 </Layout>
 
 <script>
+    // --- IMPORT BACKEND ---
+    import { pb, logoutUser } from '../../backend/backend.mjs';
+
+    // --- MENU ---
     const menuOpen = document.getElementById('menu-open');
     const menuClose = document.getElementById('menu-close');
     const overlay = document.getElementById('menu-overlay');
@@ -239,6 +236,28 @@ const navLinks = [
         menuOpen.addEventListener('click', () => { overlay.classList.remove('translate-x-full'); document.body.style.overflow = 'hidden'; });
         menuClose.addEventListener('click', () => { overlay.classList.add('translate-x-full'); document.body.style.overflow = ''; });
     }
+
+    // --- LOGIQUE BOUTONS STATUT ---
+    const btnConnected = document.getElementById('user-status-connected');
+    const btnDisconnected = document.getElementById('user-status-disconnected');
+
+    function updateHeader() {
+        if (pb && pb.authStore.isValid) {
+            btnConnected?.classList.remove('hidden');
+            btnDisconnected?.classList.add('hidden');
+        } else {
+            btnConnected?.classList.add('hidden');
+            btnDisconnected?.classList.remove('hidden');
+        }
+    }
+
+    // Action de déconnexion au clic sur le bouton vert
+    btnConnected?.addEventListener('click', () => {
+        logoutUser();
+        window.location.reload();
+    });
+
+    updateHeader();
 </script>
 
 <style>

@@ -16,12 +16,12 @@ const navLinks = [
         
         <div id="menu-overlay" class="fixed inset-0 z-[100] translate-x-full transition-transform duration-500 ease-in-out">
             <div class="absolute inset-0 bg-black">
-                <img src="/assets/images/licorn-bg.avif" alt="Menu BG" class="w-full h-full object-cover opacity-50" onerror="this.style.display='none'" />
+                <img src="/assets/images/licorn-bg.avif" alt="Menu BG" class="w-full h-full object-cover opacity-50" />
                 <div class="absolute inset-0 bg-gradient-to-l from-black/80 to-transparent"></div>
             </div>
             <div class="relative z-10 h-full flex flex-col p-6 md:p-10">
                 <div class="flex justify-between items-center w-full">
-                    <a href="/"><img src="/assets/icons/logo.avif" alt="Logo" class="h-14 md:h-20 w-auto rounded-2xl" onerror="this.style.display='none'" /></a>
+                    <a href="/"><img src="/assets/icons/logo.avif" alt="Logo" class="h-14 md:h-20 w-auto rounded-2xl" /></a>
                     <button id="menu-close" class="text-white p-2 cursor-pointer hover:rotate-90 transition-transform">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 md:h-12 md:w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
                     </button>
@@ -42,12 +42,24 @@ const navLinks = [
 
         <header class="w-full flex justify-between items-center p-6 md:p-10 z-50 bg-[#FFF4C6]">
             <a href="/" class="hover:scale-110 transition-transform">
-                <img src="/assets/icons/logo.avif" alt="Logo" class="h-14 md:h-20 w-auto rounded-2xl" onerror="this.style.display='none'" />
+                <img src="/assets/icons/logo.avif" alt="Logo" class="h-14 md:h-20 w-auto rounded-2xl" />
             </a>
-            <button id="menu-open" class="flex flex-col gap-2 p-2 cursor-pointer items-end group">
-                <div class="w-10 md:w-12 h-1 bg-black rounded-full group-hover:w-8 transition-all"></div>
-                <div class="w-10 md:w-12 h-1 bg-black rounded-full transition-all"></div>
-            </button>
+
+            <div class="flex items-center gap-4">
+                <button id="user-status-connected" class="hidden font-poppins text-[10px] md:text-xs uppercase font-bold bg-[#6d9a02] text-white px-3 py-1.5 rounded-full shadow-lg animate-pulse hover:bg-red-600 transition-colors group">
+                    <span class="group-hover:hidden">Connecté</span>
+                    <span class="hidden group-hover:inline">Déconnexion</span>
+                </button>
+
+                <a href="/connexion" id="user-status-disconnected" class="font-poppins text-[10px] md:text-xs uppercase font-bold bg-[#ED3F24] text-white px-3 py-1.5 rounded-full shadow-lg hover:scale-105 transition-transform">
+                    Se connecter
+                </a>
+
+                <button id="menu-open" class="flex flex-col gap-2 p-2 cursor-pointer items-end group">
+                    <div class="w-10 md:w-12 h-1 bg-black rounded-full group-hover:w-8 transition-all"></div>
+                    <div class="w-10 md:w-12 h-1 bg-black rounded-full transition-all"></div>
+                </button>
+            </div>
         </header>
 
         <section class="w-full pt-4 pb-12 flex justify-center text-center px-4">
@@ -57,9 +69,7 @@ const navLinks = [
         </section>
 
         <section class="w-full pb-24 px-6 md:px-10 flex flex-col items-center flex-1">
-            
             <div class="relative w-full max-w-2xl min-h-[600px] rounded-[3rem] overflow-hidden shadow-2xl border border-black/10">
-                
                 <div class="absolute inset-0 z-0">
                     <img src="/assets/images/licorn-bg.avif" alt="Fond Contact" class="w-full h-full object-cover scale-110 blur-sm" />
                     <div class="absolute inset-0 bg-black/40"></div>
@@ -108,14 +118,13 @@ const navLinks = [
                         </button>
                     </form>
                 </div>
-
             </div>
         </section>
 
         <footer class="w-full bg-black text-white pt-24 pb-12 flex flex-col items-center overflow-hidden z-30 mt-auto">
             <div class="font-poppins text-[10px] sm:text-xs md:text-base opacity-40 mb-12 text-center text-balance px-4 leading-relaxed">
                 <p>MMI 1ère année — SAE 105 — Montbéliard</p>
-                <p>Par Maël BRUNGARD @BooMooN.cloud</p>
+                <p>Par Maël BRUNGARD @BooMooN.cloud | ID Étudiant : o4g3yq8bkgg4bxz</p>
             </div>
             <nav class="mb-12 px-4 text-center">
                 <ul class="flex flex-wrap justify-center items-center gap-x-6 sm:gap-x-12 gap-y-6 font-poppins font-bold text-xs sm:text-sm md:text-xl uppercase">
@@ -135,6 +144,10 @@ const navLinks = [
 </Layout>
 
 <script>
+    // --- IMPORT BACKEND (1 Niveau car on est dans src/pages/) ---
+    import { pb, logoutUser } from '../../backend/backend.mjs';
+
+    // --- LOGIQUE DU MENU ---
     const menuOpen = document.getElementById('menu-open');
     const menuClose = document.getElementById('menu-close');
     const overlay = document.getElementById('menu-overlay');
@@ -149,6 +162,32 @@ const navLinks = [
             document.body.style.overflow = ''; 
         });
     }
+
+    // --- LOGIQUE BOUTONS STATUT ---
+    const btnConnected = document.getElementById('user-status-connected');
+    const btnDisconnected = document.getElementById('user-status-disconnected');
+
+    function updateHeader() {
+        if (pb && pb.authStore && pb.authStore.isValid) {
+            btnConnected?.classList.remove('hidden');
+            btnDisconnected?.classList.add('hidden');
+        } else {
+            btnConnected?.classList.add('hidden');
+            btnDisconnected?.classList.remove('hidden');
+        }
+    }
+
+    // Action de déconnexion au clic sur le bouton vert
+    btnConnected?.addEventListener('click', () => {
+        if(typeof logoutUser === 'function') {
+            logoutUser();
+        } else {
+            pb.authStore.clear(); 
+        }
+        window.location.reload();
+    });
+
+    updateHeader();
 </script>
 
 <style>

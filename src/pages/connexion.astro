@@ -16,12 +16,12 @@ const navLinks = [
         
         <div id="menu-overlay" class="fixed inset-0 z-[100] translate-x-full transition-transform duration-500 ease-in-out">
             <div class="absolute inset-0 bg-black">
-                <img src="/assets/images/licorn-bg.avif" alt="Menu BG" class="w-full h-full object-cover opacity-50" onerror="this.style.display='none'" />
+                <img src="/assets/images/licorn-bg.avif" alt="Menu BG" class="w-full h-full object-cover opacity-50" />
                 <div class="absolute inset-0 bg-gradient-to-l from-black/80 to-transparent"></div>
             </div>
             <div class="relative z-10 h-full flex flex-col p-6 md:p-10">
                 <div class="flex justify-between items-center w-full">
-                    <a href="/festival"><img src="/assets/icons/logo.avif" alt="Logo" class="h-14 md:h-20 w-auto rounded-2xl" /></a>
+                    <a href="/"><img src="/assets/icons/logo.avif" alt="Logo" class="h-14 md:h-20 w-auto rounded-2xl" /></a>
                     <button id="menu-close" class="text-white p-2 cursor-pointer hover:rotate-90 transition-transform">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 md:h-12 md:w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
                     </button>
@@ -41,7 +41,7 @@ const navLinks = [
         </div>
 
         <header class="w-full flex justify-between items-center p-6 md:p-10 z-50 bg-[#FFF4C6]">
-            <a href="/festival" class="hover:scale-110 transition-transform">
+            <a href="/" class="hover:scale-110 transition-transform">
                 <img src="/assets/icons/logo.avif" alt="Logo" class="h-14 md:h-20 w-auto rounded-2xl" />
             </a>
             <div class="flex items-center gap-4">
@@ -149,7 +149,7 @@ const navLinks = [
         });
     }
 
-    // --- 2. LOGIQUE CONNEXION POCKETBASE ---
+    // --- 2. LOGIQUE CONNEXION POCKETBASE (1 Niveau d'import) ---
     import { loginUser, logoutUser, pb } from '../../backend/backend.mjs';
 
     const loginForm = document.getElementById('login-form') as HTMLFormElement;
@@ -194,7 +194,11 @@ const navLinks = [
     });
 
     logoutBtn?.addEventListener('click', () => {
-        logoutUser();
+        if(typeof logoutUser === 'function') {
+            logoutUser();
+        } else {
+            pb.authStore.clear();
+        }
         updateUI();
     });
 </script>

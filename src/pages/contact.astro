@@ -9,6 +9,12 @@ const navLinks = [
     { name: "Infos pratiques", href: "/infos-pratiques" },
     { name: "Contact", href: "/contact" }
 ];
+
+const logos = [
+    "/assets/icons/culture-logo.svg",
+    "/assets/icons/logo-montbeliard-white.svg",
+    "/assets/icons/logo-univ.svg",
+];
 ---
 
 <Layout title="Contact | Echos Sonore">
@@ -80,12 +86,13 @@ const navLinks = [
                         Contactez Nous !
                     </h2>
 
-                    <form class="flex flex-col gap-8">
+                    <form class="flex flex-col gap-8" id="contact-form">
                         <div class="flex flex-col gap-3">
                             <label for="email" class="font-poppins font-bold text-xl text-white">Email</label>
                             <input 
                                 type="email" 
                                 id="email" 
+                                required
                                 placeholder="Votre Email" 
                                 class="w-full bg-black/30 border border-white/20 rounded-2xl py-4 px-6 text-white placeholder:text-white/40 focus:outline-none focus:border-[#FED506] transition-colors backdrop-blur-md"
                             />
@@ -96,6 +103,7 @@ const navLinks = [
                             <input 
                                 type="text" 
                                 id="subject" 
+                                required
                                 placeholder="Sujet" 
                                 class="w-full bg-black/30 border border-white/20 rounded-2xl py-4 px-6 text-white placeholder:text-white/40 focus:outline-none focus:border-[#FED506] transition-colors backdrop-blur-md"
                             />
@@ -105,6 +113,7 @@ const navLinks = [
                             <label for="message" class="font-poppins font-bold text-xl text-white">Votre Message</label>
                             <textarea 
                                 id="message" 
+                                required
                                 rows="5" 
                                 class="w-full bg-black/30 border border-white/20 rounded-2xl py-4 px-6 text-white focus:outline-none focus:border-[#FED506] transition-colors backdrop-blur-md resize-none"
                             ></textarea>
@@ -112,10 +121,13 @@ const navLinks = [
 
                         <button 
                             type="submit" 
+                            id="submit-btn"
                             class="w-full mt-4 bg-[#1e1e1e] hover:bg-black text-white font-poppins font-bold text-2xl py-5 rounded-3xl transition-all shadow-xl active:scale-95 border border-white/5"
                         >
                             Envoyer
                         </button>
+                        
+                        <p id="form-status" class="hidden text-center font-bold text-lg mt-4 px-4 py-2 rounded-xl"></p>
                     </form>
                 </div>
             </div>
@@ -138,15 +150,29 @@ const navLinks = [
             </div>
         </section>
 
-        <footer class="w-full bg-black text-white pt-24 pb-12 flex flex-col items-center overflow-hidden z-30 mt-auto">
-            <div class="font-poppins text-[10px] sm:text-xs md:text-base opacity-40 mb-12 text-center text-balance px-4 leading-relaxed">
+        <footer class="w-full bg-black text-white pt-32 pb-16 flex flex-col items-center overflow-hidden -mt-16 z-30">
+            <h2 class="font-poppins font-bold text-2xl md:text-3xl uppercase tracking-widest mb-12 border-b border-white/10 pb-4">
+                Partenaires :
+            </h2>
+
+            <div class="w-full relative py-12 overflow-hidden">
+                <div class="flex marquee-content whitespace-nowrap items-center">
+                    {[...logos, ...logos, ...logos].map((logo) => (
+                        <div class="flex-shrink-0 mx-8 md:mx-16 w-32 md:w-56 flex justify-center items-center"> 
+                            <img src={logo} alt="Logo" class="h-16 md:h-28 w-auto max-w-full object-contain brightness-0 invert opacity-90" />
+                        </div>
+                    ))}
+                </div>
+            </div>
+
+            <div class="font-poppins text-xs md:text-base opacity-40 mb-12 text-center text-balance px-4 leading-relaxed">
                 <p>MMI 1ère année — SAE 105 — Montbéliard</p>
                 <p>Par Maël BRUNGARD @BooMooN.cloud | ID Étudiant : o4g3yq8bkgg4bxz</p>
             </div>
             <nav class="mb-12 px-4 text-center">
-                <ul class="flex flex-wrap justify-center items-center gap-x-6 sm:gap-x-12 gap-y-6 font-poppins font-bold text-xs sm:text-sm md:text-xl uppercase">
+                <ul class="flex flex-wrap justify-center items-center gap-x-12 gap-y-6 font-poppins font-bold text-sm md:text-xl uppercase">
                     {navLinks.map((link, i) => (
-                        <li class="flex items-center gap-6 sm:gap-12">
+                        <li class="flex items-center gap-12">
                             <a href={link.href} class="hover:text-[#FED506] transition-all hover:tracking-widest">{link.name}</a>
                             {i < navLinks.length - 1 && <span class="opacity-20 hidden md:block select-none">•</span>}
                         </li>
@@ -163,16 +189,23 @@ const navLinks = [
 <script>
     import { pb, logoutUser } from '../../backend/backend.mjs';
 
-    // MENU
+    // --- LOGIQUE DU MENU ---
     const menuOpen = document.getElementById('menu-open');
     const menuClose = document.getElementById('menu-close');
     const overlay = document.getElementById('menu-overlay');
+    
     if (menuOpen && menuClose && overlay) {
-        menuOpen.addEventListener('click', () => { overlay.classList.remove('translate-x-full'); document.body.style.overflow = 'hidden'; });
-        menuClose.addEventListener('click', () => { overlay.classList.add('translate-x-full'); document.body.style.overflow = ''; });
+        menuOpen.addEventListener('click', () => { 
+            overlay.classList.remove('translate-x-full'); 
+            document.body.style.overflow = 'hidden'; 
+        });
+        menuClose.addEventListener('click', () => { 
+            overlay.classList.add('translate-x-full'); 
+            document.body.style.overflow = ''; 
+        });
     }
 
-    // AUTH STATUS
+    // --- LOGIQUE BOUTONS STATUT ---
     const btnConnected = document.getElementById('user-status-connected');
     const btnDisconnected = document.getElementById('user-status-disconnected');
 
@@ -193,8 +226,60 @@ const navLinks = [
     });
 
     updateHeader();
+
+    // --- LOGIQUE ENVOI FORMULAIRE POCKETBASE ---
+    const contactForm = document.getElementById('contact-form') as HTMLFormElement;
+    const statusMsg = document.getElementById('form-status');
+    const submitBtn = document.getElementById('submit-btn');
+
+    if (contactForm) {
+        contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            // Récupération des valeurs
+            const email = (document.getElementById('email') as HTMLInputElement).value;
+            const subject = (document.getElementById('subject') as HTMLInputElement).value;
+            const message = (document.getElementById('message') as HTMLTextAreaElement).value;
+
+            const data = {
+                email,
+                subject,
+                message
+            };
+
+            // Désactivation du bouton pendant l'envoi
+            if (submitBtn) (submitBtn as HTMLButtonElement).disabled = true;
+
+            try {
+                // Envoi à la collection 'contact' de PocketBase
+                await pb.collection('contact').create(data);
+
+                // Feedback succès
+                if (statusMsg) {
+                    statusMsg.innerText = "Message envoyé avec succès !";
+                    statusMsg.className = "block text-center font-bold text-lg mt-4 px-4 py-2 rounded-xl bg-green-500/20 text-green-500 border border-green-500/50";
+                }
+                
+                // Reset du formulaire
+                contactForm.reset();
+
+            } catch (error) {
+                // Feedback erreur
+                if (statusMsg) {
+                    statusMsg.innerText = "Erreur lors de l'envoi. Veuillez réessayer.";
+                    statusMsg.className = "block text-center font-bold text-lg mt-4 px-4 py-2 rounded-xl bg-red-500/20 text-red-500 border border-red-500/50";
+                }
+                console.error("Erreur PocketBase :", error);
+            } finally {
+                // Réactivation du bouton
+                if (submitBtn) (submitBtn as HTMLButtonElement).disabled = false;
+            }
+        });
+    }
 </script>
 
 <style>
     html { scroll-behavior: smooth; }
+    .marquee-content { animation: scroll 7s linear infinite; width: fit-content; }
+    @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-33.33%); } }
 </style>

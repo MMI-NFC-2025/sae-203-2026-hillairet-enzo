@@ -34,7 +34,7 @@ const navLinks = [
 <Layout title="Echos Sonore | Accueil">
     <div class="w-full flex flex-col overflow-x-hidden">
         
-        <div id="menu-overlay" class="fixed inset-0 z-[100] translate-x-full transition-transform duration-500 ease-in-out">
+        <div id="menu-overlay" class="fixed inset-0 z-[100] translate-x-full transition-transform duration-500 ease-in-out md:left-auto md:w-[400px]">
             <div class="absolute inset-0 bg-black">
                 <img src="/assets/images/licorn-bg.avif" alt="Menu BG" class="w-full h-full object-cover opacity-50" />
                 <div class="absolute inset-0 bg-gradient-to-l from-black/80 to-transparent"></div>
@@ -52,11 +52,11 @@ const navLinks = [
                     </button>
                 </div>
 
-                <nav class="flex-1 flex flex-col justify-start pt-32 md:pt-40 items-end pr-4 md:pr-20">
+                <nav class="flex-1 flex flex-col justify-start pt-32 md:pt-40 items-end pr-4 md:pr-10">
                     <ul class="space-y-4 md:space-y-6 text-right">
                         {navLinks.map((link) => (
                             <li>
-                                <a href={link.href} class="block text-2xl md:text-4xl lg:text-5xl font-poppins font-bold text-white uppercase tracking-tight hover:text-[#FED506] transition-colors">
+                                <a href={link.href} class="block text-2xl md:text-3xl lg:text-4xl font-poppins font-bold text-white uppercase tracking-tight hover:text-[#FED506] transition-colors">
                                     {link.name} <span class="text-white ml-2 md:ml-4">•</span>
                                 </a>
                             </li>
@@ -66,78 +66,82 @@ const navLinks = [
             </div>
         </div>
 
-        <section class="relative min-h-screen w-full flex flex-col items-center justify-center overflow-hidden bg-[#FFF4C6] py-20">
+        <section class="relative min-h-screen w-full flex flex-col items-center justify-center overflow-hidden bg-[#FFF4C6] py-20 lg:pt-32 lg:pb-40">
             
-            <header class="absolute top-0 left-0 w-full flex justify-between items-center p-6 md:p-10 z-50">
+            <header class="absolute top-0 left-0 w-full flex justify-between items-center p-6 md:p-10 lg:px-12 xl:px-16 z-50">
                 <a href="/" class="transition-transform hover:scale-110">
                     <img src="/assets/icons/logo.avif" alt="Logo" class="h-14 md:h-20 w-auto rounded-2xl" />
                 </a>
                 
                 <div class="flex items-center gap-4">
-                    <button id="user-status-connected" class="hidden font-poppins text-[10px] md:text-xs uppercase font-bold bg-[#6d9a02] text-white px-4 py-2 rounded-full shadow-lg hover:bg-red-600 transition-colors group">
+                    <button id="user-status-connected" class="hidden font-poppins text-[10px] md:text-xs lg:text-sm uppercase font-bold bg-[#6d9a02] text-white px-4 py-2 lg:px-6 lg:py-3 rounded-full shadow-lg hover:bg-red-600 transition-colors group">
                         <span class="group-hover:hidden">Connecté</span>
                         <span class="hidden group-hover:inline">Déconnexion</span>
                     </button>
 
-                    <a href="/connexion" id="user-status-disconnected" class="font-poppins text-[10px] md:text-xs uppercase font-bold bg-[#ED3F24] text-white px-4 py-2 rounded-full shadow-lg hover:scale-105 transition-transform">
+                    <a href="/connexion" id="user-status-disconnected" class="font-poppins text-[10px] md:text-xs lg:text-sm uppercase font-bold bg-[#ED3F24] text-white px-4 py-2 lg:px-6 lg:py-3 rounded-full shadow-lg hover:scale-105 transition-transform">
                         Se connecter
                     </a>
 
-                    <button id="menu-open" class="group flex flex-col gap-2 p-2 focus:outline-none cursor-pointer items-end">
-                        <div class="w-10 md:w-12 h-1 bg-black rounded-full transition-all"></div>
-                        <div class="w-10 md:w-12 h-1 bg-black rounded-full transition-all"></div>
+                    <button id="menu-open" class="group flex flex-col gap-2 p-2 focus:outline-none cursor-pointer items-end hover:opacity-70 transition-opacity">
+                        <div class="w-10 md:w-14 h-1 bg-black rounded-full transition-all group-hover:w-8"></div>
+                        <div class="w-10 md:w-14 h-1 bg-black rounded-full transition-all"></div>
                     </button>
                 </div>
             </header>
 
-            <div class="relative z-20 w-full text-center px-4 flex flex-col items-center">
-                <h1 class="font-display text-6xl md:text-9xl lg:text-[13rem] tracking-wider leading-none" 
-                    style="color:#0B1E15; -webkit-text-stroke: 2px #ED3F24; -webkit-text-fill-color: #FED506;">
-                    Echos Sonore
-                </h1>
-                <p class="mt-8 text-black font-righteous text-2xl md:text-4xl lg:text-5xl uppercase leading-tight">
-                    Vibrez <br class="md:hidden" /> au rythme de la nature
-                </p>
-                <div class="mt-10 font-poppins font-bold uppercase tracking-widest text-black space-y-2">
-                    <p class="text-xl md:text-2xl">Festival de Reggae</p>
-                    <div class="flex flex-col md:flex-row md:gap-8 justify-center opacity-80 text-sm md:text-lg">
-                        <p>du 29 au 31 octobre</p>
-                        <p class="hidden md:block">•</p>
-                        <p>Audincourt, 25400</p>
+            <div class="relative z-50 w-full max-w-7xl px-6 flex flex-col items-center lg:flex-row lg:justify-between lg:gap-10">
+                <div class="text-center lg:text-left lg:flex lg:flex-col lg:items-start lg:w-3/5">
+                    <h1 class="font-display text-6xl md:text-9xl lg:text-[16rem] xl:text-[20rem] tracking-wider leading-[0.8]" 
+                        style="color:#0B1E15; -webkit-text-stroke: 2px #ED3F24; -webkit-text-fill-color: #FED506;">
+                        Echos Sonore
+                    </h1>
+                    <p class="mt-8 text-black font-righteous text-2xl md:text-4xl lg:text-6xl xl:text-4xl lg:mt-4 uppercase leading-tight">
+                        Vibrez <br class="md:hidden" /> au rythme de la nature
+                    </p>
+                    <div class="mt-10 font-poppins font-bold uppercase tracking-widest text-black space-y-2 lg:mt-8 w-full">
+                        <p class="text-xl md:text-2xl lg:text-3xl xl:text-4xl">Festival de Reggae</p>
+                        <div class="flex flex-col md:flex-row md:gap-8 justify-center lg:justify-start opacity-80 text-sm md:text-lg lg:text-xl xl:text-2xl">
+                            <p>du 29 au 31 octobre</p>
+                            <p class="hidden md:block">•</p>
+                            <p>Audincourt, 25400</p>
+                        </div>
                     </div>
+                </div>
+
+                <div class="relative z-10 mt-12 pb-32 lg:pb-0 flex flex-col items-center gap-12 lg:w-2/5 lg:mb-16">
+                    <img src="/assets/images/mascotte.avif" alt="Mascotte" class="w-[90%] md:w-[600px] lg:w-[75%] xl:w-[65%] h-auto object-contain drop-shadow-2xl transition-transform duration-700 hover:rotate-3" />
+                    
+                    <a href="/infos-pratiques#tarifs" class="bg-[#ED3F24] hover:bg-black text-white font-righteous text-xl md:text-2xl px-12 py-5 lg:px-16 lg:py-6 rounded-full shadow-2xl transition-all transform hover:scale-110 active:scale-95">
+                        BILLETTERIE
+                    </a>
                 </div>
             </div>
 
-            <div class="relative z-10 mt-12 pb-20 flex flex-col items-center gap-12">
-                <img src="/assets/images/mascotte.avif" alt="Mascotte" class="w-[90%] md:w-[600px] h-auto object-contain drop-shadow-2xl" />
-                
-                <a href="/infos-pratiques#tarifs" class="bg-[#ED3F24] hover:bg-black text-white font-righteous text-xl md:text-2xl px-12 py-5 rounded-full shadow-2xl transition-all transform hover:scale-105 active:scale-95">
-                    BILLETTERIE
-                </a>
-            </div>
-
-            <div class="absolute bottom-16 left-0 w-full overflow-hidden leading-[0] z-40">
+            <div class="absolute bottom-16 left-0 w-full overflow-hidden leading-[0] z-40 lg:hidden">
                 <div class="flex w-[200%] animate-lines-scroll">
-                    <img src="/assets/images/lignes_rouge_jaune_vert.svg" alt="Bandes" class="w-1/2 h-auto object-cover" />
-                    <img src="/assets/images/lignes_rouge_jaune_vert.svg" alt="Bandes" class="w-1/2 h-auto object-cover" aria-hidden="true" />
+                    <img src="/assets/images/lignes_rouge_jaune_vert.svg" alt="Bandes" class="w-1/2 h-10 md:h-16 object-cover" />
+                    <img src="/assets/images/lignes_rouge_jaune_vert.svg" alt="Bandes" class="w-1/2 h-10 md:h-16 object-cover" aria-hidden="true" />
                 </div>
             </div>
         </section>
 
-        <div class="relative w-full flex flex-col items-center -mt-16 z-10">
+        <div class="w-full h-4 md:h-6 lg:h-8 bg-[#ED3F24] relative z-40 shadow-lg"></div>
+
+        <div class="relative w-full flex flex-col items-center z-10">
             <div class="absolute inset-0 w-full h-full z-0">
                 <img src="/assets/images/section-background.avif" alt="Ambiance" class="w-full h-full object-cover" />
                 <div class="absolute inset-0 bg-black/60"></div>
             </div>
 
-            <div class="relative z-10 w-full max-w-7xl px-6 py-32 grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
+            <div class="relative z-10 w-full max-w-7xl px-6 py-32 grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12 items-center">
                 {tickets.map((ticket, index) => (
                     <div class="flex flex-col gap-6 items-center">
-                        <a href="/infos-pratiques#tarifs" class="group relative w-full aspect-[16/9] md:aspect-[4/5] lg:aspect-square rounded-[10px] overflow-hidden shadow-2xl transition-transform duration-500 hover:scale-105">
-                            <img src={ticket.img} alt={ticket.title} class="absolute inset-0 w-full h-full object-cover grayscale-[20%] group-hover:grayscale-0 transition-all duration-700" />
-                            <div class="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-all"></div>
+                        <a href="/infos-pratiques#tarifs" class="group relative w-full aspect-[16/9] lg:aspect-[4/5] rounded-[10px] overflow-hidden shadow-2xl transition-transform duration-500 hover:scale-105">
+                            <img src={ticket.img} alt={ticket.title} class="absolute inset-0 w-full h-full object-cover grayscale-[20%] group-hover:grayscale-0 transition-all duration-700 group-hover:scale-110" />
+                            <div class="absolute inset-0 bg-black/40 group-hover:bg-black/10 transition-all"></div>
                             <div class="absolute bottom-6 left-6 text-white font-poppins">
-                                <h3 class="text-xl md:text-2xl font-bold uppercase tracking-wide">{ticket.title}</h3>
+                                <h3 class="text-xl md:text-2xl font-bold uppercase tracking-wide group-hover:text-[#FED506] transition-colors">{ticket.title}</h3>
                                 <p class="text-sm opacity-90">Je réserve !</p>
                             </div>
                         </a>
@@ -151,13 +155,15 @@ const navLinks = [
             </div>
         </div>
 
+        <div class="w-full h-4 md:h-6 lg:h-8 bg-[#FED506] relative z-40 shadow-lg"></div>
+
         <div class="w-full bg-[#FEFAF5] flex flex-col items-center py-32 z-20">
-            <div class="w-full max-w-7xl px-6 grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="w-full max-w-7xl px-6 grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
                 {tabs.map((tab, index) => (
                     <div class="flex flex-col gap-6 items-center">
-                        <a href={tab.href} class="group relative w-full aspect-[16/9] md:aspect-square rounded-[10px] overflow-hidden shadow-lg transition-transform duration-500 hover:scale-105">
-                            <img src={tab.img} alt={tab.title} class="absolute inset-0 w-full h-full object-cover" />
-                            <div class="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-all"></div>
+                        <a href={tab.href} class="group relative w-full aspect-[16/9] lg:aspect-[4/5] rounded-[10px] overflow-hidden shadow-lg transition-transform duration-500 hover:scale-105">
+                            <img src={tab.img} alt={tab.title} class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                            <div class="absolute inset-0 bg-black/40 group-hover:bg-[#ED3F24]/40 transition-all"></div>
                             <div class="absolute bottom-6 left-6 text-white font-poppins">
                                 <h3 class="text-xl md:text-2xl font-bold uppercase tracking-wide">{tab.title}</h3>
                                 <p class="text-sm opacity-90">{tab.text}</p>
@@ -173,44 +179,50 @@ const navLinks = [
             </div>
         </div>
 
-        <footer class="w-full bg-black text-white pt-32 pb-16 flex flex-col items-center overflow-hidden -mt-16 z-30">
-            <h2 class="font-poppins font-bold text-2xl md:text-3xl uppercase tracking-widest mb-12 border-b border-white/10 pb-4">
-                Partenaires :
-            </h2>
+        <div class="w-full h-4 md:h-6 lg:h-8 bg-[#6d9a02] relative z-40 shadow-lg"></div>
 
-            <div class="w-full relative py-12 overflow-hidden">
-                <div class="flex marquee-content whitespace-nowrap items-center">
-                    {[...logos, ...logos, ...logos].map((logo) => (
-                        <div class="flex-shrink-0 mx-8 md:mx-16 w-32 md:w-56 flex justify-center items-center"> 
-                            <img src={logo} alt="Logo" class="h-16 md:h-28 w-auto max-w-full object-contain brightness-0 invert opacity-90" />
-                        </div>
-                    ))}
+        <footer class="w-full bg-black text-white pt-32 pb-16 flex flex-col items-center overflow-hidden z-30">
+            <div class="w-full max-w-7xl flex flex-col items-center lg:items-start px-6">
+                <h2 class="w-full text-center lg:text-left font-poppins font-bold text-2xl md:text-3xl uppercase tracking-widest mb-12 border-b border-white/10 pb-4">
+                    Partenaires :
+                </h2>
+
+                <div class="w-full relative py-12 overflow-hidden">
+                    <div class="flex marquee-content whitespace-nowrap items-center">
+                        {[...logos, ...logos, ...logos].map((logo) => (
+                            <div class="flex-shrink-0 mx-8 md:mx-16 w-32 md:w-56 flex justify-center items-center"> 
+                                <img src={logo} alt="Logo" class="h-16 md:h-28 w-auto max-w-full object-contain brightness-0 invert opacity-90 hover:opacity-100 transition-opacity" />
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
+                <div class="w-full font-poppins text-xs md:text-base opacity-60 space-y-1 mt-24 mb-12 text-center lg:text-left flex flex-col lg:flex-row lg:justify-between">
+                    <p>MMI 1ère année — SAE 105 — Montbéliard</p>
+                    <p>Par Maël BRUNGARD @BooMooN.cloud | ID Étudiant : o4g3yq8bkgg4bxz</p>
+                </div>
+
+                <div class="w-full flex flex-col lg:flex-row lg:justify-between items-center">
+                    <nav class="mb-12 lg:mb-0">
+                        <ul class="flex flex-wrap justify-center lg:justify-start items-center gap-x-6 gap-y-4 font-poppins font-bold text-sm md:text-xl uppercase">
+                            {navLinks.map((link, index) => (
+                                <>
+                                    <li><a href={link.href} class="hover:text-[#FED506] transition-all hover:tracking-widest">{link.name}</a></li>
+                                    {index < navLinks.length - 1 && <li class="hidden md:block opacity-30">•</li>}
+                                </>
+                            ))}
+                        </ul>
+                    </nav>
+
+                    <nav>
+                        <ul class="flex justify-center lg:justify-end gap-10 font-poppins text-xs md:text-sm uppercase underline opacity-70">
+                            <li><a href="#" class="hover:text-white transition-colors">CGU</a></li>
+                            <li><a href="#" class="hover:text-white transition-colors">CGV</a></li>
+                            <li><a href="#" class="hover:text-white transition-colors">Mentions Légales</a></li>
+                        </ul>
+                    </nav>
                 </div>
             </div>
-
-            <div class="font-poppins text-xs md:text-base opacity-60 space-y-1 mt-24 mb-12 text-center">
-                <p>MMI 1ère année — SAE 105 — Montbéliard</p>
-                <p>Par Maël BRUNGARD @BooMooN.cloud | ID Étudiant : o4g3yq8bkgg4bxz</p>
-            </div>
-
-            <nav class="mb-12 px-4">
-                <ul class="flex flex-wrap justify-center items-center gap-x-6 gap-y-4 font-poppins font-bold text-sm md:text-xl uppercase">
-                    {navLinks.map((link, index) => (
-                        <>
-                            <li><a href={link.href} class="hover:text-[#FED506] transition-all hover:tracking-widest">{link.name}</a></li>
-                            {index < navLinks.length - 1 && <li class="hidden md:block opacity-30">•</li>}
-                        </>
-                    ))}
-                </ul>
-            </nav>
-
-            <nav>
-                <ul class="flex justify-center gap-10 font-poppins text-xs md:text-sm uppercase underline opacity-70">
-                    <li><a href="#" class="hover:text-white transition-colors">CGU</a></li>
-                    <li><a href="#" class="hover:text-white transition-colors">CGV</a></li>
-                    <li><a href="#" class="hover:text-white transition-colors">Mentions Légales</a></li>
-                </ul>
-            </nav>
         </footer>
     </div>
 </Layout>

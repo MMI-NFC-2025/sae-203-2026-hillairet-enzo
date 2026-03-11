@@ -82,7 +82,7 @@ const programDays = [
 <Layout title="Programme | Echos Sonore">
     <div class="w-full flex flex-col overflow-x-hidden bg-[#FFF4C6] min-h-screen">
         
-        <div id="menu-overlay" class="fixed inset-0 z-[100] translate-x-full transition-transform duration-500 ease-in-out">
+        <div id="menu-overlay" class="fixed inset-0 z-[100] translate-x-full transition-transform duration-500 ease-in-out md:left-auto md:w-[400px]">
             <div class="absolute inset-0 bg-black">
                 <img src="/assets/images/licorn-bg.avif" alt="Menu BG" class="w-full h-full object-cover opacity-50" />
                 <div class="absolute inset-0 bg-gradient-to-l from-black/80 to-transparent"></div>
@@ -94,11 +94,11 @@ const programDays = [
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 md:h-12 md:w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
                     </button>
                 </div>
-                <nav class="flex-1 flex flex-col justify-start pt-32 items-end pr-4 md:pr-20">
-                    <ul class="space-y-6 text-right">
+                <nav class="flex-1 flex flex-col justify-start pt-32 items-end pr-4 md:pr-10">
+                    <ul class="space-y-4 md:space-y-6 text-right">
                         {navLinks.map((link) => (
                             <li>
-                                <a href={link.href} class="block text-2xl md:text-5xl font-poppins font-bold text-white uppercase hover:text-[#FED506] transition-colors">
+                                <a href={link.href} class="block text-2xl md:text-3xl lg:text-4xl font-poppins font-bold text-white uppercase tracking-tight hover:text-[#FED506] transition-colors">
                                     {link.name} <span class="text-white ml-2 md:ml-4">•</span>
                                 </a>
                             </li>
@@ -108,49 +108,51 @@ const programDays = [
             </div>
         </div>
 
-        <header class="w-full flex justify-between items-center p-6 md:p-10 z-50 bg-[#FFF4C6]">
+        <header class="w-full flex justify-between items-center p-6 md:p-10 lg:px-12 xl:px-16 z-50 bg-[#FFF4C6]">
             <a href="/" class="hover:scale-110 transition-transform">
                 <img src="/assets/icons/logo.avif" alt="Logo" class="h-14 md:h-20 w-auto rounded-2xl" />
             </a>
             
             <div class="flex items-center gap-4">
-                <button id="user-status-connected" class="hidden font-poppins text-[10px] md:text-xs uppercase font-bold bg-[#6d9a02] text-white px-3 py-1.5 rounded-full shadow-lg animate-pulse hover:bg-red-600 transition-colors group">
+                <button id="user-status-connected" class="hidden font-poppins text-[10px] md:text-xs lg:text-sm uppercase font-bold bg-[#6d9a02] text-white px-4 py-2 lg:px-6 lg:py-3 rounded-full shadow-lg hover:bg-red-600 transition-colors group">
                     <span class="group-hover:hidden">Connecté</span>
                     <span class="hidden group-hover:inline">Déconnexion</span>
                 </button>
 
-                <a href="/connexion" id="user-status-disconnected" class="font-poppins text-[10px] md:text-xs uppercase font-bold bg-[#ED3F24] text-white px-3 py-1.5 rounded-full shadow-lg hover:scale-105 transition-transform">
+                <a href="/connexion" id="user-status-disconnected" class="font-poppins text-[10px] md:text-xs lg:text-sm uppercase font-bold bg-[#ED3F24] text-white px-4 py-2 lg:px-6 lg:py-3 rounded-full shadow-lg hover:scale-105 transition-transform">
                     Se connecter
                 </a>
 
-                <button id="menu-open" class="flex flex-col gap-2 p-2 cursor-pointer items-end group">
-                    <div class="w-10 md:w-12 h-1 bg-black rounded-full group-hover:w-8 transition-all"></div>
-                    <div class="w-10 md:w-12 h-1 bg-black rounded-full transition-all"></div>
+                <button id="menu-open" class="flex flex-col gap-2 p-2 cursor-pointer items-end group hover:opacity-70 transition-opacity">
+                    <div class="w-10 md:w-14 h-1 bg-black rounded-full group-hover:w-8 transition-all"></div>
+                    <div class="w-10 md:w-14 h-1 bg-black rounded-full transition-all"></div>
                 </button>
             </div>
         </header>
 
-        <section class="relative w-full overflow-hidden bg-black">
-            <img src="/assets/images/hero.avif" alt="Hero Programme" class="w-full h-auto block opacity-80" />
-            <div class="absolute inset-0 flex flex-col items-center justify-center p-6 text-center bg-black/30">
-                <h1 class="font-display text-4xl sm:text-6xl md:text-8xl lg:text-[10rem] text-[#FED506] uppercase italic leading-none drop-shadow-[0_4px_0_rgba(185,28,28,1)]">
+        <section class="relative w-full overflow-hidden bg-black lg:h-[60vh] flex flex-col justify-center">
+            <img src="/assets/images/hero.avif" alt="Hero Programme" class="absolute inset-0 w-full h-full object-cover opacity-60" />
+            <div class="relative z-10 flex flex-col items-center justify-center p-6 text-center lg:min-h-full w-full">
+                <h1 class="font-display text-4xl sm:text-6xl md:text-8xl lg:text-[8rem] xl:text-[10rem] text-[#FED506] uppercase italic leading-none drop-shadow-[0_4px_0_rgba(185,28,28,1)]">
                     Notre Programme
                 </h1>
-                <a href="/assets/programme.pdf" download class="mt-4 md:mt-12 font-poppins font-bold text-white uppercase tracking-widest border-b-2 border-white hover:text-[#FED506] hover:border-[#FED506] transition-all text-sm md:text-2xl">
+                <a href="/assets/programme.pdf" download class="mt-4 md:mt-12 font-poppins font-bold text-white uppercase tracking-widest border-b-2 border-white hover:text-[#FED506] hover:border-[#FED506] transition-all text-sm md:text-xl lg:text-2xl">
                     Téléchargement PDF
                 </a>
             </div>
         </section>
 
+        <div class="w-full h-4 md:h-6 lg:h-8 bg-[#ED3F24] relative z-40 shadow-lg"></div>
+
         <section class="w-full py-12 md:py-24 px-4 md:px-10 flex flex-col items-center">
-            <div class="w-full max-w-7xl flex flex-col md:flex-row items-stretch justify-center gap-6 md:gap-8">
+            <div class="w-full max-w-7xl flex flex-col md:flex-row items-stretch justify-center gap-6 md:gap-8 lg:gap-12">
                 {programDays.map((day, index) => (
                     <>
-                        <div class="group relative w-full md:flex-1 h-48 sm:h-56 md:h-[450px] rounded-2xl overflow-hidden shadow-xl transition-all duration-500 hover:scale-[1.03] cursor-pointer" onclick={`filterByDay('${day.title}')`}>
+                        <div class="group relative w-full md:flex-1 h-48 sm:h-56 md:h-[450px] lg:h-auto lg:aspect-square rounded-2xl overflow-hidden shadow-xl transition-all duration-500 hover:scale-[1.03] cursor-pointer" onclick={`filterByDay('${day.title}')`}>
                             <img src={day.img} alt={day.title} class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                             <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
-                            <div class="absolute bottom-4 left-6 md:bottom-8 md:left-8">
-                                <h3 class="font-poppins font-bold text-2xl md:text-4xl text-white uppercase tracking-widest">{day.title}</h3>
+                            <div class="absolute bottom-4 left-6 md:bottom-8 md:left-8 lg:bottom-10 lg:left-10">
+                                <h3 class="font-poppins font-bold text-2xl md:text-4xl text-white uppercase tracking-widest group-hover:text-[#FED506] transition-colors">{day.title}</h3>
                                 <p class="font-poppins text-white/70 text-xs md:text-lg uppercase tracking-wider mt-1">{day.date}</p>
                             </div>
                         </div>
@@ -164,10 +166,12 @@ const programDays = [
             </div>
         </section>
 
-        <section class="w-full bg-[#1e1e1e] py-16 flex flex-col items-center shadow-inner">
-            <h2 class="font-display text-4xl md:text-5xl text-white mb-12 tracking-widest">Filtres</h2>
+        <div class="w-full h-4 md:h-6 lg:h-8 bg-[#FED506] relative z-40 shadow-lg"></div>
+
+        <section class="w-full bg-[#1e1e1e] py-16 md:py-20 flex flex-col items-center shadow-inner relative z-30">
+            <h2 class="font-display text-4xl md:text-5xl lg:text-6xl text-white mb-12 tracking-widest text-center">Filtres</h2>
             
-            <div class="flex flex-wrap justify-center gap-8 md:gap-16 font-poppins font-bold text-white text-lg md:text-2xl mb-8">
+            <div class="flex flex-wrap justify-center gap-8 md:gap-16 lg:gap-24 font-poppins font-bold text-white text-lg md:text-2xl lg:text-3xl mb-8">
                 {filtres.genre.length > 0 && (
                     <button class="hover:text-[#FED506] transition-colors flex items-center gap-2" onclick="toggleSubFilters('genre')">
                         Genre <span id="arrow-genre" class="text-sm">▼</span>
@@ -185,23 +189,23 @@ const programDays = [
                 )}
             </div>
 
-            <div class="min-h-[60px] flex flex-col items-center w-full">
-                <div id="options-genre" class="filter-group hidden flex flex-wrap justify-center gap-4 max-w-3xl px-6">
+            <div class="min-h-[60px] flex flex-col items-center w-full px-6">
+                <div id="options-genre" class="filter-group hidden flex flex-wrap justify-center gap-4 max-w-4xl">
                     {filtres.genre.map(g => (
-                        <button class="filter-btn px-6 py-2 border border-white/40 rounded-xl bg-[#333333] text-white font-poppins text-sm md:text-base hover:bg-white hover:text-black transition-all" data-type="genre" data-value={g}>{g}</button>
+                        <button class="filter-btn px-6 py-2 border border-white/40 rounded-xl bg-[#333333] text-white font-poppins text-sm md:text-base lg:text-lg hover:bg-white hover:text-black transition-all" data-type="genre" data-value={g}>{g}</button>
                     ))}
                 </div>
-                <div id="options-horaire" class="filter-group hidden flex flex-wrap justify-center gap-4 max-w-3xl px-6">
+                <div id="options-horaire" class="filter-group hidden flex flex-wrap justify-center gap-4 max-w-4xl">
                     {filtres.horaire.map(h => (
-                        <button class="filter-btn px-6 py-2 border border-white/40 rounded-xl bg-[#333333] text-white font-poppins text-sm md:text-base hover:bg-white hover:text-black transition-all" data-type="horaire" data-value={h}>{h}</button>
+                        <button class="filter-btn px-6 py-2 border border-white/40 rounded-xl bg-[#333333] text-white font-poppins text-sm md:text-base lg:text-lg hover:bg-white hover:text-black transition-all" data-type="horaire" data-value={h}>{h}</button>
                     ))}
                 </div>
-                <div id="options-scene" class="filter-group hidden flex flex-wrap justify-center gap-4 max-w-3xl px-6">
+                <div id="options-scene" class="filter-group hidden flex flex-wrap justify-center gap-4 max-w-4xl">
                     {filtres.scene.map(s => (
-                        <button class="filter-btn px-6 py-2 border border-white/40 rounded-xl bg-[#333333] text-white font-poppins text-sm md:text-base hover:bg-white hover:text-black transition-all" data-type="scene" data-value={s}>{s}</button>
+                        <button class="filter-btn px-6 py-2 border border-white/40 rounded-xl bg-[#333333] text-white font-poppins text-sm md:text-base lg:text-lg hover:bg-white hover:text-black transition-all" data-type="scene" data-value={s}>{s}</button>
                     ))}
                 </div>
-                <button id="reset-filters" class="hidden mt-8 px-8 py-2 border border-[#FED506] text-[#FED506] rounded-xl font-poppins text-sm md:text-base hover:bg-[#FED506] hover:text-black transition-all">
+                <button id="reset-filters" class="hidden mt-8 px-8 py-3 border border-[#FED506] text-[#FED506] rounded-xl font-poppins font-bold text-sm md:text-base uppercase hover:bg-[#FED506] hover:text-black transition-all">
                     Tout afficher
                 </button>
             </div>
@@ -219,7 +223,7 @@ const programDays = [
                     if (day === 'Jour 3') bgImage = '/assets/images/licorn-bg.avif';
                     
                     return (
-                        <section class={`day-section relative w-full py-20 flex flex-col items-center overflow-hidden min-h-[500px] ${isLight ? 'bg-[#FEFAF5]' : ''}`} data-day-section={day}>
+                        <section class={`day-section relative w-full py-20 lg:py-32 flex flex-col items-center overflow-hidden min-h-[500px] ${isLight ? 'bg-[#FEFAF5]' : ''}`} data-day-section={day}>
                             {!isLight && bgImage && (
                                 <div class="absolute inset-0 z-0">
                                     <img src={bgImage} alt="Ambiance" class="w-full h-full object-cover absolute" />
@@ -227,30 +231,35 @@ const programDays = [
                                 </div>
                             )}
 
-                            <div class="relative z-10 w-full max-w-4xl px-4 flex flex-col items-center">
-                                <h2 class={`font-poppins font-bold text-4xl md:text-6xl mb-16 text-center tracking-widest uppercase ${isLight ? 'text-black' : 'text-white'}`}>
+                            <div class="relative z-10 w-full max-w-7xl px-6 flex flex-col items-center lg:items-start">
+                                <h2 class={`font-poppins font-bold text-4xl md:text-6xl lg:text-5xl mb-12 md:mb-16 tracking-widest uppercase italic ${isLight ? 'text-black' : 'text-white'}`}>
                                     {day}
                                 </h2>
-                                <div class="w-full flex flex-col items-center">
+                                
+                                <div class="w-full grid grid-cols-1 lg:grid-cols-3 gap-x-8 gap-y-6 lg:gap-y-10">
                                     {groupedConcerts[day].map((concert) => (
                                         <div class="concert-wrapper w-full flex flex-col items-center" 
                                              data-scene={concert.scene} 
                                              data-genre={concert.genre} 
                                              data-horaire={concert.horaire}
                                              data-jour={concert.jour}>
-                                            <a href={`/artistes/${concert.id}`} class="relative w-full h-[220px] md:h-[400px] rounded-3xl overflow-hidden shadow-2xl group border border-white/10 block cursor-pointer">
+                                            
+                                            <a href={`/artistes/${concert.id}`} class="relative w-full h-[220px] md:h-[400px] lg:h-auto lg:aspect-square rounded-3xl overflow-hidden shadow-2xl group block cursor-pointer">
                                                 <img src={concert.image || "/assets/images/section-background.avif"} alt={concert.nom} class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
-                                                <div class="absolute inset-0 bg-gradient-to-br from-black/80 via-transparent to-transparent opacity-90"></div>
-                                                <div class="absolute top-5 left-6 md:top-8 md:left-10">
-                                                    <h3 class="font-poppins font-bold text-2xl md:text-5xl text-white tracking-wide">{concert.nom}</h3>
+                                                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-90"></div>
+                                                
+                                                <div class="absolute top-5 left-6 md:top-8 md:left-8 lg:top-8 lg:left-8">
+                                                    <h3 class="font-poppins font-bold text-2xl md:text-5xl lg:text-2xl xl:text-3xl text-white tracking-wide uppercase leading-tight mb-4 group-hover:text-[#FED506] transition-colors">{concert.nom}</h3>
                                                 </div>
-                                                <div class="absolute bottom-5 right-6 md:bottom-8 md:right-10 flex flex-col items-end gap-2 md:opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                                    <span class="inline-block px-3 py-1 bg-[#FED506] text-black font-bold text-xs md:text-sm rounded-full uppercase tracking-widest shadow-lg">{concert.horaire}</span>
-                                                    <span class="inline-block px-3 py-1 bg-black/60 text-white font-poppins text-xs md:text-sm rounded-full uppercase tracking-widest border border-white/20 backdrop-blur-md">{concert.scene}</span>
+                                                
+                                                <div class="absolute bottom-5 right-6 md:bottom-8 md:right-8 lg:bottom-8 lg:right-8 flex flex-col items-end gap-2 lg:opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                                    <span class="inline-block px-3 py-1 bg-[#FED506] text-black font-bold text-xs md:text-sm lg:text-xs rounded-full uppercase tracking-widest shadow-lg">{concert.horaire}</span>
+                                                    <span class="inline-block px-3 py-1 bg-black/60 text-white font-poppins text-xs md:text-sm lg:text-xs rounded-full uppercase tracking-widest backdrop-blur-md">{concert.scene}</span>
                                                 </div>
                                             </a>
-                                            <div class="separator w-full py-8 md:py-12">
-                                                <img src="/assets/images/lignes_rouge_jaune_vert.svg" alt="separateur" class="w-full h-auto opacity-90 drop-shadow-xl" />
+
+                                            <div class="w-full mt-10 mb-4 lg:hidden flex justify-center">
+                                                <img src="/assets/images/lignes_rouge_jaune_vert.svg" alt="séparateur" class="w-full h-auto opacity-90" />
                                             </div>
                                         </div>
                                     ))}
@@ -265,30 +274,38 @@ const programDays = [
             </div>
         </div>
 
-        <footer class="w-full bg-black text-white pt-24 pb-12 flex flex-col items-center overflow-hidden z-30 mt-auto border-t border-white/10">
-            <div class="font-poppins text-[10px] sm:text-xs md:text-base opacity-40 mb-12 text-center text-balance px-4 leading-relaxed">
-                <p>MMI 1ère année — SAE 105 — Montbéliard</p>
-                <p>Par Maël BRUNGARD @BooMooN.cloud | ID : o4g3yq8bkgg4bxz</p>
+        <div class="w-full h-4 md:h-6 lg:h-8 bg-[#6d9a02] relative z-40 shadow-lg"></div>
+
+        <footer class="w-full bg-black text-white pt-24 pb-12 flex flex-col items-center overflow-hidden z-30 border-t border-white/10">
+            <div class="w-full max-w-7xl flex flex-col items-center lg:items-start px-6">
+                
+                <div class="w-full font-poppins text-xs md:text-base opacity-60 space-y-1 mt-12 mb-12 text-center lg:text-left flex flex-col lg:flex-row lg:justify-between">
+                    <p>MMI 1ère année — SAE 105 — Montbéliard</p>
+                    <p>Par Maël BRUNGARD @BooMooN.cloud | ID : o4g3yq8bkgg4bxz</p>
+                </div>
+
+                <div class="w-full flex flex-col lg:flex-row lg:justify-between items-center">
+                    <nav class="mb-12 lg:mb-0">
+                        <ul class="flex flex-wrap justify-center lg:justify-start items-center gap-x-12 gap-y-6 font-poppins font-bold text-sm md:text-xl uppercase">
+                            {navLinks.map((link, i) => (
+                                <li class="flex items-center gap-12">
+                                    <a href={link.href} class="hover:text-[#FED506] transition-all hover:tracking-widest">{link.name}</a>
+                                    {i < navLinks.length - 1 && <span class="opacity-20 hidden md:block select-none">•</span>}
+                                </li>
+                            ))}
+                        </ul>
+                    </nav>
+
+                    <nav class="flex gap-10 font-poppins text-[10px] md:text-xs uppercase underline opacity-40">
+                        <a href="#">CGU</a><a href="#">CGV</a><a href="#">Mentions Légales</a>
+                    </nav>
+                </div>
             </div>
-            <nav class="mb-12 px-4 text-center">
-                <ul class="flex flex-wrap justify-center items-center gap-x-12 gap-y-6 font-poppins font-bold text-sm md:text-xl uppercase">
-                    {navLinks.map((link, i) => (
-                        <li class="flex items-center gap-12">
-                            <a href={link.href} class="hover:text-[#FED506] transition-all hover:tracking-widest">{link.name}</a>
-                            {i < navLinks.length - 1 && <span class="opacity-20 hidden md:block select-none">•</span>}
-                        </li>
-                    ))}
-                </ul>
-            </nav>
-            <nav class="flex flex-wrap justify-center gap-6 sm:gap-10 font-poppins text-[9px] sm:text-[10px] md:text-xs uppercase underline opacity-40 text-center px-4">
-                <a href="#">CGU</a><a href="#">CGV</a><a href="#">Mentions Légales</a>
-            </nav>
         </footer>
     </div>
 </Layout>
 
 <script>
-    // --- IMPORT BACKEND ---
     import { pb, logoutUser } from '../../backend/backend.mjs';
 
     // --- MENU ---
@@ -306,7 +323,7 @@ const programDays = [
         });
     }
 
-    // --- LOGIQUE BOUTONS STATUT ---
+    // --- BOUTONS STATUT ---
     const btnConnected = document.getElementById('user-status-connected');
     const btnDisconnected = document.getElementById('user-status-disconnected');
 
@@ -328,7 +345,7 @@ const programDays = [
 
     updateHeader();
 
-    // --- LOGIQUE FILTRES ---
+    // --- FILTRES ---
     let activeGroup = null;
     (window as any).toggleSubFilters = function(group) {
         document.querySelectorAll('.filter-group').forEach(el => el.classList.add('hidden'));
@@ -364,7 +381,6 @@ const programDays = [
             const type = target.getAttribute('data-type');
             const val = target.getAttribute('data-value');
             
-            // Toggle filter: si on clique sur le même filtre déjà actif, on l'enlève
             if (currentFilterType === type && currentFilterValue === val) {
                 currentFilterType = null;
                 currentFilterValue = null;
@@ -401,7 +417,6 @@ const programDays = [
         daySections.forEach(section => {
             let sectionVisibleCount = 0;
             const wrappers = section.querySelectorAll('.concert-wrapper');
-            // CORRECTION ICI : "wrappers" au lieu de "wrapper"
             wrappers.forEach(wrapper => {
                 let show = true;
                 if (currentFilterType && wrapper.getAttribute(`data-${currentFilterType}`) !== currentFilterValue) show = false;

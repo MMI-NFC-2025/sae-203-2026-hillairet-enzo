@@ -56,7 +56,7 @@ const navLinks = [
 <Layout title="Nos Scènes | Echos Sonore">
     <div class="w-full flex flex-col overflow-x-hidden bg-[#FFF4C6] min-h-screen">
         
-        <div id="menu-overlay" class="fixed inset-0 z-[100] translate-x-full transition-transform duration-500 ease-in-out">
+        <div id="menu-overlay" class="fixed inset-0 z-[100] translate-x-full transition-transform duration-500 ease-in-out md:left-auto md:w-[400px]">
             <div class="absolute inset-0 bg-black">
                 <img src="/assets/images/licorn-bg.avif" alt="Menu BG" class="w-full h-full object-cover opacity-50" onerror="this.style.display='none'" />
                 <div class="absolute inset-0 bg-gradient-to-l from-black/80 to-transparent"></div>
@@ -68,11 +68,11 @@ const navLinks = [
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 md:h-12 md:w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
                     </button>
                 </div>
-                <nav class="flex-1 flex flex-col justify-start pt-32 items-end pr-4 md:pr-20">
-                    <ul class="space-y-6 text-right">
+                <nav class="flex-1 flex flex-col justify-start pt-32 items-end pr-4 md:pr-10">
+                    <ul class="space-y-4 md:space-y-6 text-right">
                         {navLinks.map((link) => (
                             <li>
-                                <a href={link.href} class="block text-2xl md:text-5xl font-poppins font-bold text-white uppercase hover:text-[#FED506] transition-colors">
+                                <a href={link.href} class="block text-2xl md:text-3xl lg:text-4xl font-poppins font-bold text-white uppercase tracking-tight hover:text-[#FED506] transition-colors">
                                     {link.name} <span class="text-white ml-2 md:ml-4">•</span>
                                 </a>
                             </li>
@@ -82,97 +82,112 @@ const navLinks = [
             </div>
         </div>
 
-        <header class="w-full flex justify-between items-center p-6 md:p-10 z-50 bg-[#FFF4C6]">
+        <header class="w-full flex justify-between items-center p-6 md:p-10 lg:px-12 xl:px-16 z-50 bg-[#FFF4C6]">
             <a href="/" class="hover:scale-110 transition-transform">
                 <img src="/assets/icons/logo.avif" alt="Logo" class="h-14 md:h-20 w-auto rounded-2xl" />
             </a>
             
             <div class="flex items-center gap-4">
-                <button id="user-status-connected" class="hidden font-poppins text-[10px] md:text-xs uppercase font-bold bg-[#6d9a02] text-white px-3 py-1.5 rounded-full shadow-lg animate-pulse hover:bg-red-600 transition-colors">
-                    Connecté
+                <button id="user-status-connected" class="hidden font-poppins text-[10px] md:text-xs lg:text-sm uppercase font-bold bg-[#6d9a02] text-white px-4 py-2 lg:px-6 lg:py-3 rounded-full shadow-lg animate-pulse hover:bg-red-600 transition-colors group">
+                    <span class="group-hover:hidden">Connecté</span>
+                    <span class="hidden group-hover:inline">Déconnexion</span>
                 </button>
 
-                <a href="/connexion" id="user-status-disconnected" class="font-poppins text-[10px] md:text-xs uppercase font-bold bg-[#ED3F24] text-white px-3 py-1.5 rounded-full shadow-lg hover:scale-105 transition-transform">
+                <a href="/connexion" id="user-status-disconnected" class="font-poppins text-[10px] md:text-xs lg:text-sm uppercase font-bold bg-[#ED3F24] text-white px-4 py-2 lg:px-6 lg:py-3 rounded-full shadow-lg hover:scale-105 transition-transform">
                     Se connecter
                 </a>
 
-                <button id="menu-open" class="flex flex-col gap-2 p-2 cursor-pointer items-end group">
-                    <div class="w-10 md:w-12 h-1 bg-black rounded-full group-hover:w-8 transition-all"></div>
-                    <div class="w-10 md:w-12 h-1 bg-black rounded-full transition-all"></div>
+                <button id="menu-open" class="flex flex-col gap-2 p-2 cursor-pointer items-end group hover:opacity-70 transition-opacity">
+                    <div class="w-10 md:w-14 h-1 bg-black rounded-full group-hover:w-8 transition-all"></div>
+                    <div class="w-10 md:w-14 h-1 bg-black rounded-full transition-all"></div>
                 </button>
             </div>
         </header>
 
-        <section class="relative w-full h-72 md:h-96 overflow-hidden bg-black">
+        <section class="relative w-full h-72 md:h-96 lg:h-[60vh] overflow-hidden bg-black flex flex-col justify-center">
             <img src="/assets/images/hero.avif" alt="Platine Vinyle" class="absolute inset-0 w-full h-full object-cover opacity-60" />
-            <div class="absolute inset-0 flex flex-col items-center justify-center p-6 text-center bg-black/40">
-                <h1 class="font-display text-5xl sm:text-7xl md:text-[10rem] text-[#FED506] uppercase italic leading-none drop-shadow-[0_4px_0_rgba(185,28,28,1)] md:drop-shadow-[0_8px_0_rgba(185,28,28,1)]">
+            <div class="relative z-10 flex flex-col items-center justify-center p-6 text-center bg-black/40 lg:bg-transparent lg:min-h-full w-full">
+                <h1 class="font-display text-5xl sm:text-7xl md:text-[8rem] lg:text-[10rem] xl:text-[12rem] text-[#FED506] uppercase italic leading-none drop-shadow-[0_4px_0_rgba(185,28,28,1)] md:drop-shadow-[0_8px_0_rgba(185,28,28,1)]">
                     Nos Scènes
                 </h1>
             </div>
         </section>
 
-        <section class="w-full py-16 md:py-28 px-6 md:px-10 flex flex-col items-center flex-1">
-            <div class="w-full max-w-4xl flex flex-col gap-8 md:gap-12">
-                {scenes.map((scene) => (
-                    <a href={`/scenes/${scene.id}`} class="block group relative w-full h-56 sm:h-64 md:h-80 bg-gray-900 rounded-[2.5rem] overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 border border-black/10 cursor-pointer">
-                        
-                        <img src={scene.image || "/assets/images/section-background.avif"} alt={scene.nom} class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
-                        
-                        <div class="absolute inset-0 bg-gradient-to-r from-black/90 via-black/50 to-transparent opacity-80 group-hover:opacity-95 transition-opacity duration-500"></div>
-                        <div class="absolute inset-0 bg-black/10 group-hover:bg-black/30 transition-all duration-500"></div>
-                        
-                        <div class="absolute top-6 left-6 md:top-10 md:left-10 flex flex-col gap-2 md:gap-4 transition-transform duration-500 group-hover:translate-y-1 z-10">
-                            <h2 class="font-poppins font-bold text-3xl md:text-5xl text-white tracking-wide">{scene.nom}</h2>
-                            <p class="font-poppins font-bold text-lg md:text-2xl text-white tracking-wide">
-                                Lieu : {scene.lieu}
-                            </p>
-                        </div>
+        <div class="w-full h-4 md:h-6 lg:h-8 bg-[#ED3F24] relative z-40 shadow-lg"></div>
 
-                        <div class="absolute bottom-6 left-6 md:bottom-10 md:left-10 pr-8 opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 max-w-[85%] md:max-w-[70%] z-10">
-                            {scene.capacite && (
-                                <p class="font-poppins text-xs md:text-sm text-white/80 uppercase tracking-widest mb-1 md:mb-2">
-                                    Capacité : <span class="font-bold text-[#FED506]">{scene.capacite} personnes</span>
+        <section class="w-full py-16 md:py-28 px-6 md:px-10 flex flex-col items-center flex-1">
+            <div class="w-full max-w-7xl grid grid-cols-1 lg:grid-cols-3 gap-8 md:gap-12 lg:gap-10">
+                {scenes.map((scene) => (
+                    <div class="w-full flex flex-col items-center">
+                        <a href={`/scenes/${scene.id}`} class="block group relative w-full h-56 sm:h-64 md:h-80 lg:h-auto lg:aspect-[4/5] bg-gray-900 rounded-[2.5rem] overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 border border-black/10 cursor-pointer hover:-translate-y-2 hover:scale-[1.02]">
+                            
+                            <img src={scene.image || "/assets/images/section-background.avif"} alt={scene.nom} class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                            
+                            <div class="absolute inset-0 bg-gradient-to-r from-black/90 via-black/50 to-transparent opacity-80 group-hover:opacity-95 transition-opacity duration-500"></div>
+                            <div class="absolute inset-0 bg-black/10 group-hover:bg-black/30 transition-all duration-500"></div>
+                            
+                            <div class="absolute top-6 left-6 md:top-10 md:left-10 lg:top-8 lg:left-8 flex flex-col gap-2 md:gap-4 transition-transform duration-500 group-hover:translate-y-1 z-10">
+                                <h2 class="font-poppins font-bold text-3xl md:text-5xl lg:text-3xl xl:text-4xl text-white tracking-wide group-hover:text-[#FED506] transition-colors">{scene.nom}</h2>
+                                <p class="font-poppins font-bold text-lg md:text-2xl lg:text-lg xl:text-xl text-white tracking-wide opacity-90">
+                                    Lieu : {scene.lieu}
                                 </p>
-                            )}
-                            {scene.description && (
-                                <p class="font-poppins text-sm md:text-base text-white/90 leading-relaxed line-clamp-2 md:line-clamp-3">
-                                    {scene.description}
-                                </p>
-                            )}
+                            </div>
+
+                            <div class="absolute bottom-6 left-6 md:bottom-10 md:left-10 lg:bottom-8 lg:left-8 pr-6 md:pr-8 opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 max-w-[85%] md:max-w-[70%] lg:max-w-[90%] z-10">
+                                {scene.capacite && (
+                                    <p class="font-poppins text-xs md:text-sm lg:text-sm text-white/80 uppercase tracking-widest mb-1 md:mb-2">
+                                        Capacité : <span class="font-bold text-[#FED506] text-sm md:text-base">{scene.capacite} personnes</span>
+                                    </p>
+                                )}
+                                {scene.description && (
+                                    <div class="font-poppins text-sm md:text-base lg:text-sm text-white/90 leading-relaxed line-clamp-2 md:line-clamp-4 lg:line-clamp-3" set:html={scene.description}></div>
+                                )}
+                            </div>
+                        </a>
+                        
+                        <div class="w-full mt-10 mb-4 lg:hidden flex justify-center">
+                            <img src="/assets/images/lignes_rouge_jaune_vert.svg" alt="séparateur" class="w-full h-auto opacity-90 drop-shadow-xl" />
                         </div>
-                    </a>
+                    </div>
                 ))}
             </div>
         </section>
 
-        <footer class="w-full bg-black text-white pt-24 pb-12 flex flex-col items-center overflow-hidden z-30 mt-auto">
-            <div class="font-poppins text-[10px] sm:text-xs md:text-base opacity-40 mb-12 text-center text-balance px-4 leading-relaxed">
-                <p>MMI 1ère année — SAE 105 — Montbéliard</p>
-                <p>Par Maël BRUNGARD @BooMooN.cloud | ID Étudiant : o4g3yq8bkgg4bxz</p>
+        <div class="w-full h-4 md:h-6 lg:h-8 bg-[#6d9a02] relative z-40 shadow-lg"></div>
+
+        <footer class="w-full bg-black text-white pt-24 pb-12 flex flex-col items-center overflow-hidden z-30 mt-auto border-t border-white/10">
+            <div class="w-full max-w-7xl flex flex-col items-center lg:items-start px-6">
+                
+                <div class="w-full font-poppins text-xs md:text-base opacity-60 space-y-1 mt-12 mb-12 text-center lg:text-left flex flex-col lg:flex-row lg:justify-between">
+                    <p>MMI 1ère année — SAE 105 — Montbéliard</p>
+                    <p>Par Maël BRUNGARD @BooMooN.cloud | ID Étudiant : o4g3yq8bkgg4bxz</p>
+                </div>
+
+                <div class="w-full flex flex-col lg:flex-row lg:justify-between items-center">
+                    <nav class="mb-12 lg:mb-0">
+                        <ul class="flex flex-wrap justify-center lg:justify-start items-center gap-x-6 sm:gap-x-12 gap-y-6 font-poppins font-bold text-xs sm:text-sm md:text-xl uppercase">
+                            {navLinks.map((link, index) => (
+                                <>
+                                    <li><a href={link.href} class="hover:text-[#FED506] transition-all hover:tracking-widest">{link.name}</a></li>
+                                    {index < navLinks.length - 1 && <li class="hidden md:block opacity-30">•</li>}
+                                </>
+                            ))}
+                        </ul>
+                    </nav>
+
+                    <nav class="flex gap-10 font-poppins text-[10px] md:text-xs uppercase underline opacity-40">
+                        <a href="#">CGU</a><a href="#">CGV</a><a href="#">Mentions Légales</a>
+                    </nav>
+                </div>
             </div>
-            <nav class="mb-12 px-4 text-center">
-                <ul class="flex flex-wrap justify-center items-center gap-x-6 sm:gap-x-12 gap-y-6 font-poppins font-bold text-xs sm:text-sm md:text-xl uppercase">
-                    {navLinks.map((link, i) => (
-                        <li class="flex items-center gap-6 sm:gap-12">
-                            <a href={link.href} class="hover:text-[#FED506] transition-all hover:tracking-widest">{link.name}</a>
-                            {i < navLinks.length - 1 && <span class="opacity-20 hidden md:block select-none">•</span>}
-                        </li>
-                    ))}
-                </ul>
-            </nav>
-            <nav class="flex flex-wrap justify-center gap-6 sm:gap-10 font-poppins text-[9px] sm:text-[10px] md:text-xs uppercase underline opacity-40 text-center px-4">
-                <a href="#">CGU</a><a href="#">CGV</a><a href="#">Mentions Légales</a>
-            </nav>
         </footer>
     </div>
 </Layout>
 
 <script>
-    // --- IMPORT BACKEND ---
     import { pb, logoutUser } from '../../backend/backend.mjs';
 
-    // --- MENU ---
+    // --- LOGIQUE DU MENU ---
     const menuOpen = document.getElementById('menu-open');
     const menuClose = document.getElementById('menu-close');
     const overlay = document.getElementById('menu-overlay');
@@ -193,7 +208,7 @@ const navLinks = [
     const btnDisconnected = document.getElementById('user-status-disconnected');
 
     function updateHeader() {
-        if (pb && pb.authStore.isValid) {
+        if (pb && pb.authStore && pb.authStore.isValid) {
             btnConnected?.classList.remove('hidden');
             btnDisconnected?.classList.add('hidden');
         } else {
@@ -202,9 +217,9 @@ const navLinks = [
         }
     }
 
-    // Déconnexion au clic sur le bouton vert
     btnConnected?.addEventListener('click', () => {
-        logoutUser();
+        if(typeof logoutUser === 'function') logoutUser();
+        else pb.authStore.clear();
         window.location.reload();
     });
 

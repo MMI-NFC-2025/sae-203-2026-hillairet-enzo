@@ -9,18 +9,12 @@ const navLinks = [
     { name: "Infos pratiques", href: "/infos-pratiques" },
     { name: "Contact", href: "/contact" }
 ];
-
-const logos = [
-    "/assets/icons/culture-logo.svg",
-    "/assets/icons/logo-montbeliard-white.svg",
-    "/assets/icons/logo-univ.svg",
-];
 ---
 
 <Layout title="Contact | Echos Sonore">
-    <div class="w-full flex flex-col overflow-x-hidden bg-[#FFF4C6] min-h-screen">
+    <div class="w-full flex flex-col overflow-x-hidden bg-[#FFF4C6] min-h-screen font-poppins">
         
-        <div id="menu-overlay" class="fixed inset-0 z-[100] translate-x-full transition-transform duration-500 ease-in-out">
+        <div id="menu-overlay" class="fixed inset-0 z-[100] translate-x-full transition-transform duration-500 ease-in-out md:left-auto md:w-[500px] lg:w-[600px]">
             <div class="absolute inset-0 bg-black">
                 <img src="/assets/images/licorn-bg.avif" alt="Menu BG" class="w-full h-full object-cover opacity-50" />
                 <div class="absolute inset-0 bg-gradient-to-l from-black/80 to-transparent"></div>
@@ -32,11 +26,11 @@ const logos = [
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 md:h-12 md:w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
                     </button>
                 </div>
-                <nav class="flex-1 flex flex-col justify-start pt-32 items-end pr-4 md:pr-20">
+                <nav class="flex-1 flex flex-col justify-start pt-32 items-end pr-4 md:pr-10">
                     <ul class="space-y-6 text-right">
                         {navLinks.map((link) => (
                             <li>
-                                <a href={link.href} class="block text-2xl md:text-5xl font-poppins font-bold text-white uppercase hover:text-[#FED506] transition-colors">
+                                <a href={link.href} class="block text-2xl md:text-4xl lg:text-5xl font-poppins font-bold text-white uppercase hover:text-[#FED506] transition-colors whitespace-nowrap">
                                     {link.name} <span class="text-white ml-2 md:ml-4">•</span>
                                 </a>
                             </li>
@@ -46,35 +40,37 @@ const logos = [
             </div>
         </div>
 
-        <header class="w-full flex justify-between items-center p-6 md:p-10 z-50 bg-[#FFF4C6]">
+        <header class="w-full flex justify-between items-center p-6 md:p-10 lg:px-12 xl:px-16 z-50 bg-[#FFF4C6]">
             <a href="/" class="hover:scale-110 transition-transform">
                 <img src="/assets/icons/logo.avif" alt="Logo" class="h-14 md:h-20 w-auto rounded-2xl" />
             </a>
 
             <div class="flex items-center gap-4">
-                <button id="user-status-connected" class="hidden font-poppins text-[10px] md:text-xs uppercase font-bold bg-[#6d9a02] text-white px-3 py-1.5 rounded-full shadow-lg animate-pulse hover:bg-red-600 transition-colors group">
+                <button id="user-status-connected" class="hidden font-poppins text-[10px] md:text-xs uppercase font-bold bg-[#6d9a02] text-white px-4 py-2 rounded-full shadow-lg group hover:bg-red-600 transition-colors">
                     <span class="group-hover:hidden">Connecté</span>
                     <span class="hidden group-hover:inline">Déconnexion</span>
                 </button>
-
-                <a href="/connexion" id="user-status-disconnected" class="font-poppins text-[10px] md:text-xs uppercase font-bold bg-[#ED3F24] text-white px-3 py-1.5 rounded-full shadow-lg hover:scale-105 transition-transform">
+                <a href="/connexion" id="user-status-disconnected" class="font-poppins text-[10px] md:text-xs uppercase font-bold bg-[#ED3F24] text-white px-4 py-2 rounded-full shadow-lg hover:scale-105 transition-transform">
                     Se connecter
                 </a>
 
-                <button id="menu-open" class="flex flex-col gap-2 p-2 cursor-pointer items-end group">
-                    <div class="w-10 md:w-12 h-1 bg-black rounded-full group-hover:w-8 transition-all"></div>
-                    <div class="w-10 md:w-12 h-1 bg-black rounded-full transition-all"></div>
+                <button id="menu-open" class="flex flex-col gap-2 p-2 cursor-pointer items-end group hover:opacity-70 transition-opacity">
+                    <div class="w-10 md:w-14 h-1 bg-black rounded-full group-hover:w-8 transition-all"></div>
+                    <div class="w-10 md:w-14 h-1 bg-black rounded-full transition-all"></div>
                 </button>
             </div>
         </header>
 
-        <section class="w-full pt-4 pb-12 flex justify-center text-center px-4">
-            <h1 class="font-display text-4xl sm:text-6xl md:text-[6rem] text-black uppercase tracking-tight">
+        <section class="w-full pt-12 pb-16 md:pt-16 flex justify-center text-center px-4">
+            <h1 class="font-display text-4xl sm:text-6xl md:text-7xl lg:text-[7rem] tracking-wider leading-[0.9] text-center uppercase" 
+                style="color: #ED3F24; -webkit-text-stroke: 3px #FED506; text-shadow: none;">
                 Formulaire de contact
             </h1>
         </section>
 
-        <section class="w-full pb-24 px-6 md:px-10 flex flex-col items-center flex-1">
+        <div class="w-full h-4 md:h-6 lg:h-8 bg-[#ED3F24] relative z-40 shadow-lg"></div>
+
+        <section class="w-full py-24 px-6 md:px-10 flex flex-col items-center flex-1">
             <div class="relative w-full max-w-2xl min-h-[600px] rounded-[3rem] overflow-hidden shadow-2xl border border-black/10">
                 <div class="absolute inset-0 z-0">
                     <img src="/assets/images/licorn-bg.avif" alt="Fond Contact" class="w-full h-full object-cover scale-110 blur-sm" />
@@ -131,57 +127,53 @@ const logos = [
                     </form>
                 </div>
             </div>
+        </section>
 
-            <div class="mt-12 flex flex-col items-center gap-6">
-                <div class="flex gap-6">
-                    <a href="https://facebook.com" target="_blank" class="w-14 h-14 bg-black text-white rounded-full flex items-center justify-center hover:bg-[#FED506] hover:text-black transition-all shadow-lg hover:-translate-y-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
-                    </a>
-                    <a href="https://instagram.com" target="_blank" class="w-14 h-14 bg-black text-white rounded-full flex items-center justify-center hover:bg-[#FED506] hover:text-black transition-all shadow-lg hover:-translate-y-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
-                    </a>
-                    <a href="https://tiktok.com" target="_blank" class="w-14 h-14 bg-black text-white rounded-full flex items-center justify-center hover:bg-[#FED506] hover:text-black transition-all shadow-lg hover:-translate-y-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path></svg>
-                    </a>
-                    <a href="https://twitter.com" target="_blank" class="w-14 h-14 bg-black text-white rounded-full flex items-center justify-center hover:bg-[#FED506] hover:text-black transition-all shadow-lg hover:-translate-y-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></svg>
-                    </a>
-                </div>
+        <div class="w-full h-4 md:h-6 lg:h-8 bg-[#FED506] relative z-40 shadow-lg"></div>
+
+        <section class="w-full py-16 flex flex-col items-center bg-[#FEFAF5]">
+            <div class="flex gap-6">
+                <a href="https://facebook.com" target="_blank" class="w-14 h-14 bg-black text-white rounded-full flex items-center justify-center hover:bg-[#FED506] hover:text-black transition-all shadow-lg hover:-translate-y-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+                </a>
+                <a href="https://instagram.com" target="_blank" class="w-14 h-14 bg-black text-white rounded-full flex items-center justify-center hover:bg-[#FED506] hover:text-black transition-all shadow-lg hover:-translate-y-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                </a>
+                <a href="https://tiktok.com" target="_blank" class="w-14 h-14 bg-black text-white rounded-full flex items-center justify-center hover:bg-[#FED506] hover:text-black transition-all shadow-lg hover:-translate-y-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path></svg>
+                </a>
+                <a href="https://twitter.com" target="_blank" class="w-14 h-14 bg-black text-white rounded-full flex items-center justify-center hover:bg-[#FED506] hover:text-black transition-all shadow-lg hover:-translate-y-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></svg>
+                </a>
             </div>
         </section>
 
-        <footer class="w-full bg-black text-white pt-32 pb-16 flex flex-col items-center overflow-hidden -mt-16 z-30">
-            <h2 class="font-poppins font-bold text-2xl md:text-3xl uppercase tracking-widest mb-12 border-b border-white/10 pb-4">
-                Partenaires :
-            </h2>
+        <div class="w-full h-4 md:h-6 lg:h-8 bg-[#6d9a02] relative z-40 shadow-lg"></div>
 
-            <div class="w-full relative py-12 overflow-hidden">
-                <div class="flex marquee-content whitespace-nowrap items-center">
-                    {[...logos, ...logos, ...logos].map((logo) => (
-                        <div class="flex-shrink-0 mx-8 md:mx-16 w-32 md:w-56 flex justify-center items-center"> 
-                            <img src={logo} alt="Logo" class="h-16 md:h-28 w-auto max-w-full object-contain brightness-0 invert opacity-90" />
-                        </div>
-                    ))}
+        <footer class="w-full bg-black text-white pt-16 pb-12 flex flex-col items-center mt-auto border-t border-white/10 z-30">
+            <div class="w-full max-w-7xl flex flex-col items-center lg:items-start px-6">
+                
+                <div class="w-full font-poppins text-xs md:text-base opacity-40 mb-12 text-center lg:text-left flex flex-col lg:flex-row lg:justify-between border-b border-white/5 pb-12 gap-4">
+                    <p>MMI 1ère année — SAE 105 — Montbéliard</p>
+                    <p>Par Maël BRUNGARD @BooMooN.cloud | ID Étudiant : o4g3yq8bkgg4bxz</p>
+                </div>
+
+                <div class="w-full flex flex-col lg:flex-row lg:justify-between items-center gap-8">
+                    <nav>
+                        <ul class="flex flex-wrap justify-center lg:justify-start items-center gap-x-12 gap-y-6 font-poppins font-bold text-sm md:text-xl uppercase">
+                            {navLinks.map((link, i) => (
+                                <li class="flex items-center gap-12">
+                                    <a href={link.href} class="hover:text-[#FED506] transition-all hover:tracking-widest">{link.name}</a>
+                                    {i < navLinks.length - 1 && <span class="opacity-20 hidden md:block select-none">•</span>}
+                                </li>
+                            ))}
+                        </ul>
+                    </nav>
+                    <nav class="flex gap-10 font-poppins text-[10px] md:text-xs uppercase underline opacity-40">
+                        <a href="#">CGU</a><a href="#">CGV</a><a href="#">Mentions Légales</a>
+                    </nav>
                 </div>
             </div>
-
-            <div class="font-poppins text-xs md:text-base opacity-40 mb-12 text-center text-balance px-4 leading-relaxed">
-                <p>MMI 1ère année — SAE 105 — Montbéliard</p>
-                <p>Par Maël BRUNGARD @BooMooN.cloud | ID Étudiant : o4g3yq8bkgg4bxz</p>
-            </div>
-            <nav class="mb-12 px-4 text-center">
-                <ul class="flex flex-wrap justify-center items-center gap-x-12 gap-y-6 font-poppins font-bold text-sm md:text-xl uppercase">
-                    {navLinks.map((link, i) => (
-                        <li class="flex items-center gap-12">
-                            <a href={link.href} class="hover:text-[#FED506] transition-all hover:tracking-widest">{link.name}</a>
-                            {i < navLinks.length - 1 && <span class="opacity-20 hidden md:block select-none">•</span>}
-                        </li>
-                    ))}
-                </ul>
-            </nav>
-            <nav class="flex flex-wrap justify-center gap-6 sm:gap-10 font-poppins text-[9px] sm:text-[10px] md:text-xs uppercase underline opacity-40 text-center px-4">
-                <a href="#">CGU</a><a href="#">CGV</a><a href="#">Mentions Légales</a>
-            </nav>
         </footer>
     </div>
 </Layout>
@@ -280,6 +272,4 @@ const logos = [
 
 <style>
     html { scroll-behavior: smooth; }
-    .marquee-content { animation: scroll 7s linear infinite; width: fit-content; }
-    @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-33.33%); } }
 </style>

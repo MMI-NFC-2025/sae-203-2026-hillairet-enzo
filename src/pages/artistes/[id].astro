@@ -125,18 +125,19 @@ const navLinks = [
             </div>
         </header>
 
-        <section class="relative w-full h-64 sm:h-96 md:h-[500px] overflow-hidden bg-black">
+        <section class="relative w-full h-64 sm:h-96 md:h-[500px] overflow-hidden bg-black flex flex-col justify-center">
             <img src={mainImage} alt={artiste.nom} class="absolute inset-0 w-full h-full object-cover opacity-90" />
-            <div class="absolute inset-0 flex items-center justify-center p-4">
+            <div class="relative z-10 flex items-center justify-center p-4 h-full">
                 <h1 class="font-poppins font-bold text-5xl md:text-8xl lg:text-9xl text-white tracking-wide text-center drop-shadow-xl">
                     {artiste.nom}
                 </h1>
             </div>
         </section>
 
+        <div class="w-full h-4 md:h-6 lg:h-8 bg-[#ED3F24] relative z-40 shadow-lg"></div>
+
         <section class="w-full max-w-4xl mx-auto px-6 py-16 md:py-24 flex flex-col items-center gap-10">
-            
-            <div class="w-full bg-[#FEFAF5] rounded-[2rem] p-8 md:p-12 shadow-sm">
+            <div class="w-full bg-[#FEFAF5] rounded-[2rem] p-8 md:p-12 shadow-sm border border-black/5">
                 <h2 class="font-poppins font-bold text-2xl md:text-3xl text-black mb-6">Description</h2>
                 <div 
                     class="font-poppins text-base md:text-xl text-black/90 leading-relaxed" 
@@ -148,21 +149,24 @@ const navLinks = [
                 <img src="/assets/images/lignes_rouge_jaune_vert.svg" alt="separateur" class="w-full h-auto opacity-90 drop-shadow-sm" />
             </div>
 
-            <div class="w-full bg-[#FEFAF5] rounded-[2rem] p-8 md:p-12 shadow-sm">
+            <div class="w-full bg-[#FEFAF5] rounded-[2rem] p-8 md:p-12 shadow-sm border border-black/5">
                 <h2 class="font-poppins font-bold text-2xl md:text-3xl text-black mb-6">Performance</h2>
                 <div class="font-poppins text-base md:text-xl text-black/90 space-y-2">
-                    <p>Date : {formattedDate}</p>
-                    <p>Scène : {artiste.type_de_scene}</p>
+                    <p><span class="font-bold">Date :</span> {formattedDate}</p>
+                    <p><span class="font-bold">Scène :</span> {artiste.type_de_scene}</p>
                 </div>
             </div>
-
         </section>
+
+        {galleryImages.length > 0 && (
+            <div class="w-full h-4 md:h-6 lg:h-8 bg-[#FED506] relative z-40 shadow-lg"></div>
+        )}
 
         {galleryImages.length > 0 && (
             <section class="relative w-full py-20 md:py-32 overflow-hidden">
                 <div class="absolute inset-0 z-0">
-                    <img src={mainImage} alt="" class="w-full h-full object-cover blur-xl scale-110" />
-                    <div class="absolute inset-0 bg-black/60"></div>
+                    <img src={mainImage} alt="" class="w-full h-full object-cover blur-xl scale-110 opacity-50" />
+                    <div class="absolute inset-0 bg-black/80"></div>
                 </div>
 
                 <div class="relative z-10 w-full max-w-6xl mx-auto flex flex-col items-center">
@@ -175,7 +179,7 @@ const navLinks = [
                             <div id="carousel-track" class="flex transition-transform duration-500 ease-in-out">
                                 {galleryImages.map((img) => (
                                     <div class="carousel-item w-full sm:w-1/2 md:w-1/3 flex-shrink-0 px-2 sm:px-4">
-                                        <div class="w-full h-64 md:h-80 rounded-3xl overflow-hidden shadow-2xl">
+                                        <div class="w-full h-64 md:h-80 rounded-3xl overflow-hidden shadow-2xl border border-white/10">
                                             <img src={img} alt={`Galerie ${artiste.nom}`} class="w-full h-full object-cover transition-transform duration-500 hover:scale-110" />
                                         </div>
                                     </div>
@@ -183,11 +187,11 @@ const navLinks = [
                             </div>
                         </div>
 
-                        <button id="btn-prev" class="absolute top-1/2 left-2 md:left-6 -translate-y-1/2 bg-black/50 hover:bg-[#FED506] hover:text-black text-white p-3 md:p-4 rounded-full backdrop-blur-md transition-all shadow-xl z-20 hidden">
+                        <button id="btn-prev" class="absolute top-1/2 left-2 md:left-6 -translate-y-1/2 bg-black/50 hover:bg-[#FED506] hover:text-black text-white p-3 md:p-4 rounded-full backdrop-blur-md transition-all shadow-xl z-20 hidden border border-white/20">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 md:h-8 md:w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
                         </button>
 
-                        <button id="btn-next" class="absolute top-1/2 right-2 md:right-6 -translate-y-1/2 bg-black/50 hover:bg-[#FED506] hover:text-black text-white p-3 md:p-4 rounded-full backdrop-blur-md transition-all shadow-xl z-20">
+                        <button id="btn-next" class="absolute top-1/2 right-2 md:right-6 -translate-y-1/2 bg-black/50 hover:bg-[#FED506] hover:text-black text-white p-3 md:p-4 rounded-full backdrop-blur-md transition-all shadow-xl z-20 border border-white/20">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 md:h-8 md:w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
                         </button>
                     </div>
@@ -195,7 +199,9 @@ const navLinks = [
             </section>
         )}
 
-        <footer class="w-full bg-black text-white pt-24 pb-12 flex flex-col items-center overflow-hidden z-30 mt-auto">
+        <div class="w-full h-4 md:h-6 lg:h-8 bg-[#6d9a02] relative z-40 shadow-lg"></div>
+
+        <footer class="w-full bg-black text-white pt-24 pb-12 flex flex-col items-center overflow-hidden z-30 mt-auto border-t border-white/10">
             <div class="font-poppins text-[10px] sm:text-xs md:text-base opacity-40 mb-12 text-center text-balance px-4 leading-relaxed">
                 <p>MMI 1ère année — SAE 105 — Montbéliard</p>
                 <p>Par Maël BRUNGARD @BooMooN.cloud | ID Étudiant : o4g3yq8bkgg4bxz</p>

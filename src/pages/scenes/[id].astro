@@ -92,7 +92,7 @@ const navLinks = [
 <Layout title={scene ? `${scene.nom} | Echos Sonore` : "Scène"}>
     <div class="w-full flex flex-col overflow-x-hidden bg-[#FFF4C6] min-h-screen">
         
-        <div id="menu-overlay" class="fixed inset-0 z-[100] translate-x-full transition-transform duration-500 ease-in-out">
+        <div id="menu-overlay" class="fixed inset-0 z-[100] translate-x-full transition-transform duration-500 ease-in-out md:left-auto md:w-[500px] lg:w-[600px]">
             <div class="absolute inset-0 bg-black">
                 <img src="/assets/images/licorn-bg.avif" alt="Menu BG" class="w-full h-full object-cover opacity-50" />
                 <div class="absolute inset-0 bg-gradient-to-l from-black/80 to-transparent"></div>
@@ -104,17 +104,17 @@ const navLinks = [
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 md:h-12 md:w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
                     </button>
                 </div>
-                <nav class="flex-1 flex flex-col justify-start pt-32 items-end pr-4 md:pr-20">
+                <nav class="flex-1 flex flex-col justify-start pt-32 items-end pr-4 md:pr-10">
                     <ul class="space-y-6 text-right">
                         {navLinks.map((link) => (
-                            <li><a href={link.href} class="block text-2xl md:text-5xl font-poppins font-bold text-white uppercase hover:text-[#FED506] transition-colors">{link.name} <span class="text-white ml-2 md:ml-4">•</span></a></li>
+                            <li><a href={link.href} class="block text-2xl md:text-4xl lg:text-5xl font-poppins font-bold text-white uppercase hover:text-[#FED506] transition-colors whitespace-nowrap">{link.name} <span class="text-white ml-2 md:ml-4">•</span></a></li>
                         ))}
                     </ul>
                 </nav>
             </div>
         </div>
 
-        <header class="w-full flex justify-between items-center p-6 md:p-10 z-50 bg-[#FFF4C6]">
+        <header class="w-full flex justify-between items-center p-6 md:p-10 lg:px-12 xl:px-16 z-50 bg-[#FFF4C6]">
             <a href="/" class="hover:scale-110 transition-transform">
                 <img src="/assets/icons/logo.avif" alt="Logo" class="h-14 md:h-20 w-auto rounded-2xl" />
             </a>
@@ -142,9 +142,11 @@ const navLinks = [
             </div>
         </section>
 
+        <div class="w-full h-4 md:h-6 lg:h-8 bg-[#ED3F24] relative z-40 shadow-lg"></div>
+
         <section class="w-full py-16 md:py-28 px-6 md:px-10 flex flex-col items-center flex-1">
             
-            <h2 class="font-display text-2xl md:text-4xl text-black tracking-widest mb-12 text-center">
+            <h2 class="font-righteous text-4xl md:text-5xl lg:text-6xl text-black tracking-widest mb-12 text-center uppercase">
                 Les Artistes sur scène
             </h2>
             
@@ -153,7 +155,6 @@ const navLinks = [
                     {artistesAssocies.map((artiste, i) => (
                         <>
                             {i > 0 && (
-                                /* Séparateur rouge/jaune/vert pleine largeur sur mobile */
                                 <div class="w-full h-auto md:hidden" key={`sep-${artiste.id}`}>
                                     <img src="/assets/images/lignes_rouge_jaune_vert.svg" alt="séparateur" class="w-full h-auto object-cover" />
                                 </div>
@@ -166,7 +167,7 @@ const navLinks = [
                                 <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-90"></div>
                                 
                                 <div class="absolute top-4 left-4 md:top-6 md:left-6 flex flex-col gap-1 transition-transform duration-500 z-10">
-                                    <h3 class="font-display text-xl md:text-3xl text-white tracking-wide drop-shadow-md">{artiste.nom}</h3>
+                                    <h3 class="font-poppins font-bold text-xl md:text-3xl text-white tracking-wide drop-shadow-md group-hover:text-[#FED506] transition-colors">{artiste.nom}</h3>
                                 </div>
 
                                 <div class="absolute bottom-4 left-4 md:bottom-6 md:left-6 z-10">
@@ -186,6 +187,10 @@ const navLinks = [
         </section>
 
         {galleryImages.length > 0 && (
+            <div class="w-full h-4 md:h-6 lg:h-8 bg-[#FED506] relative z-40 shadow-lg"></div>
+        )}
+
+        {galleryImages.length > 0 && (
             <section class="relative w-full py-20 md:py-32 overflow-hidden">
                 <div class="absolute inset-0 z-0">
                     <img src={sceneImage} alt="" class="w-full h-full object-cover blur-xl scale-110 opacity-50" />
@@ -193,7 +198,8 @@ const navLinks = [
                 </div>
 
                 <div class="relative z-10 w-full max-w-6xl mx-auto flex flex-col items-center">
-                    <h2 class="font-poppins font-bold text-3xl md:text-5xl text-white mb-16 tracking-widest text-center px-6">
+                    
+                    <h2 class="font-righteous text-4xl md:text-5xl lg:text-6xl text-white mb-16 tracking-widest text-center px-6 uppercase">
                         Galerie Photos
                     </h2>
                     
@@ -210,11 +216,11 @@ const navLinks = [
                             </div>
                         </div>
 
-                        <button id="btn-prev" class="absolute top-1/2 left-2 md:left-6 -translate-y-1/2 bg-black/50 hover:bg-[#FED506] hover:text-black text-white p-3 md:p-4 rounded-full backdrop-blur-md transition-all shadow-xl z-20 hidden">
+                        <button id="btn-prev" class="absolute top-1/2 left-2 md:left-6 -translate-y-1/2 bg-black/50 hover:bg-[#FED506] hover:text-black text-white p-3 md:p-4 rounded-full backdrop-blur-md transition-all shadow-xl z-20 hidden border border-white/20">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 md:h-8 md:w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
                         </button>
 
-                        <button id="btn-next" class="absolute top-1/2 right-2 md:right-6 -translate-y-1/2 bg-black/50 hover:bg-[#FED506] hover:text-black text-white p-3 md:p-4 rounded-full backdrop-blur-md transition-all shadow-xl z-20">
+                        <button id="btn-next" class="absolute top-1/2 right-2 md:right-6 -translate-y-1/2 bg-black/50 hover:bg-[#FED506] hover:text-black text-white p-3 md:p-4 rounded-full backdrop-blur-md transition-all shadow-xl z-20 border border-white/20">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 md:h-8 md:w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
                         </button>
                     </div>
@@ -222,8 +228,10 @@ const navLinks = [
             </section>
         )}
 
+        <div class="w-full h-4 md:h-6 lg:h-8 bg-[#6d9a02] relative z-40 shadow-lg"></div>
+
         <footer class="w-full bg-black text-white pt-16 pb-12 flex flex-col items-center mt-auto border-t border-white/10">
-            <div class="font-poppins text-xs md:text-base opacity-40 mb-12 text-center px-4 leading-relaxed">
+            <div class="font-poppins text-[10px] sm:text-xs md:text-base opacity-40 mb-12 text-center text-balance px-4 leading-relaxed">
                 <p>MMI 1ère année — SAE 105 — Montbéliard</p>
                 <p>Par Maël BRUNGARD @BooMooN.cloud | ID Étudiant : o4g3yq8bkgg4bxz</p>
             </div>
@@ -314,6 +322,4 @@ const navLinks = [
 
 <style>
     html { scroll-behavior: smooth; }
-    div[set\:html] p:first-child { margin-top: 0; }
-    div[set\:html] p:last-child { margin-bottom: 0; }
 </style>

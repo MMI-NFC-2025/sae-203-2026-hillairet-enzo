@@ -1,7 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
 
-// ... (Garde tes constantes infosList, tarifsList, hebergementCategories, transportApps et navLinks identiques)
 const infosList = [
     { title: "Nos tarifs", img: "/assets/images/cards/price.avif", link: "#tarifs" },
     { title: "Hébergement", img: "/assets/images/hebergement/autres/camping.avif", link: "#hebergement" },
@@ -17,7 +16,7 @@ const tarifsList = [
 
 const hebergementCategories = [
     {
-        name: "Hotel",
+        name: "Hôtel",
         members: [
             { name: "Hôtel du Centre", url: "https://www.booking.com", img: "/assets/images/hebergement/hotels/hotel-1.avif", sub: "Centre-ville" },
             { name: "Le Grand Logis", url: "https://www.booking.com", img: "/assets/images/hebergement/hotels/hotel-2.avif", sub: "Proche Festival" },
@@ -51,9 +50,9 @@ const navLinks = [
 ---
 
 <Layout title="Infos Pratiques | Echos Sonore">
-    <div class="w-full flex flex-col overflow-x-hidden bg-[#FFF4C6] min-h-screen">
+    <div class="w-full flex flex-col overflow-x-hidden bg-[#FFF4C6] min-h-screen font-poppins">
         
-        <div id="menu-overlay" class="fixed inset-0 z-[100] translate-x-full transition-transform duration-500 ease-in-out md:left-auto md:w-[400px]">
+        <div id="menu-overlay" class="fixed inset-0 z-[100] translate-x-full transition-transform duration-500 ease-in-out md:left-auto md:w-[500px] lg:w-[600px]">
             <div class="absolute inset-0 bg-black">
                 <img src="/assets/images/licorn-bg.avif" alt="Menu BG" class="w-full h-full object-cover opacity-50" />
                 <div class="absolute inset-0 bg-gradient-to-l from-black/80 to-transparent"></div>
@@ -68,36 +67,41 @@ const navLinks = [
                 <nav class="flex-1 flex flex-col justify-start pt-32 items-end pr-4 md:pr-10">
                     <ul class="space-y-6 text-right">
                         {navLinks.map((link) => (
-                            <li><a href={link.href} class="block text-2xl md:text-4xl font-poppins font-bold text-white uppercase hover:text-[#FED506] transition-colors">{link.name} <span class="text-white ml-2 md:ml-4">•</span></a></li>
+                            <li>
+                                <a href={link.href} class="block text-2xl md:text-4xl lg:text-5xl font-poppins font-bold text-white uppercase tracking-tight hover:text-[#FED506] transition-colors whitespace-nowrap">
+                                    {link.name} <span class="text-white ml-2 md:ml-4">•</span>
+                                </a>
+                            </li>
                         ))}
                     </ul>
                 </nav>
             </div>
         </div>
 
-        <header class="w-full flex justify-between items-center p-6 md:p-10 z-50 bg-[#FFF4C6]">
+        <header class="w-full flex justify-between items-center p-6 md:p-10 lg:px-12 xl:px-16 z-50 bg-[#FFF4C6]">
             <a href="/" class="hover:scale-110 transition-transform">
                 <img src="/assets/icons/logo.avif" alt="Logo" class="h-14 md:h-20 w-auto rounded-2xl" />
             </a>
 
             <div class="flex items-center gap-4">
-                <button id="user-status-connected" class="hidden font-poppins text-[10px] md:text-xs uppercase font-bold bg-[#6d9a02] text-white px-4 py-2 rounded-full shadow-lg group hover:bg-red-600 transition-colors">
+                <button id="user-status-connected" class="hidden font-poppins text-[10px] md:text-xs lg:text-sm uppercase font-bold bg-[#6d9a02] text-white px-4 py-2 rounded-full shadow-lg group hover:bg-red-600 transition-colors">
                     <span class="group-hover:hidden">Connecté</span>
                     <span class="hidden group-hover:inline">Déconnexion</span>
                 </button>
-                <a href="/connexion" id="user-status-disconnected" class="font-poppins text-[10px] md:text-xs uppercase font-bold bg-[#ED3F24] text-white px-4 py-2 rounded-full shadow-lg hover:scale-105 transition-transform">
+                <a href="/connexion" id="user-status-disconnected" class="font-poppins text-[10px] md:text-xs lg:text-sm uppercase font-bold bg-[#ED3F24] text-white px-4 py-2 rounded-full shadow-lg hover:scale-105 transition-transform">
                     Se connecter
                 </a>
 
                 <button id="menu-open" class="flex flex-col gap-2 p-2 cursor-pointer items-end group hover:opacity-70 transition-opacity">
-                    <div class="w-10 md:w-12 h-1 bg-black rounded-full group-hover:w-8 transition-all"></div>
-                    <div class="w-10 md:w-12 h-1 bg-black rounded-full transition-all"></div>
+                    <div class="w-10 md:w-14 h-1 bg-black rounded-full group-hover:w-8 transition-all"></div>
+                    <div class="w-10 md:w-14 h-1 bg-black rounded-full transition-all"></div>
                 </button>
             </div>
         </header>
 
-        <section class="w-full pt-8 pb-12 flex justify-center text-center px-4">
-            <h1 class="font-display text-5xl sm:text-7xl md:text-8xl lg:text-[10rem] text-[#FED506] uppercase italic leading-none drop-shadow-[0_4px_0_rgba(185,28,28,1)]">
+        <section class="w-full pt-12 pb-12 md:pt-16 flex justify-center text-center px-4">
+            <h1 class="font-display text-5xl sm:text-7xl md:text-8xl lg:text-[9rem] tracking-wider leading-[0.9] text-center uppercase" 
+                style="color: #ED3F24; -webkit-text-stroke: 3px #FED506; text-shadow: none;">
                 Infos Pratiques
             </h1>
         </section>
@@ -124,26 +128,30 @@ const navLinks = [
             </div>
         </section>
 
-        <div class="w-full h-4 md:h-6 lg:h-8 bg-[#ED3F24] relative z-40"></div>
+        <div class="w-full h-4 md:h-6 lg:h-8 bg-[#ED3F24] relative z-40 shadow-lg"></div>
 
-        <section id="tarifs" class="relative w-full py-24 md:py-40 px-6 flex flex-col items-center bg-black overflow-hidden">
+        <section id="tarifs" class="relative w-full py-24 md:py-40 px-6 flex flex-col items-center bg-black overflow-hidden scroll-mt-20">
             <div class="absolute inset-0 z-0">
                 <img src="/assets/images/section-background.avif" alt="Fond Tarifs" class="w-full h-full object-cover opacity-70" />
                 <div class="absolute inset-0 bg-black/80"></div>
             </div>
             <div class="relative z-10 w-full max-w-7xl flex flex-col items-center text-white">
-                <h2 class="font-display text-5xl md:text-8xl lg:text-7xl mb-20 uppercase italic text-center">Nos Tarifs</h2>
+                
+                <h2 class="font-righteous text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white mb-20 uppercase tracking-widest text-center">
+                    Nos Tarifs
+                </h2>
+                
                 <div class="w-full flex flex-col lg:flex-row gap-10">
                     {tarifsList.map((pass) => (
                         <div class="flex-1 flex flex-col">
                             <div class="w-full bg-white/80 backdrop-blur-md rounded-[45px] p-8 md:p-12 shadow-2xl border border-white/20 transition-all duration-500 hover:bg-white/90">
-                                <h3 class="font-poppins font-black text-3xl md:text-5xl text-black mb-8 uppercase tracking-wider italic">{pass.title}</h3>
+                                <h3 class="font-poppins font-black text-3xl md:text-4xl text-black mb-8 uppercase tracking-wider">{pass.title}</h3>
                                 <div class="font-poppins text-lg md:text-2xl text-black/90 space-y-4 font-bold">
                                     <div class="flex justify-between border-b border-black/10 pb-2"><span>Étudiants :</span> <span>{pass.priceS}</span></div>
                                     <div class="flex justify-between border-b border-black/10 pb-2"><span>- de 22 ans :</span> <span>{pass.price22}</span></div>
                                     <div class="flex justify-between border-b border-black/10 pb-2"><span>+ de 22 ans :</span> <span>{pass.pricePlus}</span></div>
                                 </div>
-                                <button class="w-full mt-10 py-5 bg-[#ED3F24] text-white font-bold uppercase rounded-2xl hover:scale-105 transition-transform shadow-lg">Réserver</button>
+                                <button class="w-full mt-10 py-5 bg-[#ED3F24] text-white font-bold uppercase tracking-widest rounded-2xl hover:scale-105 transition-transform shadow-lg">Réserver</button>
                             </div>
                         </div>
                     ))}
@@ -151,14 +159,20 @@ const navLinks = [
             </div>
         </section>
 
-        <div class="w-full h-4 md:h-6 lg:h-8 bg-[#FED506] relative z-40"></div>
+        <div class="w-full h-4 md:h-6 lg:h-8 bg-[#FED506] relative z-40 shadow-lg"></div>
 
-        <section id="hebergement" class="w-full bg-[#FEFAF5] py-24 md:py-40 flex flex-col items-center">
-            <h2 class="font-display text-5xl md:text-7xl lg:text-7xl text-black mb-24 uppercase tracking-widest text-center px-4 italic">Hébergement</h2>
+        <section id="hebergement" class="w-full bg-[#FEFAF5] py-24 md:py-40 flex flex-col items-center scroll-mt-20">
+            
+            <h2 class="font-righteous text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-black mb-24 uppercase tracking-widest text-center px-4">
+                Hébergement
+            </h2>
+            
             <div class="w-full max-w-7xl space-y-16 lg:space-y-20">
                 {hebergementCategories.map((cat) => (
                     <div class="flex flex-col items-center w-full">
-                        <h3 class="font-poppins font-bold text-xl md:text-3xl lg:text-4xl mb-12 lg:mb-12 uppercase tracking-[0.3em] opacity-30 italic">{cat.name}</h3>
+                        <h3 class="font-poppins font-bold text-2xl md:text-3xl lg:text-4xl mb-12 uppercase tracking-[0.3em] text-black">
+                            {cat.name}
+                        </h3>
                         <div class="flex flex-row overflow-x-auto no-scrollbar md:grid md:grid-cols-3 items-center justify-center gap-6 md:gap-12 w-full px-6 pb-8">
                             {cat.members.map((member, index) => (
                                 <div class="flex flex-row items-center justify-center gap-6 shrink-0 md:flex-col md:shrink md:w-full">
@@ -180,23 +194,34 @@ const navLinks = [
             </div>
         </section>
 
-        <div class="w-full h-4 md:h-6 lg:h-8 bg-[#6d9a02] relative z-40"></div>
+        <div class="w-full h-4 md:h-6 lg:h-8 bg-[#6d9a02] relative z-40 shadow-lg"></div>
 
-        <section id="transports" class="relative w-full py-24 md:py-40 px-6 flex flex-col items-center bg-black overflow-hidden">
-            <div class="absolute inset-0 w-full h-full z-0"><img src="/assets/images/section-background.avif" alt="Fond" class="w-full h-full object-cover opacity-40" /><div class="absolute inset-0 bg-black/80"></div></div>
+        <section id="transports" class="relative w-full py-24 md:py-40 px-6 flex flex-col items-center bg-black overflow-hidden scroll-mt-20">
+            <div class="absolute inset-0 w-full h-full z-0">
+                <img src="/assets/images/section-background.avif" alt="Fond" class="w-full h-full object-cover opacity-40" />
+                <div class="absolute inset-0 bg-black/80"></div>
+            </div>
             <div class="relative z-10 w-full max-w-7xl">
-                <h2 class="font-display text-5xl md:text-9xl text-white text-center mb-24 uppercase italic leading-none">Transports</h2>
+                
+                <h2 class="font-righteous text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white text-center mb-24 uppercase tracking-widest leading-none">
+                    Transports
+                </h2>
+                
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-32 items-center">
                     <div class="space-y-12 text-center md:text-left bg-black/40 p-8 lg:p-12 rounded-[30px] border border-white/10 backdrop-blur-md">
                         <h3 class="font-poppins font-bold text-2xl md:text-4xl text-white uppercase tracking-widest">Réseau Evolity</h3>
-                        <div class="rounded-3xl overflow-hidden shadow-2xl border-4 border-white/10 group"><img src="/assets/images/transports/carte-bus.avif" alt="Plan Bus Evolity" class="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105" /></div>
+                        <div class="rounded-3xl overflow-hidden shadow-2xl border-4 border-white/10 group">
+                            <img src="/assets/images/transports/carte-bus.avif" alt="Plan Bus Evolity" class="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105" />
+                        </div>
                     </div>
                     <div class="space-y-12 bg-black/40 p-8 lg:p-12 rounded-[30px] border border-white/10 backdrop-blur-md flex flex-col items-center">
                         <h3 class="font-poppins font-bold text-2xl md:text-4xl text-white uppercase tracking-widest text-center">Autres solutions</h3>
                         <div class="grid grid-cols-3 gap-6 md:gap-12 w-full">
                             {transportApps.map((app) => (
                                 <a href={app.url} target="_blank" class="flex flex-col items-center gap-4 group">
-                                    <div class="w-20 h-20 md:w-32 md:h-32 transition-transform duration-500 group-hover:scale-110 rounded-3xl overflow-hidden bg-white/10 backdrop-blur-md p-4 flex items-center justify-center border border-white/5"><img src={app.img} alt={app.name} class="w-full h-full object-contain pointer-events-none" /></div>
+                                    <div class="w-20 h-20 md:w-32 md:h-32 transition-transform duration-500 group-hover:scale-110 rounded-3xl overflow-hidden bg-white/10 backdrop-blur-md p-4 flex items-center justify-center border border-white/5">
+                                        <img src={app.img} alt={app.name} class="w-full h-full object-contain pointer-events-none" />
+                                    </div>
                                     <p class="font-poppins font-bold text-white text-[10px] md:text-sm uppercase text-center tracking-widest opacity-80 group-hover:opacity-100 group-hover:text-[#FED506] transition-colors">{app.name}</p>
                                 </a>
                             ))}
@@ -206,7 +231,7 @@ const navLinks = [
             </div>
         </section>
 
-        <footer class="w-full bg-black text-white pt-24 pb-12 flex flex-col items-center mt-auto border-t border-white/10">
+        <footer class="w-full bg-black text-white pt-24 pb-12 flex flex-col items-center mt-auto border-t border-white/10 z-30">
             <div class="w-full max-w-7xl flex flex-col items-center lg:items-start px-6">
                 
                 <div class="w-full font-poppins text-xs md:text-base opacity-40 mb-12 text-center lg:text-left flex flex-col lg:flex-row lg:justify-between border-b border-white/5 pb-12 gap-4">
@@ -215,7 +240,7 @@ const navLinks = [
                 </div>
 
                 <div class="w-full flex flex-col lg:flex-row lg:justify-between items-center gap-8">
-                    <nav class="mb-12 lg:mb-0">
+                    <nav>
                         <ul class="flex flex-wrap justify-center lg:justify-start items-center gap-x-12 gap-y-6 font-poppins font-bold text-sm md:text-xl uppercase">
                             {navLinks.map((link, i) => (
                                 <li class="flex items-center gap-12">
@@ -237,7 +262,7 @@ const navLinks = [
 <script>
     import { pb, logoutUser } from '../../backend/backend.mjs';
 
-    // MENU
+    // MENU LOGIC
     const menuOpen = document.getElementById('menu-open');
     const menuClose = document.getElementById('menu-close');
     const overlay = document.getElementById('menu-overlay');

@@ -8,7 +8,6 @@ const tickets = [
     { title: "Pass 1 jour", img: "/assets/images/cards/pass-1.avif" }
 ];
 
-// AJOUT DES LIENS "href" DIRECTEMENT DANS LE TABLEAU
 const tabs = [
     { title: "Programme", text: "En Savoir Plus...", img: "/assets/images/cards/programme.avif", href: "/programme" },
     { title: "Invités", text: "En Savoir Plus...", img: "/assets/images/cards/invite.avif", href: "/artistes" },
@@ -32,9 +31,9 @@ const navLinks = [
 ---
 
 <Layout title="Echos Sonore | Accueil">
-    <div class="w-full flex flex-col overflow-x-hidden">
+    <div class="w-full flex flex-col overflow-x-hidden bg-[#FFF4C6] min-h-screen font-poppins">
         
-        <div id="menu-overlay" class="fixed inset-0 z-[100] translate-x-full transition-transform duration-500 ease-in-out md:left-auto md:w-[400px]">
+        <div id="menu-overlay" class="fixed inset-0 z-[100] translate-x-full transition-transform duration-500 ease-in-out md:left-auto md:w-[500px] lg:w-[600px]">
             <div class="absolute inset-0 bg-black">
                 <img src="/assets/images/licorn-bg.avif" alt="Menu BG" class="w-full h-full object-cover opacity-50" />
                 <div class="absolute inset-0 bg-gradient-to-l from-black/80 to-transparent"></div>
@@ -56,7 +55,7 @@ const navLinks = [
                     <ul class="space-y-4 md:space-y-6 text-right">
                         {navLinks.map((link) => (
                             <li>
-                                <a href={link.href} class="block text-2xl md:text-3xl lg:text-4xl font-poppins font-bold text-white uppercase tracking-tight hover:text-[#FED506] transition-colors">
+                                <a href={link.href} class="block text-2xl md:text-4xl lg:text-5xl font-bold text-white uppercase tracking-tight hover:text-[#FED506] transition-colors whitespace-nowrap">
                                     {link.name} <span class="text-white ml-2 md:ml-4">•</span>
                                 </a>
                             </li>
@@ -67,22 +66,17 @@ const navLinks = [
         </div>
 
         <section class="relative min-h-screen w-full flex flex-col items-center justify-center overflow-hidden bg-[#FFF4C6] py-20 lg:pt-32 lg:pb-40">
-            
             <header class="absolute top-0 left-0 w-full flex justify-between items-center p-6 md:p-10 lg:px-12 xl:px-16 z-50">
                 <a href="/" class="transition-transform hover:scale-110">
                     <img src="/assets/icons/logo.avif" alt="Logo" class="h-14 md:h-20 w-auto rounded-2xl" />
                 </a>
                 
                 <div class="flex items-center gap-4">
-                    <button id="user-status-connected" class="hidden font-poppins text-[10px] md:text-xs lg:text-sm uppercase font-bold bg-[#6d9a02] text-white px-4 py-2 lg:px-6 lg:py-3 rounded-full shadow-lg hover:bg-red-600 transition-colors group">
+                    <button id="user-status-connected" class="hidden text-[10px] md:text-xs lg:text-sm uppercase font-bold bg-[#6d9a02] text-white px-4 py-2 lg:px-6 lg:py-3 rounded-full shadow-lg hover:bg-red-600 transition-colors group">
                         <span class="group-hover:hidden">Connecté</span>
                         <span class="hidden group-hover:inline">Déconnexion</span>
                     </button>
-
-                    <a href="/connexion" id="user-status-disconnected" class="font-poppins text-[10px] md:text-xs lg:text-sm uppercase font-bold bg-[#ED3F24] text-white px-4 py-2 lg:px-6 lg:py-3 rounded-full shadow-lg hover:scale-105 transition-transform">
-                        Se connecter
-                    </a>
-
+                    <a href="/connexion" id="user-status-disconnected" class="text-[10px] md:text-xs lg:text-sm uppercase font-bold bg-[#ED3F24] text-white px-4 py-2 lg:px-6 lg:py-3 rounded-full shadow-lg hover:scale-105 transition-transform">Se connecter</a>
                     <button id="menu-open" class="group flex flex-col gap-2 p-2 focus:outline-none cursor-pointer items-end hover:opacity-70 transition-opacity">
                         <div class="w-10 md:w-14 h-1 bg-black rounded-full transition-all group-hover:w-8"></div>
                         <div class="w-10 md:w-14 h-1 bg-black rounded-full transition-all"></div>
@@ -91,52 +85,51 @@ const navLinks = [
             </header>
 
             <div class="relative z-50 w-full max-w-7xl px-6 flex flex-col items-center lg:flex-row lg:justify-between lg:gap-10">
-                <div class="text-center lg:text-left lg:flex lg:flex-col lg:items-start lg:w-3/5">
-                    <h1 class="font-display text-6xl md:text-9xl lg:text-[16rem] xl:text-[20rem] tracking-wider leading-[0.8]" 
-                        style="color:#0B1E15; -webkit-text-stroke: 2px #ED3F24; -webkit-text-fill-color: #FED506;">
+                <div class="text-center lg:text-left lg:flex lg:flex-col lg:items-start lg:w-3/5 mt-16 lg:mt-0">
+                    <h1 class="font-display text-7xl sm:text-8xl md:text-8xl lg:text-[9rem] xl:text-[11rem] tracking-wider leading-[0.9]" 
+                        style="color: #ED3F24; -webkit-text-stroke: 3px #FED506; text-shadow: none;">
                         Echos Sonore
                     </h1>
-                    <p class="mt-8 text-black font-righteous text-2xl md:text-4xl lg:text-6xl xl:text-xl lg:mt-4 uppercase leading-tight">
+                    
+                    <p class="mt-6 text-black font-righteous text-2xl md:text-4xl lg:text-5xl uppercase leading-tight">
                         Vibrez <br class="md:hidden" /> au rythme de la nature
                     </p>
-                    <div class="mt-10 font-poppins font-bold uppercase tracking-widest text-black space-y-2 lg:mt-8 w-full">
-                        <p class="text-xl md:text-2xl lg:text-3xl xl:text-4xl">Festival de Reggae</p>
-                        <div class="flex flex-col md:flex-row md:gap-8 justify-center lg:justify-start opacity-80 text-sm md:text-lg lg:text-xl xl:text-2xl">
-                            <p>du 29 au 31 octobre</p>
-                            <p class="hidden md:block">•</p>
-                            <p>Audincourt, 25400</p>
-                        </div>
+                    
+                    <div class="mt-10 font-bold uppercase tracking-widest text-black flex flex-col md:flex-row md:flex-wrap items-center lg:items-start justify-center lg:justify-start gap-2 md:gap-4 text-base md:text-xl lg:text-2xl w-full">
+                        <p>Festival de Reggae</p>
+                        <span class="hidden md:block text-[#ED3F24]">•</span>
+                        <p>du 29 au 31 octobre</p>
+                        <span class="hidden md:block text-[#ED3F24]">•</span>
+                        <p>Audincourt, 25400</p>
                     </div>
                 </div>
 
                 <div class="relative z-10 mt-12 pb-32 lg:pb-0 flex flex-col items-center gap-12 lg:w-2/5 lg:mb-16">
                     <img src="/assets/images/mascotte.avif" alt="Mascotte" class="w-[90%] md:w-[600px] lg:w-[75%] xl:w-[65%] h-auto object-contain drop-shadow-2xl transition-transform duration-700 hover:rotate-3" />
-                    
                     <a href="/infos-pratiques#tarifs" class="bg-[#ED3F24] hover:bg-black text-white font-righteous text-xl md:text-2xl px-12 py-5 lg:px-16 lg:py-6 rounded-full shadow-2xl transition-all transform hover:scale-110 active:scale-95">
                         BILLETTERIE
                     </a>
                 </div>
             </div>
 
-            <div class="absolute bottom-16 left-0 w-full overflow-hidden leading-[0] z-40 lg:hidden">
+            <div class="absolute bottom-0 left-0 w-full overflow-hidden leading-[0] z-40 lg:hidden">
                 <div class="flex w-[200%] animate-lines-scroll">
-                    <img src="/assets/images/lignes_rouge_jaune_vert.svg" alt="Bandes" class="w-1/2 h-10 md:h-16 object-cover" />
-                    <img src="/assets/images/lignes_rouge_jaune_vert.svg" alt="Bandes" class="w-1/2 h-10 md:h-16 object-cover" aria-hidden="true" />
+                    <img src="/assets/images/lignes_rouge_jaune_vert.svg" alt="Bandes" class="w-1/2 h-10 md:h-16 object-cover block" />
+                    <img src="/assets/images/lignes_rouge_jaune_vert.svg" alt="Bandes" class="w-1/2 h-10 md:h-16 object-cover block" aria-hidden="true" />
                 </div>
             </div>
         </section>
 
         <div class="w-full h-4 md:h-6 lg:h-8 bg-[#ED3F24] relative z-40 shadow-lg"></div>
 
-        <div class="relative w-full flex flex-col items-center z-10">
-            <div class="absolute inset-0 w-full h-full z-0">
-                <img src="/assets/images/section-background.avif" alt="Ambiance" class="w-full h-full object-cover" />
-                <div class="absolute inset-0 bg-black/60"></div>
+        <div class="relative w-full flex flex-col items-center z-10 bg-black py-32">
+            <div class="absolute inset-0 w-full h-full z-0 overflow-hidden">
+                <img src="/assets/images/section-background.avif" alt="Ambiance" class="w-full h-full object-cover opacity-40" />
             </div>
 
-            <div class="relative z-10 w-full max-w-7xl px-6 py-32 grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12 items-center">
+            <div class="relative z-10 w-full max-w-7xl px-6 grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
                 {tickets.map((ticket, index) => (
-                    <div class="flex flex-col gap-6 items-center">
+                    <div class="flex flex-col gap-6 items-center w-full">
                         <a href="/infos-pratiques#tarifs" class="group relative w-full aspect-[16/9] lg:aspect-[4/5] rounded-[10px] overflow-hidden shadow-2xl transition-transform duration-500 hover:scale-105">
                             <img src={ticket.img} alt={ticket.title} class="absolute inset-0 w-full h-full object-cover grayscale-[20%] group-hover:grayscale-0 transition-all duration-700 group-hover:scale-110" />
                             <div class="absolute inset-0 bg-black/40 group-hover:bg-black/10 transition-all"></div>
@@ -145,11 +138,7 @@ const navLinks = [
                                 <p class="text-sm opacity-90">Je réserve !</p>
                             </div>
                         </a>
-                        {index < tickets.length - 1 && (
-                            <div class="w-full md:hidden">
-                                 <img src="/assets/images/lignes_rouge_jaune_vert.svg" alt="séparateur" class="w-full h-auto" />
-                            </div>
-                        )}
+                        {index < tickets.length - 1 && <div class="w-full md:hidden"><img src="/assets/images/lignes_rouge_jaune_vert.svg" alt="séparateur" class="w-full h-auto" /></div>}
                     </div>
                 ))}
             </div>
@@ -160,7 +149,7 @@ const navLinks = [
         <div class="w-full bg-[#FEFAF5] flex flex-col items-center py-32 z-20">
             <div class="w-full max-w-7xl px-6 grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
                 {tabs.map((tab, index) => (
-                    <div class="flex flex-col gap-6 items-center">
+                    <div class="flex flex-col gap-6 items-center w-full">
                         <a href={tab.href} class="group relative w-full aspect-[16/9] lg:aspect-[4/5] rounded-[10px] overflow-hidden shadow-lg transition-transform duration-500 hover:scale-105">
                             <img src={tab.img} alt={tab.title} class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
                             <div class="absolute inset-0 bg-black/40 group-hover:bg-[#ED3F24]/40 transition-all"></div>
@@ -169,11 +158,7 @@ const navLinks = [
                                 <p class="text-sm opacity-90">{tab.text}</p>
                             </div>
                         </a>
-                        {index < tabs.length - 1 && (
-                            <div class="w-full md:hidden">
-                                 <img src="/assets/images/lignes_rouge_jaune_vert.svg" alt="séparateur" class="w-full h-auto" />
-                            </div>
-                        )}
+                        {index < tabs.length - 1 && <div class="w-full md:hidden"><img src="/assets/images/lignes_rouge_jaune_vert.svg" alt="séparateur" class="w-full h-auto" /></div>}
                     </div>
                 ))}
             </div>
@@ -230,7 +215,7 @@ const navLinks = [
 <script>
     import { pb, logoutUser } from '../../backend/backend.mjs';
 
-    // --- LOGIQUE DU MENU ---
+    // --- MENU ---
     const menuOpen = document.getElementById('menu-open');
     const menuClose = document.getElementById('menu-close');
     const overlay = document.getElementById('menu-overlay');
@@ -240,14 +225,13 @@ const navLinks = [
             overlay.classList.remove('translate-x-full');
             document.body.style.overflow = 'hidden';
         });
-
         menuClose.addEventListener('click', () => {
             overlay.classList.add('translate-x-full');
             document.body.style.overflow = '';
         });
     }
 
-    // --- LOGIQUE BOUTONS STATUT ---
+    // --- AUTH STATUS ---
     const btnConnected = document.getElementById('user-status-connected');
     const btnDisconnected = document.getElementById('user-status-disconnected');
 
@@ -262,11 +246,8 @@ const navLinks = [
     }
 
     btnConnected?.addEventListener('click', () => {
-        if(typeof logoutUser === 'function') {
-            logoutUser();
-        } else {
-            pb.authStore.clear(); 
-        }
+        if(typeof logoutUser === 'function') logoutUser();
+        else pb.authStore.clear(); 
         window.location.reload();
     });
 
@@ -274,11 +255,17 @@ const navLinks = [
 </script>
 
 <style>
+    html { scroll-behavior: smooth; }
+    
+    .font-display { font-family: 'Magic Vintage', cursive; }
+    .font-righteous { font-family: 'Righteous', cursive; }
+    
+    /* Animation Marquee restaurée à l'identique (Pause au hover incluse) */
     .marquee-content { animation: scroll 7s linear infinite; width: fit-content; }
     @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-33.33%); } }
-
+    .marquee-content:hover { animation-play-state: paused; }
+    
+    /* Animation Bandes Infinie */
     .animate-lines-scroll { animation: scrollLines 15s linear infinite; }
     @keyframes scrollLines { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-
-    .marquee-content:hover { animation-play-state: paused; }
 </style>

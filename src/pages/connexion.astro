@@ -12,9 +12,9 @@ const navLinks = [
 ---
 
 <Layout title="Connexion | Echos Sonore">
-    <div class="w-full flex flex-col overflow-x-hidden bg-[#FFF4C6] min-h-screen">
+    <div class="w-full flex flex-col overflow-x-hidden bg-[#FFF4C6] min-h-screen font-poppins">
         
-        <div id="menu-overlay" class="fixed inset-0 z-[100] translate-x-full transition-transform duration-500 ease-in-out md:left-auto md:w-[400px]">
+        <div id="menu-overlay" class="fixed inset-0 z-[100] translate-x-full transition-transform duration-500 ease-in-out md:left-auto md:w-[500px] lg:w-[600px]">
             <div class="absolute inset-0 bg-black">
                 <img src="/assets/images/licorn-bg.avif" alt="Menu BG" class="w-full h-full object-cover opacity-50" />
                 <div class="absolute inset-0 bg-gradient-to-l from-black/80 to-transparent"></div>
@@ -27,10 +27,10 @@ const navLinks = [
                     </button>
                 </div>
                 <nav class="flex-1 flex flex-col justify-start pt-32 items-end pr-4 md:pr-10">
-                    <ul class="space-y-4 md:space-y-6 text-right">
+                    <ul class="space-y-6 text-right">
                         {navLinks.map((link) => (
                             <li>
-                                <a href={link.href} class="block text-2xl md:text-3xl lg:text-4xl font-poppins font-bold text-white uppercase tracking-tight hover:text-[#FED506] transition-colors">
+                                <a href={link.href} class="block text-2xl md:text-4xl lg:text-5xl font-poppins font-bold text-white uppercase tracking-tight hover:text-[#FED506] transition-colors whitespace-nowrap">
                                     {link.name} <span class="text-white ml-2 md:ml-4">•</span>
                                 </a>
                             </li>
@@ -53,24 +53,29 @@ const navLinks = [
             </div>
         </header>
 
-        <section class="w-full pt-4 pb-12 flex justify-center text-center px-4">
-            <h1 class="font-display text-5xl sm:text-7xl md:text-8xl lg:text-[10rem] text-[#130e0a] uppercase italic leading-none drop-shadow-[0_4px_0_rgba(185,28,28,1)]">
+        <section class="w-full pt-12 pb-16 md:pt-16 flex justify-center text-center px-4">
+            <h1 class="font-display text-5xl sm:text-7xl md:text-8xl lg:text-[10rem] tracking-wider leading-[0.9] text-center uppercase" 
+                style="color: #ED3F24; -webkit-text-stroke: 3px #FED506; text-shadow: none;">
                 Espace Membre
             </h1>
         </section>
 
-        <section class="w-full pb-24 px-6 md:px-10 flex flex-col items-center justify-center flex-1">
+        <div class="w-full h-4 md:h-6 lg:h-8 bg-[#ED3F24] relative z-40 shadow-lg"></div>
+
+        <section class="w-full py-24 px-6 md:px-10 flex flex-col items-center justify-center flex-1 relative">
             
-            <div class="relative w-full max-w-md min-h-[550px] rounded-[3rem] overflow-hidden shadow-2xl border border-black/10 transition-transform duration-500 hover:scale-[1.01]">
+            <div class="relative z-10 w-full max-w-md min-h-[550px] rounded-[3rem] overflow-hidden shadow-2xl border border-black/10 transition-transform duration-500 hover:scale-[1.01]">
                 
-                <img src="/assets/images/licorn-bg.avif" alt="Fond" class="absolute inset-0 w-full h-full object-cover scale-110 blur-sm rounded-[3rem]" />
+                <img src="/assets/images/licorn-bg.avif" alt="Fond Carte" class="absolute inset-0 w-full h-full object-cover scale-110 blur-sm rounded-[3rem]" />
                 <div class="absolute inset-0 bg-black/60 backdrop-blur-md rounded-[3rem]"></div>
 
                 <div class="relative z-10 p-8 md:p-14 flex flex-col h-full text-white">
                     
                     <div id="login-zone" class="w-full">
-                        <h2 class="font-poppins font-bold text-3xl md:text-4xl mb-2 drop-shadow-md italic">Heureux de vous revoir !</h2>
-                        <p class="font-poppins text-white/60 mb-10 text-sm">Connectez-vous pour accéder à vos avantages.</p>
+                        <h2 class="font-righteous text-3xl md:text-4xl mb-4 drop-shadow-md text-center uppercase tracking-widest">
+                            Heureux de vous revoir !
+                        </h2>
+                        <p class="font-poppins text-white/60 mb-10 text-sm text-center">Connectez-vous pour accéder à vos avantages.</p>
 
                         <form id="login-form" class="flex flex-col gap-6">
                             <div class="flex flex-col gap-2">
@@ -101,7 +106,7 @@ const navLinks = [
 
                             <button 
                                 type="submit" 
-                                class="w-full mt-4 bg-[#FED506] hover:bg-white text-black font-poppins font-bold text-xl py-5 rounded-3xl transition-all shadow-xl active:scale-95 border-none uppercase tracking-widest"
+                                class="w-full mt-4 bg-[#ED3F24] hover:bg-[#FED506] text-white hover:text-black font-poppins font-bold text-xl py-5 rounded-3xl transition-all shadow-xl active:scale-95 border-none uppercase tracking-widest"
                             >
                                 Se connecter
                             </button>
@@ -114,10 +119,10 @@ const navLinks = [
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
                             </svg>
                         </div>
-                        <h2 class="font-poppins font-bold text-3xl mb-4 italic">Accès autorisé</h2>
+                        <h2 class="font-righteous text-3xl mb-4 uppercase tracking-widest">Accès autorisé</h2>
                         <p class="font-poppins text-white/70 mb-12">Vous êtes actuellement authentifié sur Echos Sonores.</p>
                         
-                        <button id="logout-btn" class="w-full bg-[#ed3f24] hover:bg-red-600 text-white font-poppins font-bold text-xl py-5 rounded-3xl transition-all shadow-xl active:scale-95 border border-white/10 uppercase tracking-widest">
+                        <button id="logout-btn" class="w-full bg-[#ED3F24] hover:bg-[#FED506] hover:text-black text-white font-poppins font-bold text-xl py-5 rounded-3xl transition-all shadow-xl active:scale-95 border border-white/10 uppercase tracking-widest">
                             Se déconnecter
                         </button>
                     </div>
@@ -126,15 +131,17 @@ const navLinks = [
             </div>
         </section>
 
-        <footer class="w-full bg-black text-white pt-24 pb-12 flex flex-col items-center mt-auto border-t border-white/10">
+        <div class="w-full h-4 md:h-6 lg:h-8 bg-[#6d9a02] relative z-40 shadow-lg"></div>
+
+        <footer class="w-full bg-black text-white pt-16 pb-12 flex flex-col items-center mt-auto border-t border-white/10 z-30">
             <div class="w-full max-w-7xl flex flex-col items-center lg:items-start px-6">
-                <div class="w-full font-poppins text-xs md:text-base opacity-40 mb-12 text-center lg:text-left flex flex-col lg:flex-row lg:justify-between border-b border-white/5 pb-12">
+                <div class="w-full font-poppins text-xs md:text-base opacity-40 mb-12 text-center lg:text-left flex flex-col lg:flex-row lg:justify-between border-b border-white/5 pb-12 gap-4">
                     <p>MMI 1ère année — SAE 105 — Montbéliard</p>
                     <p>Par Maël BRUNGARD @BooMooN.cloud | ID Étudiant : o4g3yq8bkgg4bxz</p>
                 </div>
 
-                <div class="w-full flex flex-col lg:flex-row lg:justify-between items-center mt-8">
-                    <nav class="mb-12 lg:mb-0">
+                <div class="w-full flex flex-col lg:flex-row lg:justify-between items-center gap-8">
+                    <nav>
                         <ul class="flex flex-wrap justify-center lg:justify-start items-center gap-x-12 gap-y-6 font-poppins font-bold text-sm md:text-xl uppercase">
                             {navLinks.map((link, i) => (
                                 <li class="flex items-center gap-12">

@@ -80,9 +80,9 @@ const programDays = [
 ---
 
 <Layout title="Programme | Echos Sonore">
-    <div class="w-full flex flex-col overflow-x-hidden bg-[#FFF4C6] min-h-screen">
+    <div class="w-full flex flex-col overflow-x-hidden bg-[#FFF4C6] min-h-screen font-poppins">
         
-        <div id="menu-overlay" class="fixed inset-0 z-[100] translate-x-full transition-transform duration-500 ease-in-out md:left-auto md:w-[400px]">
+        <div id="menu-overlay" class="fixed inset-0 z-[100] translate-x-full transition-transform duration-500 ease-in-out md:left-auto md:w-[500px] lg:w-[600px]">
             <div class="absolute inset-0 bg-black">
                 <img src="/assets/images/licorn-bg.avif" alt="Menu BG" class="w-full h-full object-cover opacity-50" />
                 <div class="absolute inset-0 bg-gradient-to-l from-black/80 to-transparent"></div>
@@ -98,7 +98,7 @@ const programDays = [
                     <ul class="space-y-4 md:space-y-6 text-right">
                         {navLinks.map((link) => (
                             <li>
-                                <a href={link.href} class="block text-2xl md:text-3xl lg:text-4xl font-poppins font-bold text-white uppercase tracking-tight hover:text-[#FED506] transition-colors">
+                                <a href={link.href} class="block text-2xl md:text-4xl lg:text-5xl font-bold text-white uppercase tracking-tight hover:text-[#FED506] transition-colors whitespace-nowrap">
                                     {link.name} <span class="text-white ml-2 md:ml-4">•</span>
                                 </a>
                             </li>
@@ -114,12 +114,12 @@ const programDays = [
             </a>
             
             <div class="flex items-center gap-4">
-                <button id="user-status-connected" class="hidden font-poppins text-[10px] md:text-xs lg:text-sm uppercase font-bold bg-[#6d9a02] text-white px-4 py-2 lg:px-6 lg:py-3 rounded-full shadow-lg hover:bg-red-600 transition-colors group">
+                <button id="user-status-connected" class="hidden text-[10px] md:text-xs lg:text-sm uppercase font-bold bg-[#6d9a02] text-white px-4 py-2 lg:px-6 lg:py-3 rounded-full shadow-lg hover:bg-red-600 transition-colors group">
                     <span class="group-hover:hidden">Connecté</span>
                     <span class="hidden group-hover:inline">Déconnexion</span>
                 </button>
 
-                <a href="/connexion" id="user-status-disconnected" class="font-poppins text-[10px] md:text-xs lg:text-sm uppercase font-bold bg-[#ED3F24] text-white px-4 py-2 lg:px-6 lg:py-3 rounded-full shadow-lg hover:scale-105 transition-transform">
+                <a href="/connexion" id="user-status-disconnected" class="text-[10px] md:text-xs lg:text-sm uppercase font-bold bg-[#ED3F24] text-white px-4 py-2 lg:px-6 lg:py-3 rounded-full shadow-lg hover:scale-105 transition-transform">
                     Se connecter
                 </a>
 
@@ -133,10 +133,11 @@ const programDays = [
         <section class="relative w-full overflow-hidden bg-black lg:h-[60vh] flex flex-col justify-center">
             <img src="/assets/images/hero.avif" alt="Hero Programme" class="absolute inset-0 w-full h-full object-cover opacity-60" />
             <div class="relative z-10 flex flex-col items-center justify-center p-6 text-center lg:min-h-full w-full">
-                <h1 class="font-display text-4xl sm:text-6xl md:text-8xl lg:text-[8rem] xl:text-[10rem] text-[#FED506] uppercase italic leading-none drop-shadow-[0_4px_0_rgba(185,28,28,1)]">
+                <h1 class="font-display text-5xl md:text-8xl lg:text-[10rem] tracking-wider leading-[0.9] text-center uppercase" 
+                    style="color: #ED3F24; -webkit-text-stroke: 3px #FED506; text-shadow: none;">
                     Notre Programme
                 </h1>
-                <a href="/assets/programme.pdf" download class="mt-4 md:mt-12 font-poppins font-bold text-white uppercase tracking-widest border-b-2 border-white hover:text-[#FED506] hover:border-[#FED506] transition-all text-sm md:text-xl lg:text-2xl">
+                <a href="/assets/programme.pdf" download class="mt-8 md:mt-12 font-poppins font-bold text-white uppercase tracking-widest border-b-2 border-white hover:text-[#FED506] hover:border-[#FED506] transition-all text-sm md:text-xl lg:text-2xl">
                     Téléchargement PDF
                 </a>
             </div>
@@ -169,7 +170,7 @@ const programDays = [
         <div class="w-full h-4 md:h-6 lg:h-8 bg-[#FED506] relative z-40 shadow-lg"></div>
 
         <section class="w-full bg-[#1e1e1e] py-16 md:py-20 flex flex-col items-center shadow-inner relative z-30">
-            <h2 class="font-display text-4xl md:text-5xl lg:text-6xl text-white mb-12 tracking-widest text-center">Filtres</h2>
+            <h2 class="font-righteous text-4xl md:text-5xl lg:text-6xl text-white mb-12 tracking-widest text-center uppercase">Filtres</h2>
             
             <div class="flex flex-wrap justify-center gap-8 md:gap-16 lg:gap-24 font-poppins font-bold text-white text-lg md:text-2xl lg:text-3xl mb-8">
                 {filtres.genre.length > 0 && (
@@ -232,7 +233,7 @@ const programDays = [
                             )}
 
                             <div class="relative z-10 w-full max-w-7xl px-6 flex flex-col items-center lg:items-start">
-                                <h2 class={`font-poppins font-bold text-4xl md:text-6xl lg:text-5xl mb-12 md:mb-16 tracking-widest uppercase italic ${isLight ? 'text-black' : 'text-white'}`}>
+                                <h2 class={`font-righteous text-5xl md:text-7xl lg:text-7xl mb-12 md:mb-16 tracking-widest uppercase ${isLight ? 'text-black' : 'text-white'}`}>
                                     {day}
                                 </h2>
                                 
@@ -276,7 +277,7 @@ const programDays = [
 
         <div class="w-full h-4 md:h-6 lg:h-8 bg-[#6d9a02] relative z-40 shadow-lg"></div>
 
-        <footer class="w-full bg-black text-white pt-24 pb-12 flex flex-col items-center overflow-hidden z-30 border-t border-white/10">
+        <footer class="w-full bg-black text-white pt-16 pb-12 flex flex-col items-center overflow-hidden z-30 border-t border-white/10">
             <div class="w-full max-w-7xl flex flex-col items-center lg:items-start px-6">
                 
                 <div class="w-full font-poppins text-xs md:text-base opacity-60 space-y-1 mt-12 mb-12 text-center lg:text-left flex flex-col lg:flex-row lg:justify-between">

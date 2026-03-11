@@ -10,9 +10,9 @@ const quickLinks = [
 
 // 2. Histoire
 const historySteps = [
-    { title: "La naissance d’une équipe", text: "Ce projet à démarrer dans le cadre d'un travail étudiants en MMI. Ce projet à finis par ce concrétiser et est devenu le festival que vous connaissez." },
-    { title: "Notre premier festival", text: "En 2026 nous organiserons notre premier festival de reggae. Ce festival vise tout public et à pour but de rendre le reggae accessible." },
-    { title: "Nos projets à venir", text: "Nous visons à égaler les meilleurs festivals et à donner une nouvelles images plus propre aux festivals de musique." }
+    { title: "La naissance d’une équipe", text: "Ce projet a démarré dans le cadre d'un travail étudiant en MMI. Ce projet a fini par se concrétiser et est devenu le festival que vous connaissez." },
+    { title: "Notre premier festival", text: "En 2026 nous organiserons notre premier festival de reggae. Ce festival vise tout public et a pour but de rendre le reggae accessible." },
+    { title: "Nos projets à venir", text: "Nous visons à égaler les meilleurs festivals et à donner une nouvelle image plus propre aux festivals de musique." }
 ];
 
 // 3. Équipe
@@ -43,7 +43,6 @@ const teamCategories = [
     }
 ];
 
-
 // 4. Édition 2026
 const themes = [
     { label: "Festival de la ", bold: "culture reggae" },
@@ -69,9 +68,9 @@ const navLinks = [
 ---
 
 <Layout title="Le Festival | Echos Sonore">
-    <div class="w-full flex flex-col overflow-x-hidden bg-[#FFF4C6] min-h-screen">
+    <div class="w-full flex flex-col overflow-x-hidden bg-[#FFF4C6] min-h-screen font-poppins">
         
-        <div id="menu-overlay" class="fixed inset-0 z-[100] translate-x-full transition-transform duration-500 ease-in-out md:left-auto md:w-[400px]">
+        <div id="menu-overlay" class="fixed inset-0 z-[100] translate-x-full transition-transform duration-500 ease-in-out md:left-auto md:w-[500px] lg:w-[600px]">
             <div class="absolute inset-0 bg-black">
                 <img src="/assets/images/licorn-bg.avif" alt="Menu BG" class="w-full h-full object-cover opacity-50" />
                 <div class="absolute inset-0 bg-gradient-to-l from-black/80 to-transparent"></div>
@@ -84,9 +83,9 @@ const navLinks = [
                     </button>
                 </div>
                 <nav class="flex-1 flex flex-col justify-start pt-32 items-end pr-4 md:pr-10">
-                    <ul class="space-y-4 md:space-y-6 text-right">
+                    <ul class="space-y-6 text-right">
                         {navLinks.map((link) => (
-                            <li><a href={link.href} class="block text-2xl md:text-3xl lg:text-4xl font-poppins font-bold text-white uppercase tracking-tight hover:text-[#FED506] transition-colors">{link.name} <span class="text-white ml-2 md:ml-4">•</span></a></li>
+                            <li><a href={link.href} class="block text-2xl md:text-4xl lg:text-5xl font-bold text-white uppercase tracking-tight hover:text-[#FED506] transition-colors whitespace-nowrap">{link.name} <span class="text-white ml-2 md:ml-4">•</span></a></li>
                         ))}
                     </ul>
                 </nav>
@@ -99,12 +98,12 @@ const navLinks = [
             </a>
             
             <div class="flex items-center gap-4">
-                <button id="user-status-connected" class="hidden font-poppins text-[10px] md:text-xs lg:text-sm uppercase font-bold bg-[#6d9a02] text-white px-4 py-2 lg:px-6 lg:py-3 rounded-full shadow-lg hover:bg-red-600 transition-colors group">
+                <button id="user-status-connected" class="hidden text-[10px] md:text-xs lg:text-sm uppercase font-bold bg-[#6d9a02] text-white px-4 py-2 lg:px-6 lg:py-3 rounded-full shadow-lg hover:bg-red-600 transition-colors group">
                     <span class="group-hover:hidden">Connecté</span>
                     <span class="hidden group-hover:inline">Déconnexion</span>
                 </button>
 
-                <a href="/connexion" id="user-status-disconnected" class="font-poppins text-[10px] md:text-xs lg:text-sm uppercase font-bold bg-[#ED3F24] text-white px-4 py-2 lg:px-6 lg:py-3 rounded-full shadow-lg hover:scale-105 transition-transform">
+                <a href="/connexion" id="user-status-disconnected" class="text-[10px] md:text-xs lg:text-sm uppercase font-bold bg-[#ED3F24] text-white px-4 py-2 lg:px-6 lg:py-3 rounded-full shadow-lg hover:scale-105 transition-transform">
                     Se connecter
                 </a>
 
@@ -115,10 +114,11 @@ const navLinks = [
             </div>
         </header>
 
-        <section class="relative w-full overflow-hidden bg-black lg:h-[70vh] flex flex-col justify-center">
-            <img src="/assets/images/hero.avif" alt="Hero Festival" class="w-full h-auto block lg:h-full lg:object-cover absolute inset-0" />
-            <div class="relative z-10 bg-black/40 flex items-center justify-center p-6 lg:p-20 min-h-[30vh] lg:min-h-full w-full">
-                <h1 class="font-display text-5xl md:text-8xl lg:text-[8rem] xl:text-[10rem] text-white uppercase italic tracking-tighter text-center leading-none">
+        <section class="relative w-full overflow-hidden bg-black h-72 sm:h-96 md:h-[500px] lg:h-[70vh] flex flex-col justify-center">
+            <img src="/assets/images/hero.avif" alt="Hero Festival" class="absolute inset-0 w-full h-full object-cover opacity-80" />
+            <div class="relative z-10 bg-black/40 flex items-center justify-center p-6 lg:p-20 h-full w-full">
+                <h1 class="font-display text-6xl md:text-9xl lg:text-[12rem] tracking-wider leading-[0.9] text-center uppercase" 
+                    style="color: #ED3F24; -webkit-text-stroke: 3px #FED506; text-shadow: none;">
                     Le Festival
                 </h1>
             </div>
@@ -134,7 +134,7 @@ const navLinks = [
                             <img src={link.img} alt={link.title} class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                             <div class="absolute inset-0 bg-black/50 group-hover:bg-black/20 transition-all duration-500"></div>
                             <div class="absolute bottom-6 left-8 lg:bottom-10 lg:left-10">
-                                <h3 class="font-poppins font-bold text-2xl md:text-3xl lg:text-4xl text-white uppercase tracking-widest leading-tight group-hover:text-white transition-colors">{link.title}</h3>
+                                <h3 class="font-poppins font-bold text-2xl md:text-3xl lg:text-4xl text-white uppercase tracking-widest leading-tight group-hover:text-[#FED506] transition-colors">{link.title}</h3>
                             </div>
                         </a>
                         {index < quickLinks.length - 1 && (
@@ -153,7 +153,9 @@ const navLinks = [
                 <div class="absolute inset-0 bg-black/75"></div> 
             </div>
 
-            <h2 class="relative z-10 font-display text-5xl md:text-8xl lg:text-7xl text-white mb-24 text-center uppercase italic opacity-95 leading-none">Notre histoire</h2>
+            <h2 class="relative z-10 font-righteous text-4xl sm:text-5xl md:text-7xl lg:text-7xl text-white mb-16 md:mb-24 text-center uppercase tracking-widest leading-none drop-shadow-lg">
+                Notre histoire
+            </h2>
             
             <div class="relative z-10 w-full max-w-7xl flex flex-col md:flex-row items-stretch justify-center gap-8 lg:gap-12 px-6">
                 {historySteps.map((step, index) => (
@@ -177,12 +179,16 @@ const navLinks = [
         <div class="w-full h-4 md:h-6 lg:h-8 bg-[#FED506] relative z-40 shadow-lg"></div>
 
         <section id="equipe" class="w-full bg-[#FEFAF5] py-24 md:py-40 flex flex-col items-center scroll-mt-20">
-            <h2 class="font-display text-4xl md:text-7xl lg:text-7xl text-black mb-24 uppercase tracking-widest text-center px-4 leading-none">Notre équipe</h2>
+            <h2 class="font-righteous text-4xl sm:text-5xl md:text-7xl lg:text-7xl text-black mb-16 md:mb-24 uppercase tracking-widest text-center px-4 leading-none">
+                Notre équipe
+            </h2>
             
-            <div class="w-full max-w-7xl space-y-16 lg:space-y-20">
+            <div class="w-full max-w-7xl space-y-16 lg:space-y-24">
                 {teamCategories.map((cat) => (
                     <div class="flex flex-col items-center w-full">
-                        <h3 class="font-poppins font-bold text-xl md:text-3xl lg:text-4xl mb-12 lg:mb-12 uppercase tracking-[0.3em] opacity-30 italic">{cat.name}</h3>
+                        <h3 class="font-poppins font-bold text-2xl md:text-3xl lg:text-4xl mb-12 lg:mb-16 uppercase tracking-[0.3em] text-black">
+                            {cat.name}
+                        </h3>
                         
                         <div class="flex flex-row overflow-x-auto no-scrollbar md:grid md:grid-cols-3 items-center justify-center gap-6 md:gap-12 w-full px-6 pb-8">
                             {cat.members.map((member, index) => (
@@ -197,7 +203,7 @@ const navLinks = [
                                         </div>
                                         <div class="hidden md:flex flex-col items-center mt-4">
                                             <span class="font-poppins font-bold text-lg lg:text-2xl text-black uppercase group-hover:text-[#ED3F24] transition-colors">{member.name}</span>
-                                            <span class="font-poppins text-sm lg:text-base text-black/60 uppercase tracking-widest">{member.role}</span>
+                                            <span class="font-poppins text-sm lg:text-base text-black font-medium uppercase tracking-widest">{member.role}</span>
                                         </div>
                                     </button>
                                     
@@ -220,7 +226,10 @@ const navLinks = [
                 <div class="absolute inset-0 bg-black/80 backdrop-blur-sm"></div>
             </div>
             <div class="relative z-10 w-full max-w-7xl">
-                <h2 class="font-display text-4xl md:text-7xl lg:text-7xl text-white text-center mb-24 uppercase leading-none">Édition 2026</h2>
+                <h2 class="font-righteous text-4xl sm:text-5xl md:text-7xl lg:text-7xl text-white text-center mb-16 md:mb-24 uppercase tracking-widest leading-none drop-shadow-lg">
+                    Édition 2026
+                </h2>
+                
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-20 md:gap-40 items-start">
                     <div class="space-y-12 text-center md:text-left bg-black/40 p-8 lg:p-12 rounded-[30px] border border-white/10 backdrop-blur-md">
                         <h3 class="font-poppins font-bold text-2xl md:text-4xl text-white uppercase tracking-widest text-center md:text-left">Thématiques</h3>
@@ -233,6 +242,7 @@ const navLinks = [
                             ))}
                         </ul>
                     </div>
+                    
                     <div class="space-y-12 bg-black/40 p-8 lg:p-12 rounded-[30px] border border-white/10 backdrop-blur-md">
                         <h3 class="font-poppins font-bold text-2xl md:text-4xl text-white uppercase tracking-widest text-center">Valeurs</h3>
                         <div class="grid grid-cols-3 gap-6 lg:gap-10">
@@ -241,7 +251,7 @@ const navLinks = [
                                     <div class="w-16 h-16 md:w-24 md:h-24 lg:w-32 lg:h-32 transition-transform duration-500 group-hover:scale-110 group-hover:-translate-y-2">
                                         <img src={value.img} alt={value.name} class="w-full h-full object-contain brightness-0 invert opacity-90 group-hover:opacity-100" />
                                     </div>
-                                    <p class="font-poppins font-bold text-white text-[10px] md:text-xs lg:text-sm uppercase text-center tracking-widest group-hover:text-[#ED3F24] transition-colors">{value.name}</p>
+                                    <p class="font-poppins font-bold text-white text-[10px] md:text-xs lg:text-sm uppercase text-center tracking-widest group-hover:text-[#FED506] transition-colors">{value.name}</p>
                                 </div>
                             ))}
                         </div>
@@ -250,36 +260,49 @@ const navLinks = [
             </div>
         </section>
 
-        <footer class="w-full bg-black text-white pt-32 pb-16 flex flex-col items-center overflow-hidden z-30">
+        <footer class="w-full bg-black text-white pt-16 pb-12 flex flex-col items-center mt-auto border-t border-white/10 z-30">
             <div class="w-full max-w-7xl flex flex-col items-center lg:items-start px-6">
-                
-                <div class="w-full font-poppins text-xs md:text-base opacity-60 space-y-1 mt-12 mb-12 text-center lg:text-left flex flex-col lg:flex-row lg:justify-between">
+
+                <div class="w-full font-poppins text-xs md:text-base opacity-40 mb-12 text-center lg:text-left flex flex-col lg:flex-row lg:justify-between border-b border-white/5 pb-12 gap-4">
                     <p>MMI 1ère année — SAE 105 — Montbéliard</p>
                     <p>Par Maël BRUNGARD @BooMooN.cloud | ID Étudiant : o4g3yq8bkgg4bxz</p>
                 </div>
 
-                <div class="w-full flex flex-col lg:flex-row lg:justify-between items-center">
-                    <nav class="mb-12 lg:mb-0">
-                        <ul class="flex flex-wrap justify-center lg:justify-start items-center gap-x-6 gap-y-4 font-poppins font-bold text-sm md:text-xl uppercase">
-                            {navLinks.map((link, index) => (
-                                <>
-                                    <li><a href={link.href} class="hover:text-[#FED506] transition-all hover:tracking-widest">{link.name}</a></li>
-                                    {index < navLinks.length - 1 && <li class="hidden md:block opacity-30">•</li>}
-                                </>
+                <div class="w-full flex flex-col lg:flex-row lg:justify-between items-center gap-8">
+                    <nav>
+                        <ul class="flex flex-wrap justify-center lg:justify-start items-center gap-x-12 gap-y-6 font-bold text-sm md:text-xl uppercase">
+                            {navLinks.map((link, i) => (
+                                <li class="flex items-center gap-12">
+                                    <a href={link.href} class="hover:text-[#FED506] transition-all hover:tracking-widest">{link.name}</a>
+                                    {i < navLinks.length - 1 && <span class="opacity-20 hidden md:block select-none">•</span>}
+                                </li>
                             ))}
                         </ul>
                     </nav>
-
-                    <nav>
-                        <ul class="flex justify-center lg:justify-end gap-10 font-poppins text-xs md:text-sm uppercase underline opacity-70">
-                            <li><a href="#" class="hover:text-white transition-colors">CGU</a></li>
-                            <li><a href="#" class="hover:text-white transition-colors">CGV</a></li>
-                            <li><a href="#" class="hover:text-white transition-colors">Mentions Légales</a></li>
-                        </ul>
+                    <nav class="flex gap-10 text-[10px] md:text-xs uppercase underline opacity-40">
+                        <a href="#">CGU</a><a href="#">CGV</a><a href="#">Mentions Légales</a>
                     </nav>
                 </div>
             </div>
         </footer>
+
+        <div id="team-modal" class="fixed inset-0 z-[200] hidden flex items-center justify-center p-4">
+            <div id="modal-overlay" class="absolute inset-0 bg-black/80 backdrop-blur-sm cursor-pointer"></div>
+            <div id="modal-content" class="relative bg-[#FFF4C6] w-full max-w-2xl rounded-[2rem] p-8 md:p-12 shadow-2xl scale-95 transition-transform duration-300 flex flex-col md:flex-row gap-8 items-center border border-black/10">
+                <button id="modal-close-btn" class="absolute top-4 right-4 text-black hover:text-[#ED3F24] transition-colors p-2 bg-black/5 rounded-full">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                </button>
+                <div class="w-40 h-40 md:w-56 md:h-56 shrink-0 rounded-full overflow-hidden border-4 border-[#ED3F24] shadow-xl">
+                    <img id="modal-img" src="" alt="Team Member" class="w-full h-full object-cover" />
+                </div>
+                <div class="flex flex-col text-center md:text-left">
+                    <h3 id="modal-name" class="font-display text-4xl text-black uppercase mb-1"></h3>
+                    <p id="modal-role" class="font-poppins font-bold text-[#ED3F24] uppercase tracking-widest text-sm mb-6"></p>
+                    <p id="modal-bio" class="font-poppins text-black/80 text-sm md:text-base leading-relaxed"></p>
+                </div>
+            </div>
+        </div>
+
     </div>
 </Layout>
 
@@ -301,6 +324,7 @@ const navLinks = [
     const modalContent = document.getElementById('modal-content');
     const modalCloseBtn = document.getElementById('modal-close-btn');
     const modalOverlay = document.getElementById('modal-overlay');
+    
     const mImg = document.getElementById('modal-img') as HTMLImageElement;
     const mName = document.getElementById('modal-name');
     const mRole = document.getElementById('modal-role');
@@ -308,14 +332,11 @@ const navLinks = [
 
     teamTriggers.forEach(btn => {
         btn.addEventListener('click', () => {
-            const name = btn.getAttribute('data-name');
-            const role = btn.getAttribute('data-role');
-            const bio = btn.getAttribute('data-bio');
-            const img = btn.getAttribute('data-img');
-            if(mImg) mImg.src = img || '';
-            if(mName) mName.innerText = name || '';
-            if(mRole) mRole.innerText = role || '';
-            if(mBio) mBio.innerText = bio || '';
+            if(mImg) mImg.src = btn.getAttribute('data-img') || '';
+            if(mName) mName.innerText = btn.getAttribute('data-name') || '';
+            if(mRole) mRole.innerText = btn.getAttribute('data-role') || '';
+            if(mBio) mBio.innerText = btn.getAttribute('data-bio') || '';
+            
             teamModal?.classList.remove('hidden');
             setTimeout(() => modalContent?.classList.remove('scale-95'), 10);
             document.body.style.overflow = 'hidden';
@@ -329,7 +350,7 @@ const navLinks = [
     modalCloseBtn?.addEventListener('click', closeTeamModal);
     modalOverlay?.addEventListener('click', closeTeamModal);
 
-    // --- LOGIQUE BOUTONS STATUT ---
+    // --- AUTH STATUS ---
     const btnConnected = document.getElementById('user-status-connected');
     const btnDisconnected = document.getElementById('user-status-disconnected');
 
@@ -354,6 +375,8 @@ const navLinks = [
 
 <style>
     html { scroll-behavior: smooth; }
+    .font-display { font-family: 'Magic Vintage', cursive; }
+    .font-righteous { font-family: 'Righteous', cursive; }
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 </style>

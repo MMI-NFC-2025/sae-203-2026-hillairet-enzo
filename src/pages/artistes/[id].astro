@@ -82,7 +82,7 @@ const navLinks = [
 <Layout title={`${artiste.nom} | Echos Sonore`}>
     <div class="w-full flex flex-col overflow-x-hidden bg-[#FFF4C6] min-h-screen">
         
-        <div id="menu-overlay" class="fixed inset-0 z-[100] translate-x-full transition-transform duration-500 ease-in-out">
+        <div id="menu-overlay" class="fixed inset-0 z-[100] translate-x-full transition-transform duration-500 ease-in-out md:left-auto md:w-[500px] lg:w-[600px]">
             <div class="absolute inset-0 bg-black">
                 <img src="/assets/images/licorn-bg.avif" alt="Menu BG" class="w-full h-full object-cover opacity-50" />
                 <div class="absolute inset-0 bg-gradient-to-l from-black/80 to-transparent"></div>
@@ -94,11 +94,11 @@ const navLinks = [
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 md:h-12 md:w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
                     </button>
                 </div>
-                <nav class="flex-1 flex flex-col justify-start pt-32 items-end pr-4 md:pr-20">
+                <nav class="flex-1 flex flex-col justify-start pt-32 items-end pr-4 md:pr-10">
                     <ul class="space-y-6 text-right">
                         {navLinks.map((link) => (
                             <li>
-                                <a href={link.href} class="block text-2xl md:text-5xl font-poppins font-bold text-white uppercase hover:text-[#FED506] transition-colors">
+                                <a href={link.href} class="block text-2xl md:text-4xl lg:text-5xl font-poppins font-bold text-white uppercase hover:text-[#FED506] transition-colors whitespace-nowrap">
                                     {link.name} <span class="text-white ml-2 md:ml-4">•</span>
                                 </a>
                             </li>

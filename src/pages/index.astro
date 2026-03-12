@@ -6,7 +6,8 @@ import Hero from '../components/Hero.astro';
 
 // Logique PocketBase
 import PocketBase from 'pocketbase';
-const pb = new PocketBase('http://127.0.0.1:8090');
+// Changement ici : on pointe vers le VPS en ligne
+const pb = new PocketBase('https://echosonore.hillairet.optimiseus.fr');
 
 let artistes: any[] = [];
 try {
@@ -19,5 +20,4 @@ try {
 <Layout title="Echos Sonore | Festival Reggae à Belfort">
     <main>
         <Hero />
-    </header>
-</Layout>
+    </main> </Layout>

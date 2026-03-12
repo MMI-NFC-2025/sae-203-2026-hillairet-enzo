@@ -8,7 +8,8 @@ export const prerender = true;
 // 1. GÉNÉRATION DES CHEMINS (Static Paths)
 // ==========================================
 export async function getStaticPaths() {
-    const pb = new PocketBase('http://127.0.0.1:8090');
+    // Remplacement par l'URL en ligne
+    const pb = new PocketBase('https://echosonore.hillairet.optimiseus.fr');
     
     try {
         const records = await pb.collection('scenes').getFullList();
@@ -32,7 +33,8 @@ export async function getStaticPaths() {
 // 2. RÉCUPÉRATION DES DONNÉES (Scène + Artistes)
 // ==========================================
 const { scene } = Astro.props;
-const pb = new PocketBase('http://127.0.0.1:8090');
+// Remplacement par l'URL en ligne
+const pb = new PocketBase('https://echosonore.hillairet.optimiseus.fr');
 
 // IMAGE DE LA SCÈNE (Champ "image" de la collection scenes)
 let sceneImage = '/assets/images/section-background.avif';

@@ -8,7 +8,8 @@ export const prerender = true;
 // 1. GÉNÉRATION DES CHEMINS (Static Paths)
 // ==========================================
 export async function getStaticPaths() {
-    const pb = new PocketBase('http://127.0.0.1:8090');
+    // Changement ici : on pointe vers le VPS en ligne
+    const pb = new PocketBase('https://echosonore.hillairet.optimiseus.fr');
     
     try {
         const records = await pb.collection('artistes').getFullList();
@@ -31,7 +32,8 @@ export async function getStaticPaths() {
 // ==========================================
 const { id } = Astro.params;
 let artiste = Astro.props.artiste;
-const pb = new PocketBase('http://127.0.0.1:8090');
+// Changement ici aussi : on pointe vers le VPS en ligne
+const pb = new PocketBase('https://echosonore.hillairet.optimiseus.fr');
 
 if (!artiste) {
     try {

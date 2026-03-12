@@ -36,22 +36,22 @@ const pb = new PocketBase('http://127.0.0.1:8090');
 
 // IMAGE DE LA SCÈNE (Champ "image" de la collection scenes)
 let sceneImage = '/assets/images/section-background.avif';
-if (scene?.image) {
-    sceneImage = pb.files.getUrl(scene, scene.image);
+if ((scene as any)?.image) {
+    sceneImage = pb.files.getUrl(scene, (scene as any).image);
 } else if (scene?.imageDeSecours) {
     sceneImage = scene.imageDeSecours;
 }
 
 // GALERIE PHOTOS
-let galleryImages = [];
-if (scene?.galerie && Array.isArray(scene.galerie) && scene.galerie.length > 0) {
-    galleryImages = scene.galerie.map(img => pb.files.getUrl(scene, img));
+let galleryImages: any[] = [];
+if ((scene as any)?.galerie && Array.isArray((scene as any).galerie) && (scene as any).galerie.length > 0) {
+    galleryImages = (scene as any).galerie.map((img: any) => pb.files.getUrl(scene, img));
 } else if (scene?.galerieDeSecours) {
     galleryImages = scene.galerieDeSecours;
 }
 
 // ARTISTES DE CETTE SCÈNE
-let artistesAssocies = [];
+let artistesAssocies: any[] = [];
 try {
     const tousArtistes = await pb.collection('artistes').getFullList();
     
@@ -152,14 +152,14 @@ const navLinks = [
             
             {artistesAssocies.length > 0 ? (
                 <div class="w-full max-w-5xl flex flex-col items-center gap-6 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-x-12 md:gap-y-16">
-                    {artistesAssocies.map((artiste, i) => (
+                    {artistesAssocies.map((artiste: any, i: number) => (
                         <>
                             {i > 0 && (
-                                <div class="w-full h-auto md:hidden" key={`sep-${artiste.id}`}>
+                                <div class="w-full h-auto md:hidden">
                                     <img src="/assets/images/lignes_rouge_jaune_vert.svg" alt="séparateur" class="w-full h-auto object-cover" />
                                 </div>
                             )}
-                            <a href={`/artistes/${artiste.id}`} class="group relative block w-full aspect-[16/10] md:aspect-square rounded-[1.5rem] overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-black/10 cursor-pointer flex-shrink-0" key={artiste.id}>
+                            <a href={`/artistes/${artiste.id}`} class="group relative block w-full aspect-[16/10] md:aspect-square rounded-[1.5rem] overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-black/10 cursor-pointer flex-shrink-0">
                                 
                                 <img src={artiste.image || "/assets/images/section-background.avif"} alt={artiste.nom} class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                                 
@@ -206,7 +206,7 @@ const navLinks = [
                     <div class="relative w-full group px-12 md:px-20">
                         <div class="overflow-hidden w-full">
                             <div id="carousel-track" class="flex transition-transform duration-500 ease-in-out">
-                                {galleryImages.map((img) => (
+                                {galleryImages.map((img: any) => (
                                     <div class="carousel-item w-full sm:w-1/2 md:w-1/3 flex-shrink-0 px-2 sm:px-4">
                                         <div class="w-full h-64 md:h-80 rounded-3xl overflow-hidden shadow-2xl border border-white/10">
                                             <img src={img} alt={`Galerie ${scene?.nom}`} class="w-full h-full object-cover transition-transform duration-500 hover:scale-110" />
@@ -290,7 +290,7 @@ const navLinks = [
         const totalItems = items.length;
 
         const updateCarousel = () => {
-            if (totalItems === 0) return;
+            if (totalItems === 0 || !track.parentElement) return;
             const itemWidth = items[0].getBoundingClientRect().width;
             track.style.transform = `translateX(-${currentIndex * itemWidth}px)`;
 
@@ -305,6 +305,7 @@ const navLinks = [
         };
 
         btnNext.addEventListener('click', () => {
+            if (!track.parentElement) return;
             const itemWidth = items[0].getBoundingClientRect().width;
             const trackContainerWidth = track.parentElement.getBoundingClientRect().width;
             const visibleItems = Math.round(trackContainerWidth / itemWidth);

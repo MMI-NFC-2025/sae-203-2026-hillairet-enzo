@@ -81,10 +81,10 @@ const navLinks = [
 <Layout title="Nos Artistes | Echos Sonore">
     <div class="w-full flex flex-col overflow-x-hidden bg-[#FFF4C6] min-h-screen font-poppins">
         
-        <div id="menu-overlay" class="fixed inset-0 z-[100] translate-x-full transition-transform duration-500 ease-in-out md:left-auto md:w-[500px] lg:w-[600px]">
+        <div id="menu-overlay" class="fixed inset-0 z-100 translate-x-full transition-transform duration-500 ease-in-out md:left-auto md:w-125 lg:w-150">
             <div class="absolute inset-0 bg-black">
                 <img src="/assets/images/licorn-bg.avif" alt="Menu BG" class="w-full h-full object-cover opacity-50" onerror="this.style.display='none'" />
-                <div class="absolute inset-0 bg-gradient-to-l from-black/80 to-transparent"></div>
+                <div class="absolute inset-0 bg-linear-to-l from-black/80 to-transparent"></div>
             </div>
             <div class="relative z-10 h-full flex flex-col p-6 md:p-10">
                 <div class="flex justify-between items-center w-full">
@@ -129,7 +129,7 @@ const navLinks = [
             </div>
         </header>
 
-        <section class="relative w-full h-64 md:h-[500px] lg:h-[60vh] overflow-hidden bg-black flex flex-col justify-center">
+        <section class="relative w-full h-64 md:h-125 lg:h-[60vh] overflow-hidden bg-black flex flex-col justify-center">
             <img src="/assets/images/hero.avif" alt="Platine Vinyle" class="absolute inset-0 w-full h-full object-cover opacity-80" />
             <div class="relative z-10 flex flex-col items-center justify-center p-6 text-center w-full">
                 <h1 class="font-display text-5xl md:text-8xl lg:text-[10rem] tracking-wider leading-[0.9] text-center uppercase" 
@@ -145,11 +145,11 @@ const navLinks = [
             <div class="w-full max-w-7xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12 lg:gap-10">
                 {artistes.map((artiste) => (
                     <div class="w-full flex flex-col items-center">
-                        <a href={`/artistes/${artiste.id}`} class="group relative block w-full h-64 md:h-[350px] lg:h-auto lg:aspect-square rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 hover:scale-[1.02] cursor-pointer">
+                        <a href={`/artistes/${artiste.id}`} class="group relative block w-full h-64 md:h-87.5 lg:h-auto lg:aspect-square rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 hover:scale-[1.02] cursor-pointer">
                             <img src={artiste.image || "/assets/images/section-background.avif"} alt={artiste.nom} class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                             
                             <div class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-all duration-500"></div>
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-90"></div>
+                            <div class="absolute inset-0 bg-linear-to-t from-black/90 via-black/40 to-transparent opacity-90"></div>
                             
                             <div class="absolute bottom-6 left-6 md:bottom-8 md:left-8 flex flex-col gap-1 md:gap-2">
                                 <h3 class="font-poppins font-bold text-3xl md:text-4xl lg:text-3xl xl:text-4xl text-white tracking-wide group-hover:text-[#FED506] transition-colors">{artiste.nom}</h3>

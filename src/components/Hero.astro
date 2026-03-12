@@ -33,10 +33,10 @@ const navLinks = [
 <Layout title="Echos Sonore | Accueil">
     <div class="w-full flex flex-col overflow-x-hidden bg-[#FFF4C6] min-h-screen font-poppins">
         
-        <div id="menu-overlay" class="fixed inset-0 z-[100] translate-x-full transition-transform duration-500 ease-in-out md:left-auto md:w-[500px] lg:w-[600px]">
+        <div id="menu-overlay" class="fixed inset-0 z-100 translate-x-full transition-transform duration-500 ease-in-out md:left-auto md:w-125 lg:w-150">
             <div class="absolute inset-0 bg-black">
                 <img src="/assets/images/licorn-bg.avif" alt="Menu BG" class="w-full h-full object-cover opacity-50" />
-                <div class="absolute inset-0 bg-gradient-to-l from-black/80 to-transparent"></div>
+                <div class="absolute inset-0 bg-linear-to-l from-black/80 to-transparent"></div>
             </div>
 
             <div class="relative z-10 h-full flex flex-col p-6 md:p-10">
@@ -105,14 +105,14 @@ const navLinks = [
                 </div>
 
                 <div class="relative z-10 mt-12 pb-32 lg:pb-0 flex flex-col items-center gap-12 lg:w-2/5 lg:mb-16">
-                    <img src="/assets/images/mascotte.avif" alt="Mascotte" class="w-[90%] md:w-[600px] lg:w-[75%] xl:w-[65%] h-auto object-contain drop-shadow-2xl transition-transform duration-700 hover:rotate-3" />
+                    <img src="/assets/images/mascotte.avif" alt="Mascotte" class="w-[90%] md:w-150 lg:w-[75%] xl:w-[65%] h-auto object-contain drop-shadow-2xl transition-transform duration-700 hover:rotate-3" />
                     <a href="/infos-pratiques#tarifs" class="bg-[#ED3F24] hover:bg-black text-white font-righteous text-xl md:text-2xl px-12 py-5 lg:px-16 lg:py-6 rounded-full shadow-2xl transition-all transform hover:scale-110 active:scale-95">
                         BILLETTERIE
                     </a>
                 </div>
             </div>
 
-            <div class="absolute bottom-0 left-0 w-full overflow-hidden leading-[0] z-40 lg:hidden">
+            <div class="absolute bottom-0 left-0 w-full overflow-hidden leading-0 z-40 lg:hidden">
                 <div class="flex w-[200%] animate-lines-scroll">
                     <img src="/assets/images/lignes_rouge_jaune_vert.svg" alt="Bandes" class="w-1/2 h-10 md:h-16 object-cover block" />
                     <img src="/assets/images/lignes_rouge_jaune_vert.svg" alt="Bandes" class="w-1/2 h-10 md:h-16 object-cover block" aria-hidden="true" />
@@ -130,8 +130,8 @@ const navLinks = [
             <div class="relative z-10 w-full max-w-7xl px-6 grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
                 {tickets.map((ticket, index) => (
                     <div class="flex flex-col gap-6 items-center w-full">
-                        <a href="/infos-pratiques#tarifs" class="group relative w-full aspect-[16/9] lg:aspect-[4/5] rounded-[10px] overflow-hidden shadow-2xl transition-transform duration-500 hover:scale-105">
-                            <img src={ticket.img} alt={ticket.title} class="absolute inset-0 w-full h-full object-cover grayscale-[20%] group-hover:grayscale-0 transition-all duration-700 group-hover:scale-110" />
+                        <a href="/infos-pratiques#tarifs" class="group relative w-full aspect-video lg:aspect-4/5 rounded-[10px] overflow-hidden shadow-2xl transition-transform duration-500 hover:scale-105">
+                            <img src={ticket.img} alt={ticket.title} class="absolute inset-0 w-full h-full object-cover grayscale-20 group-hover:grayscale-0 transition-all duration-700 group-hover:scale-110" />
                             <div class="absolute inset-0 bg-black/40 group-hover:bg-black/10 transition-all"></div>
                             <div class="absolute bottom-6 left-6 text-white font-poppins">
                                 <h3 class="text-xl md:text-2xl font-bold uppercase tracking-wide group-hover:text-[#FED506] transition-colors">{ticket.title}</h3>
@@ -150,7 +150,7 @@ const navLinks = [
             <div class="w-full max-w-7xl px-6 grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
                 {tabs.map((tab, index) => (
                     <div class="flex flex-col gap-6 items-center w-full">
-                        <a href={tab.href} class="group relative w-full aspect-[16/9] lg:aspect-[4/5] rounded-[10px] overflow-hidden shadow-lg transition-transform duration-500 hover:scale-105">
+                        <a href={tab.href} class="group relative w-full aspect-video lg:aspect-4/5 rounded-[10px] overflow-hidden shadow-lg transition-transform duration-500 hover:scale-105">
                             <img src={tab.img} alt={tab.title} class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
                             <div class="absolute inset-0 bg-black/40 group-hover:bg-[#ED3F24]/40 transition-all"></div>
                             <div class="absolute bottom-6 left-6 text-white font-poppins">
@@ -175,7 +175,7 @@ const navLinks = [
                 <div class="w-full relative py-12 overflow-hidden">
                     <div class="flex marquee-content whitespace-nowrap items-center">
                         {[...logos, ...logos, ...logos].map((logo) => (
-                            <div class="flex-shrink-0 mx-8 md:mx-16 w-32 md:w-56 flex justify-center items-center"> 
+                            <div class="shrink-0 mx-8 md:mx-16 w-32 md:w-56 flex justify-center items-center"> 
                                 <img src={logo} alt="Logo" class="h-16 md:h-28 w-auto max-w-full object-contain brightness-0 invert opacity-90 hover:opacity-100 transition-opacity" />
                             </div>
                         ))}

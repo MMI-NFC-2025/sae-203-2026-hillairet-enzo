@@ -39,6 +39,9 @@ if (!artiste) {
     } catch (error) {
         console.warn(`Artiste avec l'ID ${id} introuvable, utilisation des données par défaut.`);
         artiste = {
+            id: 'fallback',
+            collectionId: 'artistes',
+            collectionName: 'artistes',
             nom: "Artiste introuvable",
             description: "Les informations de cet artiste ne sont pas disponibles actuellement.",
             date_representation: null,
@@ -272,7 +275,7 @@ const navLinks = [
         const totalItems = items.length;
 
         const updateCarousel = () => {
-            if (totalItems === 0) return;
+            if (totalItems === 0 || !track.parentElement) return;
 
             const itemWidth = items[0].getBoundingClientRect().width;
             track.style.transform = `translateX(-${currentIndex * itemWidth}px)`;
@@ -294,6 +297,7 @@ const navLinks = [
         };
 
         btnNext.addEventListener('click', () => {
+            if (!track.parentElement) return;
             const itemWidth = items[0].getBoundingClientRect().width;
             const trackContainerWidth = track.parentElement.getBoundingClientRect().width;
             const visibleItems = Math.round(trackContainerWidth / itemWidth);

@@ -1,6 +1,5 @@
 import PocketBase from 'pocketbase';
 
-// Remplacement par l'URL en ligne
 export const pb = new PocketBase('https://echosonore.hillairet.optimiseus.fr');
 
 pb.autoCancellation(false); 

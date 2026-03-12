@@ -35,7 +35,7 @@ async function runTests() {
             ID: artiste.id
         }]);
 
-        // Test 4 (Corrigé avec le mot de passe de 15 caractères)
+        // Test 4 
         console.log("\n--- Test 4 : Connexion d'un visiteur ---");
         const user = await loginUser('test@test.com', '123456789101112');
         if (user) {
